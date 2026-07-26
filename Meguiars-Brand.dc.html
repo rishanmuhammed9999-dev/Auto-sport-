@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<script src="assets/brands/meguiars/meguiars-data.js"></script>
+<title>Meguiar’s Products — Auto Sports Car Care</title>
+<meta name="description" content="Meguiar’s products from Auto Sports Car Care. Pilot production catalogue.">
+<style>*{box-sizing:border-box}body{margin:0}@keyframes ascc-spin{to{transform:rotate(360deg)}}</style>
+</helmet>
+<div style="background:#05070d;color:#f2f4f9;font-family:'Inter',system-ui,sans-serif;line-height:1.6;min-height:100vh">
+<a href="#main" style="position:absolute;left:-9999px;top:0;background:#3f7bff;color:#05070d;padding:12px 18px;font-weight:700;z-index:200" style-focus="left:12px;top:12px">Skip to main content</a>
+<dc-import name="SiteHeader" current="Products" hint-size="100%,74px"></dc-import>
+
+<main id="main">
+<section style="position:relative;overflow:hidden;border-bottom:1px solid rgba(120,160,255,.12)">
+  <div style="position:absolute;inset:0;background:linear-gradient(100deg,#05070d 0%,rgba(5,7,13,.95) 60%,rgba(5,7,13,.88) 100%)"></div>
+  <div style="position:relative;max-width:1720px;width:94%;margin:0 auto;padding:clamp(40px,6vw,64px) 0">
+    <a href="Brands.dc.html" style="color:#8fb4ff;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none">‹ Brand Directory</a>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:18px">
+      <div style="height:64px;width:140px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:8px;background:#fff;padding:8px;border:1px solid rgba(120,160,255,.14)">
+        <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:20px;letter-spacing:.04em;color:#14161c;text-align:center">Meguiar’s</span>
+      </div>
+      <div>
+        <h1 style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:clamp(24px,3.4vw,36px);margin:0">Meguiar’s Products</h1>
+        <p style="color:#9aa5ba;font-size:14px;margin:6px 0 0">54 products · 1 category · Detailing chemicals, waxes, compounds and car care products.</p>
+      </div>
+      <span style="margin-left:auto;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;padding:5px 10px;border-radius:99px;border:1px solid rgba(255,194,71,.4);background:rgba(38,28,6,.5);color:#ffc247">Logo File Required</span>
+    </div>
+    <p style="color:#c2ccdd;font-size:15px;max-width:70ch;margin:18px 0 0">Scope, materials and stock availability are confirmed on enquiry. Prices are not shown.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:22px">
+      <button onClick="{{ openBrandRetail }}" style="display:inline-flex;align-items:center;gap:8px;background:#e11d27;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:14px;padding:13px 20px;border-radius:8px;border:0;min-height:46px" style-hover="background:#ff3b3b">Retail Enquiry</button>
+      <button onClick="{{ openBrandWholesale }}" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35);font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:14px;padding:13px 20px;border-radius:8px;min-height:46px">Wholesale Enquiry</button>
+      <button onClick="{{ openBrandQuote }}" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#8fb4ff;border:1px solid rgba(120,160,255,.3);font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:14px;padding:13px 20px;border-radius:8px;min-height:46px">Request Quotation</button>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1720px;width:94%;margin:0 auto;padding:28px 0 0;display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+  <input type="search" value="{{ searchText }}" onChange="{{ onSearchChange }}" placeholder="Search by name or code…" aria-label="Search Meguiar’s products" style="flex:1;min-width:220px;background:rgba(255,255,255,.04);border:1px solid rgba(120,160,255,.2);border-radius:8px;color:#f2f4f9;font-family:'Inter',sans-serif;font-size:14.5px;padding:12px 15px;min-height:46px" style-focus="border-color:#3f7bff;outline:2px solid #3f7bff;outline-offset:2px">
+  <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="4">
+    <button onClick="{{ cat.select }}" aria-pressed="{{ cat.active }}" style="font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:12.5px;padding:10px 15px;border-radius:8px;border:1px solid {{ cat.borderColor }};background:{{ cat.bg }};color:{{ cat.color }};min-height:44px" style-focus="outline:2px solid #3f7bff;outline-offset:2px">{{ cat.label }}</button>
+  </sc-for>
+  <button onClick="{{ onClearFilters }}" style="font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:12.5px;padding:10px 15px;border-radius:8px;border:1px dashed #3a4256;background:transparent;color:#7a8299;min-height:44px">Clear Filters</button>
+</section>
+
+<section style="max-width:1720px;width:94%;margin:0 auto;padding:20px 0 clamp(56px,7vw,88px);min-height:300px">
+  <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+    <div style="border:1px solid rgba(255,90,90,.3);background:rgba(60,10,12,.3);border-radius:14px;padding:32px;text-align:center">
+      <p style="font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#ff8a8a;margin:0">Couldn't Load Meguiar’s Product Data</p>
+    </div>
+  </sc-if>
+  <sc-if value="{{ hasResults }}" hint-placeholder-val="{{ true }}">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax({{ cardMinWidth }},1fr));gap:18px">
+      <sc-for list="{{ filteredProducts }}" as="p" hint-placeholder-count="8">
+        <div style="background:rgba(255,255,255,.035);border:1px solid rgba(120,160,255,.14);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:.18s" style-hover="transform:translateY(-4px);border-color:rgba(120,160,255,.4);box-shadow:0 16px 40px rgba(0,0,0,.35)">
+          <div style="position:relative;aspect-ratio:5/4;background:linear-gradient(160deg,#10152a,#0a0d18);display:flex;align-items:center;justify-content:center;overflow:hidden">
+            <sc-if value="{{ showImageBadges }}" hint-placeholder-val="{{ true }}">
+            <span style="position:absolute;top:9px;left:9px;z-index:2;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:rgba(6,10,19,.7);color:{{ p.imageBadgeColor }};border:1px solid {{ p.imageBadgeBorder }}">{{ p.imageStatusShort }}</span>
+            </sc-if>
+            <sc-if value="{{ p.hasImage }}" hint-placeholder-val="{{ false }}">
+              <img src="{{ p.imagePath }}" alt="{{ p.name }}" loading="lazy" style="width: 100%; height: 100%; object-fit: {{ imageFit }}; padding: 14px; border-width: 1px; border-style: solid; border-color: #000000; background-color: #070707">
+            </sc-if>
+            <sc-if value="{{ p.noImage }}" hint-placeholder-val="{{ true }}">
+              <span style="color:#3f7bff;opacity:.5;font-size:34px" aria-hidden="true">{{ p.categoryIcon }}</span>
+            </sc-if>
+          </div>
+          <div style="padding:16px;display:flex;flex-direction:column;flex:1;gap:5px">
+            <p style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:#8fb4ff;margin:0">{{ p.cleanCategory }}</p>
+            <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15.5px;letter-spacing:.01em;margin:0;line-height:1.3;min-height:2.6em">{{ p.name }}</h3>
+            <p style="color:#7a8299;font-size:12px;margin:0">{{ p.metaLine }}</p>
+            <div style="display:flex;gap:6px;margin-top:10px">
+              <button onClick="{{ p.open }}" style="flex:1;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:#dde4f3;background:transparent;border:1px solid rgba(120,160,255,.25);border-radius:7px;padding:9px 6px;min-height:38px" style-hover="border-color:#3f7bff;color:#fff">Details</button>
+              <button onClick="{{ p.openRetail }}" style="flex:1;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:#e11d27;border:0;border-radius:7px;padding:9px 6px;min-height:38px" style-hover="background:#ff3b3b">Retail</button>
+              <button onClick="{{ p.openWholesale }}" style="flex:1;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:#8fb4ff;background:transparent;border:1px solid rgba(120,160,255,.3);border-radius:7px;padding:9px 6px;min-height:38px" style-hover="border-color:#3f7bff;color:#fff">Wholesale</button>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+  <sc-if value="{{ hasNoResults }}" hint-placeholder-val="{{ false }}">
+    <div style="border:1px dashed rgba(120,160,255,.25);border-radius:14px;padding:56px 24px;text-align:center">
+      <p style="color:#7a8299;font-size:15px;margin:0">No products match your search or filter.</p>
+    </div>
+  </sc-if>
+  <p style="color:#5a6274;font-size:12.5px;margin-top:18px">Showing {{ visibleCount }} of {{ totalCount }} Meguiar’s products.</p>
+</section>
+</main>
+
+<sc-if value="{{ activeProduct }}" hint-placeholder-val="{{ null }}">
+  <div role="dialog" aria-modal="true" aria-labelledby="pdTitle" style="position:fixed;inset:0;z-index:120;background:rgba(4,6,12,.82);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px">
+    <div style="width:min(760px,100%);max-height:88vh;overflow:auto;background:#0a0d18;border:1px solid rgba(120,160,255,.18);border-radius:16px">
+      <div style="display:flex;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid rgba(120,160,255,.12)">
+        <h3 id="pdTitle" style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.01em;font-size:16px;margin:0;flex:1">{{ activeProduct.name }}</h3>
+        <button onClick="{{ closeProduct }}" aria-label="Close details" style="width:36px;height:36px;border-radius:8px;border:1px solid rgba(120,160,255,.2);background:transparent;color:#fff;font-size:16px">✕</button>
+      </div>
+      <div style="padding:22px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+          <div style="width:90px;height:90px;flex-shrink:0;background:linear-gradient(160deg,#10152a,#0a0d18);border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(120,160,255,.12);overflow:hidden">
+            <sc-if value="{{ activeProduct.hasImage }}" hint-placeholder-val="{{ false }}">
+              <img src="{{ activeProduct.imagePath }}" alt="{{ activeProduct.name }}" style="width:100%;height:100%;object-fit:contain;padding:8px;background:#fff">
+            </sc-if>
+            <sc-if value="{{ activeProduct.noImage }}" hint-placeholder-val="{{ true }}">
+              <span style="color:#3f7bff;opacity:.5;font-size:32px">{{ activeProduct.categoryIcon }}</span>
+            </sc-if>
+          </div>
+          <div>
+            <p style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#ffc247;margin:0 0 4px">{{ activeProduct.imageStatus }}</p>
+            <p style="color:#9aa5ba;font-size:13px;margin:0">{{ activeProduct.cleanCategory }}</p>
+          </div>
+        </div>
+        <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px 18px">
+          <div><dt style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7a8299;margin:0 0 3px">Product Code</dt><dd style="margin:0;color:#e9edf5;font-size:14px">{{ activeProduct.codeLabel }}</dd></div>
+          <div><dt style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7a8299;margin:0 0 3px">Size / Pack</dt><dd style="margin:0;color:#e9edf5;font-size:14px">{{ activeProduct.sizeLabel }}</dd></div>
+          <div><dt style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7a8299;margin:0 0 3px">Workbook Category</dt><dd style="margin:0;color:#e9edf5;font-size:13px">{{ activeProduct.category }}</dd></div>
+        </dl>
+        <div>
+          <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7a8299;margin:0 0 4px">Original Workbook Entry</p>
+          <p style="color:#c2ccdd;font-size:13.5px;line-height:1.55;margin:0">{{ activeProduct.originalEntry }}</p>
+        </div>
+        <div style="border-top:1px solid rgba(120,160,255,.1);padding-top:14px">
+          <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#dde4f3;margin:0 0 10px">Technical Information</p>
+          <p style="color:#7a8299;font-size:13px;margin:0">INFORMATION REQUIRED — not yet verified from an official Meguiar’s source.</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;padding-top:6px;border-top:1px solid rgba(120,160,255,.1)">
+          <button onClick="{{ activeProduct.openRetail }}" style="display:inline-flex;align-items:center;gap:8px;background:#e11d27;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:13.5px;padding:12px 16px;border-radius:8px;border:0;min-height:42px">Retail Enquiry</button>
+          <button onClick="{{ activeProduct.openWholesale }}" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35);font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:13.5px;padding:12px 16px;border-radius:8px;min-height:42px">Wholesale Enquiry</button>
+          <button onClick="{{ activeProduct.openQuote }}" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#8fb4ff;border:1px solid rgba(120,160,255,.3);font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:13.5px;padding:12px 16px;border-radius:8px;min-height:42px">Request Quotation</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ enquiry }}" hint-placeholder-val="{{ null }}">
+  <div role="dialog" aria-modal="true" aria-labelledby="eqTitle" style="position:fixed;inset:0;z-index:130;background:rgba(4,6,12,.85);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px">
+    <div style="width:min(560px,100%);max-height:90vh;overflow:auto;background:#0a0d18;border:1px solid rgba(120,160,255,.18);border-radius:16px">
+      <div style="display:flex;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid rgba(120,160,255,.12)">
+        <h3 id="eqTitle" style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;font-size:16px;margin:0;flex:1">{{ enquiry.title }}</h3>
+        <button onClick="{{ closeEnquiry }}" aria-label="Close enquiry form" style="width:36px;height:36px;border-radius:8px;border:1px solid rgba(120,160,255,.2);background:transparent;color:#fff;font-size:16px">✕</button>
+      </div>
+      <sc-if value="{{ enquiry.success }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:32px 22px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px">
+          <span style="width:48px;height:48px;border-radius:50%;background:rgba(61,220,132,.15);display:flex;align-items:center;justify-content:center;color:#3ddc84;font-size:22px">✓</span>
+          <p style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;font-size:16px;margin:0">Enquiry Ready</p>
+          <p style="color:#9aa5ba;font-size:14px;margin:0;max-width:38ch">Your details are prepared. Continue on WhatsApp to send your enquiry to our team.</p>
+          <a href="{{ enquiry.waLink }}" target="_blank" rel="noopener" style="margin-top:6px;display:inline-flex;align-items:center;gap:8px;background:#e11d27;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:14px;padding:13px 20px;border-radius:8px;text-decoration:none;min-height:44px">Continue on WhatsApp</a>
+        </div>
+      </sc-if>
+      <sc-if value="{{ enquiry.notSuccess }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:20px 22px;display:flex;flex-direction:column;gap:12px">
+        <p style="color:#9aa5ba;font-size:13px;margin:0">Meguiar’s — {{ enquiry.productName }} ({{ enquiry.sizeLabel }})</p>
+        <sc-if value="{{ enquiry.error }}" hint-placeholder-val="{{ false }}">
+          <p style="color:#ff8a8a;font-size:13px;margin:0;background:rgba(60,10,12,.3);border:1px solid rgba(255,90,90,.3);border-radius:8px;padding:10px 12px">{{ enquiry.error }}</p>
+        </sc-if>
+        <label style="display:flex;flex-direction:column;gap:5px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#9aa5ba">Full Name *
+          <input type="text" value="{{ enquiry.name }}" onChange="{{ enquiry.setName }}" style="font-family:'Inter',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;background:rgba(255,255,255,.04);border:1px solid rgba(120,160,255,.2);border-radius:8px;color:#f2f4f9;font-size:14.5px;padding:11px 13px;min-height:44px" style-focus="border-color:#3f7bff;outline:2px solid #3f7bff;outline-offset:2px">
+        </label>
+        <label style="display:flex;flex-direction:column;gap:5px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#9aa5ba">Phone / WhatsApp *
+          <input type="tel" value="{{ enquiry.phone }}" onChange="{{ enquiry.setPhone }}" style="font-family:'Inter',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;background:rgba(255,255,255,.04);border:1px solid rgba(120,160,255,.2);border-radius:8px;color:#f2f4f9;font-size:14.5px;padding:11px 13px;min-height:44px" style-focus="border-color:#3f7bff;outline:2px solid #3f7bff;outline-offset:2px">
+        </label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <label style="display:flex;flex-direction:column;gap:5px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#9aa5ba">Quantity
+            <input type="text" value="{{ enquiry.quantity }}" onChange="{{ enquiry.setQuantity }}" placeholder="e.g. 2 units" style="font-family:'Inter',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;background:rgba(255,255,255,.04);border:1px solid rgba(120,160,255,.2);border-radius:8px;color:#f2f4f9;font-size:14.5px;padding:11px 13px;min-height:44px" style-focus="border-color:#3f7bff;outline:2px solid #3f7bff;outline-offset:2px">
+          </label>
+          <label style="display:flex;flex-direction:column;gap:5px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#9aa5ba">Business Type
+            <input type="text" value="{{ enquiry.businessType }}" onChange="{{ enquiry.setBusinessType }}" placeholder="e.g. Workshop, Individual" style="font-family:'Inter',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;background:rgba(255,255,255,.04);border:1px solid rgba(120,160,255,.2);border-radius:8px;color:#f2f4f9;font-size:14.5px;padding:11px 13px;min-height:44px" style-focus="border-color:#3f7bff;outline:2px solid #3f7bff;outline-offset:2px">
+          </label>
+        </div>
+        <label style="display:flex;flex-direction:column;gap:5px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#9aa5ba">Message
+          <textarea value="{{ enquiry.message }}" onChange="{{ enquiry.setMessage }}" rows="3" style="font-family:'Inter',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;background:rgba(255,255,255,.04);border:1px solid rgba(120,160,255,.2);border-radius:8px;color:#f2f4f9;font-size:14.5px;padding:11px 13px;resize:vertical" style-focus="border-color:#3f7bff;outline:2px solid #3f7bff;outline-offset:2px"></textarea>
+        </label>
+        <label style="display:flex;align-items:flex-start;gap:9px;font-size:13px;color:#c2ccdd">
+          <input type="checkbox" checked="{{ enquiry.consent }}" onChange="{{ enquiry.setConsent }}" style="margin-top:3px;width:16px;height:16px">
+          I agree to be contacted about this enquiry. Prices and availability are confirmed by our team, not shown here.
+        </label>
+        <button onClick="{{ enquiry.submit }}" disabled="{{ enquiry.loading }}" style="margin-top:4px;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#e11d27;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:14.5px;padding:13px 18px;border-radius:8px;border:0;min-height:46px" style-hover="background:#ff3b3b">
+          <sc-if value="{{ enquiry.loading }}" hint-placeholder-val="{{ false }}"><span style="width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;animation:ascc-spin 0.7s linear infinite;display:inline-block"></span></sc-if>
+          {{ enquiry.submitLabel }}
+        </button>
+      </div>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+
+<dc-import name="SiteFooter" hint-size="100%,320px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;gridDensity&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Spacious&quot;,&quot;options&quot;:[&quot;Compact&quot;,&quot;Standard&quot;,&quot;Spacious&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;showImageBadges&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;imageFit&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;cover&quot;,&quot;options&quot;:[&quot;contain&quot;,&quot;cover&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;defaultCategory&quot;:{&quot;editor&quot;:null,&quot;default&quot;:&quot;All&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = {
+    searchText: '', activeCategory: null, activeProductId: null,
+    enquiryType: null, enquiryProductId: null,
+    eqName: '', eqPhone: '', eqQuantity: '', eqBusinessType: '', eqMessage: '', eqConsent: false,
+    eqLoading: false, eqSuccess: false, eqError: ''
+  };
+
+  getProducts() {
+    return (typeof window !== 'undefined' && window.MEGUIARS_PRODUCTS) ? window.MEGUIARS_PRODUCTS : [];
+  }
+
+  renderVals() {
+    const allProducts = this.getProducts();
+    const hasError = allProducts.length === 0;
+    const searchText = this.state.searchText;
+    const activeCategory = this.state.activeCategory || this.props.defaultCategory || 'All';
+    const categoryList = ['All', ...new Set(allProducts.map(p => p.cleanCategory))];
+    const cardMinWidth = this.props.gridDensity === 'Compact' ? '210px' : this.props.gridDensity === 'Spacious' ? '300px' : '250px';
+    const showImageBadges = this.props.showImageBadges ?? true;
+
+    const filtered = allProducts.filter(p => {
+      const matchCat = activeCategory === 'All' || p.cleanCategory === activeCategory;
+      const matchSearch = !searchText || p.name.toLowerCase().includes(searchText.toLowerCase()) || (p.code || '').toLowerCase().includes(searchText.toLowerCase());
+      return matchCat && matchSearch;
+    });
+
+    const openEnquiry = (type, productId) => () => this.setState({
+      enquiryType: type, enquiryProductId: productId || null, eqName: '', eqPhone: '', eqQuantity: '', eqBusinessType: '', eqMessage: '', eqConsent: false, eqLoading: false, eqSuccess: false, eqError: ''
+    });
+
+    const decorate = (p) => ({
+      ...p,
+      codeLabel: p.code || 'Not listed',
+      sizeLabel: p.size || 'Not recorded',
+      metaLine: p.code ? (p.code + ' · ' + (p.size || 'size n/a')) : (p.size || 'Size not recorded'),
+      hasImage: !!p.imagePath,
+      noImage: !p.imagePath,
+      imageStatusShort: p.imagePath ? 'Verified' : (p.imageStatus === 'IMAGE REQUIRES CONFIRMATION' ? 'Confirming' : 'Image required'),
+      imageBadgeColor: p.imagePath ? '#3ddc84' : (p.imageStatus === 'IMAGE REQUIRES CONFIRMATION' ? '#8fb4ff' : '#ffc247'),
+      imageBadgeBorder: p.imagePath ? 'rgba(61,220,132,.4)' : (p.imageStatus === 'IMAGE REQUIRES CONFIRMATION' ? 'rgba(120,160,255,.4)' : 'rgba(255,194,71,.4)'),
+      open: () => this.setState({ activeProductId: p.id }),
+      openRetail: openEnquiry('Retail Enquiry', p.id),
+      openWholesale: openEnquiry('Wholesale Enquiry', p.id),
+      openQuote: openEnquiry('Request Quotation', p.id)
+    });
+
+    const filteredProducts = filtered.map(decorate);
+
+    const categories = categoryList.map(label => {
+      const active = label === activeCategory;
+      return {
+        label, active,
+        color: active ? '#fff' : '#dde4f3',
+        bg: active ? 'rgba(63,123,255,.22)' : 'transparent',
+        borderColor: active ? '#3f7bff' : 'rgba(120,160,255,.25)',
+        select: () => this.setState({ activeCategory: label })
+      };
+    });
+
+    const activeProductRaw = allProducts.find(p => p.id === this.state.activeProductId);
+    const activeProduct = activeProductRaw ? decorate(activeProductRaw) : null;
+
+    let enquiry = null;
+    if (this.state.enquiryType) {
+      const prod = allProducts.find(p => p.id === this.state.enquiryProductId);
+      const waBase = 'https://wa.me/971563867796?text=';
+      const msgParts = [
+        `${this.state.enquiryType} — Meguiar’s${prod ? ' — ' + prod.name : ''}`,
+        prod && prod.code ? `Code: ${prod.code}` : null,
+        prod && prod.size ? `Size: ${prod.size}` : null,
+        this.state.eqQuantity ? `Quantity: ${this.state.eqQuantity}` : null,
+        this.state.eqBusinessType ? `Business type: ${this.state.eqBusinessType}` : null,
+        `Name: ${this.state.eqName}`,
+        `Phone: ${this.state.eqPhone}`,
+        this.state.eqMessage ? `Message: ${this.state.eqMessage}` : null
+      ].filter(Boolean).join('\n');
+      const waLink = waBase + encodeURIComponent(msgParts);
+
+      enquiry = {
+        title: this.state.enquiryType,
+        productName: prod ? prod.name : 'General enquiry',
+        sizeLabel: prod ? (prod.size || 'size n/a') : '—',
+        name: this.state.eqName, setName: (e) => this.setState({ eqName: e.target.value }),
+        phone: this.state.eqPhone, setPhone: (e) => this.setState({ eqPhone: e.target.value }),
+        quantity: this.state.eqQuantity, setQuantity: (e) => this.setState({ eqQuantity: e.target.value }),
+        businessType: this.state.eqBusinessType, setBusinessType: (e) => this.setState({ eqBusinessType: e.target.value }),
+        message: this.state.eqMessage, setMessage: (e) => this.setState({ eqMessage: e.target.value }),
+        consent: this.state.eqConsent, setConsent: (e) => this.setState({ eqConsent: e.target.checked }),
+        loading: this.state.eqLoading,
+        success: this.state.eqSuccess,
+        notSuccess: !this.state.eqSuccess,
+        error: this.state.eqError,
+        submitLabel: this.state.eqLoading ? 'Preparing…' : 'Prepare Enquiry',
+        waLink,
+        submit: () => {
+          if (!this.state.eqName.trim() || !this.state.eqPhone.trim()) {
+            this.setState({ eqError: 'Please enter your name and phone/WhatsApp number.' }); return;
+          }
+          if (!this.state.eqConsent) {
+            this.setState({ eqError: 'Please confirm consent to be contacted.' }); return;
+          }
+          this.setState({ eqError: '', eqLoading: true });
+          setTimeout(() => this.setState({ eqLoading: false, eqSuccess: true }), 600);
+        }
+      };
+    }
+
+    return {
+      hasError,
+      searchText,
+      cardMinWidth,
+      showImageBadges,
+      imageFit: this.props.imageFit ?? 'contain',
+      onSearchChange: (e) => this.setState({ searchText: e.target.value }),
+      categories,
+      onClearFilters: () => this.setState({ searchText: '', activeCategory: 'All' }),
+      filteredProducts,
+      hasResults: filteredProducts.length > 0,
+      hasNoResults: !hasError && filteredProducts.length === 0,
+      visibleCount: filteredProducts.length,
+      totalCount: allProducts.length,
+      activeProduct,
+      closeProduct: () => this.setState({ activeProductId: null }),
+      enquiry,
+      closeEnquiry: () => this.setState({ enquiryType: null, enquiryProductId: null }),
+      openBrandRetail: openEnquiry('Retail Enquiry', null),
+      openBrandWholesale: openEnquiry('Wholesale Enquiry', null),
+      openBrandQuote: openEnquiry('Request Quotation', null)
+    };
+  }
+}
+
+</script>
+</body>
+</html>

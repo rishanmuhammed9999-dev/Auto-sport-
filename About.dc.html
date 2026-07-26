@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>About Us — Auto Sports Car Care</title>
+<meta name="description" content="About Auto Sports Car Care — vehicle detailing, protection, paint and body, customisation, restoration and maintenance, operated by AL KHAIR AL RAAZ LLC in Ajman, Sharjah and Dubai.">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0}
+@keyframes ascc-fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+::selection{background:rgba(63,123,255,.35)}
+</style>
+</helmet>
+
+<div style="background:#05070d;color:#f2f4f9;font-family:'Inter',system-ui,sans-serif;line-height:1.6;min-height:100vh;overflow-x:hidden">
+<a href="#main" style="position:absolute;left:-9999px;top:0;background:#3f7bff;color:#05070d;padding:12px 18px;font-weight:700;z-index:200" style-focus="left:12px;top:12px">Skip to main content</a>
+
+<dc-import name="SiteHeader" current="About" hint-size="100%,74px"></dc-import>
+
+<main id="main">
+
+<section aria-label="About Auto Sports Car Care" style="position:relative;overflow:hidden;padding:clamp(56px,9vw,96px) 0 clamp(40px,6vw,64px);border-bottom:1px solid rgba(120,160,255,.12)">
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 18% 20%,rgba(63,123,255,.14),transparent 55%)"></div>
+  <div style="position:relative;max-width:1720px;width:94%;margin:0 auto">
+    <p style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:clamp(12px,1.6vw,15px);letter-spacing:.32em;color:#8fb4ff;text-transform:uppercase;margin:0 0 14px">About Us</p>
+    <h1 style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:clamp(30px,5vw,54px);line-height:1.08;margin:0;max-width:20ch">Auto Sports Car Care</h1>
+    <p style="color:#c2ccdd;font-size:clamp(15px,1.6vw,18px);line-height:1.65;margin:20px 0 0;max-width:62ch">Vehicle detailing, protection, paint and body, customisation, restoration and maintenance — operated by AL KHAIR AL RAAZ LLC and serving Ajman, Sharjah and Dubai.</p>
+  </div>
+</section>
+
+<section aria-labelledby="who-h" style="max-width:1720px;width:94%;margin:0 auto;padding:clamp(48px,7vw,80px) 0">
+  <div style="display:grid;grid-template-columns:minmax(280px,1fr) minmax(280px,0.85fr);gap:clamp(28px,5vw,64px);align-items:center">
+    <div>
+      <h2 id="who-h" style="font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:.03em;text-transform:uppercase;font-size:clamp(22px,3vw,32px);margin:0 0 18px">Who We Are</h2>
+      <p style="color:#c2ccdd;font-size:16px;line-height:1.7;margin:0 0 16px;max-width:56ch">Auto Sports Car Care is a vehicle care workshop operated by AL KHAIR AL RAAZ LLC, licence number 2646563.01. We work on detailing, protection, paint and body, customisation, restoration and maintenance for cars brought to our workshop or collected from customers.</p>
+      <p style="color:#c2ccdd;font-size:16px;line-height:1.7;margin:0;max-width:56ch">Every job starts with an inspection of the vehicle. Scope of work and materials are confirmed with the customer before a quotation is issued, and any additional work found during the job requires customer approval before it proceeds.</p>
+    </div>
+    <div style="position:relative;border-radius:14px;overflow:hidden;aspect-ratio:4/3;border:1px solid rgba(120,160,255,.14)">
+      <img src="assets/about.webp" alt="Technicians servicing a vehicle on a lift in the Auto Sports Car Care workshop" style="mix-blend-mode:lighten;width:100%;height:100%;object-fit:cover;display:block">
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="activities-h" style="max-width:1720px;width:94%;margin:0 auto;padding:0 0 clamp(48px,7vw,80px)">
+  <h2 id="activities-h" style="font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:.03em;text-transform:uppercase;font-size:clamp(22px,3vw,32px);margin:0 0 24px">Business Activities</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px">
+    <sc-for list="{{ activities }}" as="a" hint-placeholder-count="6">
+      <div style="background:rgba(255,255,255,.035);border:1px solid rgba(120,160,255,.14);border-radius:14px;padding:24px;transition:.18s" style-hover="transform:translateY(-4px);border-color:rgba(120,160,255,.4);box-shadow:0 16px 40px rgba(0,0,0,.35)">
+        <span style="color:#3f7bff;display:inline-flex;margin-bottom:14px" aria-hidden="true">{{ a.icon }}</span>
+        <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:18px;letter-spacing:.02em;text-transform:uppercase;margin:0 0 8px">{{ a.title }}</h3>
+        <p style="color:#9aa5ba;font-size:14.5px;line-height:1.5;margin:0">{{ a.desc }}</p>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section aria-labelledby="areas-h" style="max-width:1720px;width:94%;margin:0 auto;padding:0 0 clamp(48px,7vw,80px)">
+  <div style="background:rgba(255,255,255,.035);border:1px solid rgba(120,160,255,.14);border-radius:16px;padding:clamp(28px,4vw,40px);display:flex;flex-wrap:wrap;gap:28px;align-items:center">
+    <span style="flex-shrink:0;width:52px;height:52px;border-radius:50%;background:rgba(63,123,255,.15);display:flex;align-items:center;justify-content:center;color:#3f7bff"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3.2c-4 0-7 3.1-7 7 0 5.2 7 10.6 7 10.6s7-5.4 7-10.6c0-3.9-3-7-7-7z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+    <div style="flex:1;min-width:220px">
+      <h2 id="areas-h" style="font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:.03em;text-transform:uppercase;font-size:clamp(19px,2.4vw,24px);margin:0 0 8px">Service Areas</h2>
+      <p style="color:#c2ccdd;font-size:15px;line-height:1.6;margin:0">We serve customers in Ajman, Sharjah and Dubai. Pickup and drop-off availability is confirmed at the time of booking.</p>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <sc-for list="{{ areas }}" as="area" hint-placeholder-count="3">
+        <span style="font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:13px;padding:9px 16px;border-radius:99px;border:1px solid rgba(120,160,255,.3);color:#8fb4ff">{{ area }}</span>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="workflow-h" style="max-width:1720px;width:94%;margin:0 auto;padding:0 0 clamp(48px,7vw,80px)">
+  <h2 id="workflow-h" style="font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:.03em;text-transform:uppercase;font-size:clamp(22px,3vw,32px);margin:0 0 28px">How We Work</h2>
+  <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px">
+    <sc-for list="{{ workflow }}" as="step" hint-placeholder-count="4">
+      <li style="background:rgba(255,255,255,.035);border:1px solid rgba(120,160,255,.14);border-radius:14px;padding:24px;position:relative">
+        <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:34px;color:rgba(63,123,255,.5);display:block;margin-bottom:10px">{{ step.n }}</span>
+        <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:17px;letter-spacing:.02em;text-transform:uppercase;margin:0 0 6px">{{ step.title }}</h3>
+        <p style="color:#9aa5ba;font-size:14px;line-height:1.5;margin:0">{{ step.desc }}</p>
+      </li>
+    </sc-for>
+  </ol>
+</section>
+
+<section aria-labelledby="mvv-h" style="max-width:1720px;width:94%;margin:0 auto;padding:0 0 clamp(48px,7vw,80px)">
+  <h2 id="mvv-h" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Mission, Vision and Core Values</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px">
+    <div style="background:linear-gradient(120deg,rgba(63,123,255,.12),rgba(63,123,255,.02));border:1px solid rgba(120,160,255,.18);border-radius:16px;padding:clamp(24px,3vw,32px)">
+      <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.03em;font-size:20px;margin:0 0 12px;color:#8fb4ff">Mission</h3>
+      <p style="color:#c2ccdd;font-size:15px;line-height:1.65;margin:0">To care for every vehicle with an honest, inspection-led process — confirming scope and cost before work begins, and keeping the customer in control of every decision.</p>
+    </div>
+    <div style="background:linear-gradient(120deg,rgba(63,123,255,.12),rgba(63,123,255,.02));border:1px solid rgba(120,160,255,.18);border-radius:16px;padding:clamp(24px,3vw,32px)">
+      <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.03em;font-size:20px;margin:0 0 12px;color:#8fb4ff">Vision</h3>
+      <p style="color:#c2ccdd;font-size:15px;line-height:1.65;margin:0">To be a dependable name in vehicle care across Ajman, Sharjah and Dubai, built on clear communication and consistent workmanship.</p>
+    </div>
+  </div>
+  <div style="margin-top:22px">
+    <h3 style="font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:.03em;text-transform:uppercase;font-size:clamp(19px,2.4vw,24px);margin:0 0 18px">Core Values</h3>
+    <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px 32px">
+      <sc-for list="{{ values }}" as="item" hint-placeholder-count="5">
+        <li style="display:flex;align-items:flex-start;gap:10px;color:#dde4f3;font-size:15px;line-height:1.5">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3ddc84" stroke-width="2" style="flex-shrink:0;margin-top:2px" aria-hidden="true"><path d="M5 13l4.4 4.4L19 7.6"/></svg>
+          {{ item }}
+        </li>
+      </sc-for>
+    </ul>
+  </div>
+</section>
+
+<section aria-labelledby="legal-h" style="max-width:1720px;width:94%;margin:0 auto;padding:0 0 clamp(48px,7vw,80px)">
+  <div style="border:1px solid rgba(120,160,255,.14);border-radius:14px;padding:clamp(24px,3vw,32px);background:rgba(255,255,255,.02)">
+    <h2 id="legal-h" style="font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:16px;margin:0 0 16px;color:#9aa5ba">Legal Company Information</h2>
+    <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px 24px">
+      <div><dt style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:#7a8299;margin:0 0 4px">Legal Operator</dt><dd style="margin:0;color:#e9edf5;font-size:15px">AL KHAIR AL RAAZ LLC</dd></div>
+      <div><dt style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:#7a8299;margin:0 0 4px">Trade Name</dt><dd style="margin:0;color:#e9edf5;font-size:15px">Auto Sports Car Care</dd></div>
+      <div><dt style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:#7a8299;margin:0 0 4px">Licence Number</dt><dd style="margin:0;color:#e9edf5;font-size:15px">2646563.01</dd></div>
+      <div><dt style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:#7a8299;margin:0 0 4px">Service Areas</dt><dd style="margin:0;color:#e9edf5;font-size:15px">Ajman, Sharjah, Dubai</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section aria-label="Contact call to action" style="max-width:1720px;width:94%;margin:0 auto;padding:0 0 clamp(56px,7vw,88px)">
+  <div style="background:linear-gradient(120deg,rgba(225,29,39,.14),rgba(63,123,255,.05));border:1px solid rgba(120,160,255,.18);border-radius:16px;padding:clamp(24px,4vw,36px);display:flex;flex-wrap:wrap;align-items:center;gap:22px 28px">
+    <div style="flex:1;min-width:220px">
+      <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:clamp(18px,2.2vw,24px);margin:0 0 6px">Have a Question or Ready to Book?</h2>
+      <p style="color:#c2ccdd;font-size:15px;margin:0">Reach our team by WhatsApp, phone or email — or request a booking.</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:14px">
+      <a href="Contact.dc.html" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35);font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.07em;text-transform:uppercase;font-size:15px;padding:15px 24px;border-radius:8px;text-decoration:none;min-height:48px;transition:.18s" style-hover="border-color:#3f7bff;background:rgba(63,123,255,.12)">Contact Us</a>
+      <a href="https://wa.me/971563867796" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;background:#e11d27;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.07em;text-transform:uppercase;font-size:15px;padding:15px 24px;border-radius:8px;text-decoration:none;white-space:nowrap;min-height:48px;transition:.18s" style-hover="background:#ff3b3b;box-shadow:0 10px 28px rgba(225,29,39,.4)">Book Your Service Now <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<dc-import name="SiteFooter" hint-size="100%,320px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      activities: [
+        { title: 'Detailing', desc: 'Interior and exterior vehicle detailing and cleaning.', icon: '◆' },
+        { title: 'Protection', desc: 'Paint protection film and coating application.', icon: '◈' },
+        { title: 'Paint & Body', desc: 'Paint work and body repair services.', icon: '◇' },
+        { title: 'Customisation', desc: 'Vehicle customisation including wraps and tint.', icon: '◑' },
+        { title: 'Restoration', desc: 'Restoration work for older or damaged vehicles.', icon: '◎' },
+        { title: 'Maintenance', desc: 'General vehicle maintenance and upkeep.', icon: '⬡' }
+      ],
+      areas: ['Ajman', 'Sharjah', 'Dubai'],
+      workflow: [
+        { n: '01', title: 'Inspection', desc: 'We inspect the vehicle to assess the work required.' },
+        { n: '02', title: 'Quotation', desc: 'Scope and cost are confirmed before any work begins.' },
+        { n: '03', title: 'Approval', desc: 'Any additional work found is approved by you first.' },
+        { n: '04', title: 'Handover', desc: 'Vehicle is returned or delivered on completion.' }
+      ],
+      values: [
+        'Service scope confirmed after vehicle inspection',
+        'Quotation issued before any work begins',
+        'Additional work carried out only with your approval',
+        'Product brands and availability confirmed on request',
+        'Progress updates from request through to handover'
+      ]
+    };
+  }
+}
+
+</script>
+</body>
+</html>

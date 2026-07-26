@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Products — Auto Sports Car Care</title>
+<meta name="description" content="Care products, paint materials, films, tools and equipment from Auto Sports Car Care.">
+<style>*{box-sizing:border-box}body{margin:0}@keyframes ascc-spin{to{transform:rotate(360deg)}}</style>
+</helmet>
+<div style="background:#05070d;color:#f2f4f9;font-family:'Inter',system-ui,sans-serif;line-height:1.6;min-height:100vh">
+<a href="#main" style="position:absolute;left:-9999px;top:0;background:#3f7bff;color:#05070d;padding:12px 18px;font-weight:700;z-index:200" style-focus="left:12px;top:12px">Skip to main content</a>
+<dc-import name="SiteHeader" current="Products" hint-size="100%,74px"></dc-import>
+
+<main id="main">
+<section style="max-width:1720px;width:94%;margin:0 auto;padding:clamp(48px,7vw,72px) 0 24px">
+  <p style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;letter-spacing:.28em;color:#8fb4ff;text-transform:uppercase;margin:0 0 14px">Product Catalogue</p>
+  <h1 style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:clamp(28px,4vw,44px);margin:0 0 12px">Care Products &amp; Supply</h1>
+  <p style="color:#9aa5ba;font-size:15px;max-width:64ch;margin:0 0 8px">Foundation catalogue for testing search, filters and enquiries. Product entries below use <strong style="color:#ffc247">TEMPORARY ASSET</strong> data — names, images and descriptions are placeholders, not real stock. Prices are not shown; availability is confirmed on enquiry.</p>
+</section>
+
+<section style="max-width:1720px;width:94%;margin:0 auto;padding:0 0 24px;display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+  <div style="flex:1;min-width:240px;position:relative">
+    <input type="search" value="{{ searchText }}" onChange="{{ onSearchChange }}" placeholder="Search products…" aria-label="Search products" style="width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(120,160,255,.2);border-radius:8px;color:#f2f4f9;font-family:'Inter',sans-serif;font-size:15px;padding:13px 16px;min-height:48px" style-focus="border-color:#3f7bff;outline:2px solid #3f7bff;outline-offset:2px">
+  </div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="5">
+      <button onClick="{{ cat.select }}" aria-pressed="{{ cat.active }}" style="font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:13.5px;padding:11px 18px;border-radius:8px;border:1px solid {{ cat.borderColor }};background:{{ cat.bg }};color:{{ cat.color }};min-height:44px" style-focus="outline:2px solid #3f7bff;outline-offset:2px">{{ cat.label }}</button>
+    </sc-for>
+  </div>
+</section>
+
+<section style="max-width:1720px;width:94%;margin:0 auto;padding:0 0 clamp(56px,7vw,88px);min-height:340px">
+
+  <sc-if value="{{ isLoading }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 0;gap:16px">
+      <div style="width:36px;height:36px;border-radius:50%;border:3px solid rgba(120,160,255,.2);border-top-color:#3f7bff;animation:ascc-spin 0.8s linear infinite"></div>
+      <p style="color:#9aa5ba;font-size:14px;margin:0">Loading products…</p>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isError }}" hint-placeholder-val="{{ false }}">
+    <div style="border:1px solid rgba(255,90,90,.3);background:rgba(60,10,12,.3);border-radius:14px;padding:32px;text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center">
+      <p style="font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#ff8a8a;margin:0">Couldn't Load Products</p>
+      <p style="color:#e3b8b8;font-size:14px;margin:0">Something went wrong loading the catalogue. Please try again.</p>
+      <button onClick="{{ retryLoad }}" style="background:#e11d27;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:14px;padding:12px 22px;border-radius:8px;border:0;min-height:44px">Retry</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isReady }}" hint-placeholder-val="{{ true }}">
+    <sc-if value="{{ hasResults }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px">
+        <sc-for list="{{ filteredProducts }}" as="p" hint-placeholder-count="6">
+          <div style="background:rgba(255,255,255,.035);border:1px solid rgba(120,160,255,.14);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:.18s" style-hover="transform:translateY(-4px);border-color:rgba(120,160,255,.4);box-shadow:0 16px 40px rgba(0,0,0,.35)">
+            <div style="position:relative;aspect-ratio:4/3;background:#04070e;overflow:hidden">
+              <span style="position:absolute;top:10px;left:10px;z-index:2;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;padding:4px 10px;border-radius:99px;border:1px solid rgba(255,194,71,.45);background:rgba(38,28,6,.72);color:#ffc247">Temporary Asset</span>
+              <img src="{{ p.image }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover;display:block">
+            </div>
+            <div style="padding:20px;display:flex;flex-direction:column;flex:1;gap:8px">
+              <p style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#8fb4ff;margin:0">{{ p.category }}</p>
+              <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:18px;letter-spacing:.02em;text-transform:uppercase;margin:0">{{ p.name }}</h3>
+              <p style="color:#9aa5ba;font-size:14px;line-height:1.45;margin:0;flex:1">{{ p.desc }}</p>
+              <button onClick="{{ p.open }}" style="margin-top:8px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13.5px;letter-spacing:.07em;text-transform:uppercase;color:#8fb4ff;background:none;border:1px solid rgba(120,160,255,.3);border-radius:8px;padding:11px 14px;min-height:44px" style-hover="border-color:#3f7bff;color:#fff">View Details</button>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+    <sc-if value="{{ hasNoResults }}" hint-placeholder-val="{{ false }}">
+      <div style="border:1px dashed rgba(120,160,255,.25);border-radius:14px;padding:56px 24px;text-align:center">
+        <p style="color:#7a8299;font-size:15px;margin:0">No products match "{{ searchText }}". Try a different search or category.</p>
+      </div>
+    </sc-if>
+  </sc-if>
+
+</section>
+</main>
+
+<sc-if value="{{ activeProduct }}" hint-placeholder-val="{{ null }}">
+  <div role="dialog" aria-modal="true" aria-labelledby="pTitle" style="position:fixed;inset:0;z-index:120;background:rgba(4,6,12,.82);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px">
+    <div style="width:min(720px,100%);max-height:88vh;overflow:auto;background:#0a0d18;border:1px solid rgba(120,160,255,.18);border-radius:16px">
+      <div style="position:relative;aspect-ratio:16/9;background:#04070e">
+        <img src="{{ activeProduct.image }}" alt="{{ activeProduct.name }}" style="width:100%;height:100%;object-fit:cover;display:block">
+        <button onClick="{{ closeProduct }}" aria-label="Close details" style="position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:8px;border:1px solid rgba(255,255,255,.3);background:rgba(4,6,12,.6);color:#fff;font-size:16px">✕</button>
+      </div>
+      <div style="padding:26px 28px">
+        <p style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:#8fb4ff;margin:0 0 8px">{{ activeProduct.category }} · Temporary Asset</p>
+        <h3 id="pTitle" style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:24px;margin:0 0 14px">{{ activeProduct.name }}</h3>
+        <p style="color:#c2ccdd;font-size:15px;line-height:1.6;margin:0 0 22px">{{ activeProduct.desc }} Availability and pricing confirmed on enquiry.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px">
+          <a href="{{ activeProduct.retailLink }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:#e11d27;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:14.5px;padding:14px 20px;border-radius:8px;text-decoration:none;min-height:46px">Retail Enquiry</a>
+          <a href="{{ activeProduct.wholesaleLink }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35);font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:14.5px;padding:14px 20px;border-radius:8px;text-decoration:none;min-height:46px">Wholesale Enquiry</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<div style="max-width:1720px;width:94%;margin:0 auto;padding:0 0 20px;display:flex;gap:10px;flex-wrap:wrap">
+  <button onClick="{{ toggleErrorDemo }}" style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:#5a6274;background:transparent;border:1px dashed #3a4256;border-radius:8px;padding:8px 12px">QA: Toggle Error State</button>
+</div>
+
+<dc-import name="SiteFooter" hint-size="100%,320px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { searchText: '', activeCategory: 'All', isLoading: true, isError: false, activeProductId: null };
+
+  componentDidMount() {
+    this._t = setTimeout(() => this.setState({ isLoading: false }), 500);
+  }
+  componentWillUnmount() { clearTimeout(this._t); }
+
+  renderVals() {
+    const allProducts = [
+      { id: 'p1', name: 'Interior Detailing Kit', category: 'Detailing Chemicals', desc: 'Interior cleaning and conditioning set for upholstery and trim.', image: 'assets/about.webp' },
+      { id: 'p2', name: 'Ceramic Coating Set', category: 'Ceramic Coatings', desc: 'Two-step exterior ceramic coating application kit.', image: 'assets/tech-config.webp' },
+      { id: 'p3', name: 'Paint Protection Film Roll', category: 'PPF & Films', desc: 'Clear protective film roll for paintwork application.', image: 'assets/tech-3d.webp' },
+      { id: 'p4', name: 'Window Tint Film', category: 'PPF & Films', desc: 'Automotive window film in multiple shade options.', image: 'assets/tech-360.webp' },
+      { id: 'p5', name: 'Dual-Action Polisher', category: 'Tools & Equipment', desc: 'Polishing machine for paint correction work.', image: 'assets/tech-showreel.webp' },
+      { id: 'p6', name: 'Microfibre Towel Pack', category: 'Accessories', desc: 'Set of microfibre towels for detailing and drying.', image: 'assets/hero.webp' }
+    ];
+    const categoryList = ['All', 'Detailing Chemicals', 'Ceramic Coatings', 'PPF & Films', 'Tools & Equipment', 'Accessories'];
+    const activeCategory = this.state.activeCategory;
+    const searchText = this.state.searchText;
+
+    const filtered = allProducts.filter(p => {
+      const matchCat = activeCategory === 'All' || p.category === activeCategory;
+      const matchSearch = !searchText || p.name.toLowerCase().includes(searchText.toLowerCase());
+      return matchCat && matchSearch;
+    });
+
+    const waBase = 'https://wa.me/971563867796?text=';
+    const filteredProducts = filtered.map(p => ({
+      ...p,
+      retailLink: waBase + encodeURIComponent(`Hi, I'd like a retail enquiry about: ${p.name}`),
+      wholesaleLink: waBase + encodeURIComponent(`Hi, I'd like a wholesale enquiry about: ${p.name}`),
+      open: () => this.setState({ activeProductId: p.id })
+    }));
+
+    const categories = categoryList.map(label => {
+      const active = label === activeCategory;
+      return {
+        label, active,
+        color: active ? '#fff' : '#dde4f3',
+        bg: active ? 'rgba(63,123,255,.22)' : 'transparent',
+        borderColor: active ? '#3f7bff' : 'rgba(120,160,255,.25)',
+        select: () => this.setState({ activeCategory: label })
+      };
+    });
+
+    const activeProduct = filteredProducts.find(p => p.id === this.state.activeProductId)
+      || allProducts.filter(p => p.id === this.state.activeProductId).map(p => ({
+        ...p,
+        retailLink: waBase + encodeURIComponent(`Hi, I'd like a retail enquiry about: ${p.name}`),
+        wholesaleLink: waBase + encodeURIComponent(`Hi, I'd like a wholesale enquiry about: ${p.name}`)
+      }))[0] || null;
+
+    const isReady = !this.state.isLoading && !this.state.isError;
+
+    return {
+      searchText,
+      onSearchChange: (e) => this.setState({ searchText: e.target.value }),
+      categories,
+      isLoading: this.state.isLoading,
+      isError: this.state.isError,
+      isReady,
+      hasResults: isReady && filteredProducts.length > 0,
+      hasNoResults: isReady && filteredProducts.length === 0,
+      filteredProducts,
+      activeProduct,
+      closeProduct: () => this.setState({ activeProductId: null }),
+      retryLoad: () => this.setState({ isError: false, isLoading: true }, () => setTimeout(() => this.setState({ isLoading: false }), 500)),
+      toggleErrorDemo: () => this.setState(s => ({ isError: !s.isError, isLoading: false }))
+    };
+  }
+}
+
+</script>
+</body>
+</html>

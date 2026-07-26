@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Auto Paint Department — Auto Sports Car Care</title>
+<meta name="description" content="Full-body and panel painting, repairs, colour matching, primer, filler and finishing. Scope and price confirmed after vehicle inspection.">
+<style>*{box-sizing:border-box}body{margin:0;background:#05070d}a{color:#8fb4ff}a:hover{color:#fff}</style>
+</helmet>
+<div style="background:#05070d;color:#f2f4f9;font-family:'Inter',system-ui,sans-serif;line-height:1.6;min-height:100vh">
+
+<header style="position:sticky;top:0;z-index:80;background:rgba(5,7,13,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(120,160,255,.12)">
+  <div style="max-width:1560px;width:94%;margin:0 auto;display:flex;align-items:center;gap:26px;min-height:74px">
+    <a href="Homepage.dc.html" aria-label="Auto Sports Car Care — home" style="display:flex;align-items:center;flex-shrink:0">
+      <img src="assets/logo.png" alt="Auto Sports Car Care" style="height:32px;display:block">
+    </a>
+    <sc-if value="{{ isDesktopNav }}" hint-placeholder-val="{{ true }}">
+      <nav aria-label="Main" style="display:flex;align-items:center;gap:20px;flex:1">
+        <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="8">
+          <a href="{{ n.href }}" aria-current="{{ n.current }}" style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;letter-spacing:.04em;color:{{ n.color }};text-decoration:none;white-space:nowrap;border-bottom:2px solid {{ n.border }};padding-bottom:3px" style-hover="color:#fff">{{ n.label }}</a>
+        </sc-for>
+      </nav>
+      <a href="https://wa.me/971563867796" target="_blank" rel="noopener" style="background:#e11d27;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;font-size:14px;padding:11px 20px;border-radius:99px;text-decoration:none;white-space:nowrap" style-hover="background:#ff3b3b">WhatsApp</a>
+    </sc-if>
+    <sc-if value="{{ isMobileNav }}" hint-placeholder-val="{{ false }}">
+      <button aria-label="Open menu" aria-expanded="{{ mobileOpen }}" onClick="{{ toggleMobile }}" style="margin-left:auto;background:transparent;border:1px solid rgba(120,160,255,.3);border-radius:8px;width:44px;height:44px;color:#fff;font-size:20px">☰</button>
+    </sc-if>
+  </div>
+  <sc-if value="{{ mobileOpen }}" hint-placeholder-val="{{ false }}">
+    <nav aria-label="Mobile" style="display:flex;flex-direction:column;padding:6px 5% 18px;border-top:1px solid rgba(120,160,255,.1)">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="8">
+        <a href="{{ n.href }}" onClick="{{ closeMobile }}" style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:16px;letter-spacing:.06em;color:#dde4f3;text-decoration:none;padding:14px 2px;border-bottom:1px solid rgba(120,160,255,.1);min-height:48px;display:flex;align-items:center">{{ n.label }}</a>
+      </sc-for>
+      <a href="https://wa.me/971563867796" target="_blank" rel="noopener" style="margin-top:14px;background:#e11d27;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;padding:14px;border-radius:99px;text-decoration:none;text-align:center;min-height:48px;display:flex;align-items:center;justify-content:center">WhatsApp</a>
+    </nav>
+  </sc-if>
+</header>
+
+<main>
+<section style="max-width:1560px;width:94%;margin:0 auto;padding:clamp(48px,7vw,88px) 0;display:grid;grid-template-columns:minmax(280px,1fr) minmax(300px,1.1fr);gap:clamp(28px,5vw,56px);align-items:center">
+  <div>
+    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(12px,1.4vw,14px);letter-spacing:.22em;color:#e11d27;text-transform:uppercase;margin:0 0 16px">Surface. Colour. Finish.</p>
+    <h1 style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.01em;font-size:clamp(34px,5.2vw,60px);line-height:1.05;margin:0 0 20px">Auto Paint<br>Department</h1>
+    <p style="color:#c2ccdd;font-size:clamp(14px,1.4vw,16.5px);line-height:1.7;margin:0 0 30px;max-width:46ch">Full-body and panel painting, repairs, colour matching, primer, filler and finishing. Scope, preparation, price, completion time and warranty are confirmed after inspecting the vehicle.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:14px">
+      <a href="https://wa.me/971563867796" target="_blank" rel="noopener" style="background:#e11d27;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:14.5px;padding:16px 26px;border-radius:6px;text-decoration:none;min-height:52px;display:inline-flex;align-items:center" style-hover="background:#ff3b3b;box-shadow:0 10px 28px rgba(225,29,39,.35)">Request Paint Quotation</a>
+      <a href="https://wa.me/971563867796" target="_blank" rel="noopener" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35);font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:14.5px;padding:16px 26px;border-radius:6px;text-decoration:none;min-height:52px;display:inline-flex;align-items:center" style-hover="border-color:#3f7bff;background:rgba(63,123,255,.12)">Send Damage Photos</a>
+    </div>
+  </div>
+  <div style="position:relative;border-radius:14px;overflow:hidden;aspect-ratio:16/10;background:linear-gradient(150deg,#0b1220,#05070d 70%);border:1px solid rgba(120,160,255,.14)">
+    <img src="assets/hero.webp" alt="Vehicle in the Auto Sports Car Care paint department" style="width:100%;height:100%;object-fit:cover;opacity:.55">
+    <span style="position:absolute;top:14px;right:14px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:6px 11px;border-radius:4px;border:1px solid rgba(120,160,255,.35);background:rgba(6,10,19,.7);color:#8fb4ff">3D Concept Render</span>
+  </div>
+</section>
+
+<section aria-labelledby="ps-h" style="max-width:1560px;width:94%;margin:0 auto;padding:0 0 clamp(48px,7vw,88px)">
+  <div style="display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:32px">
+    <span style="width:60px;height:1px;background:linear-gradient(to right,transparent,#3f7bff)"></span>
+    <h2 id="ps-h" style="font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:.18em;text-transform:uppercase;font-size:clamp(17px,2.2vw,24px);margin:0;text-align:center">Paint Services</h2>
+    <span style="width:60px;height:1px;background:linear-gradient(to left,transparent,#3f7bff)"></span>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px">
+    <sc-for list="{{ paintServices }}" as="s" hint-placeholder-count="8">
+      <article style="background:rgba(255,255,255,.035);border:1px solid rgba(120,160,255,.14);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:.18s" style-hover="transform:translateY(-4px);border-color:rgba(120,160,255,.4);box-shadow:0 16px 40px rgba(0,0,0,.35)">
+        <div style="aspect-ratio:16/10;background:linear-gradient(155deg,#0d1524,#060810);display:flex;align-items:center;justify-content:center;color:#3f7bff;font-size:34px" aria-hidden="true">{{ s.icon }}</div>
+        <div style="padding:20px;display:flex;flex-direction:column;flex:1">
+          <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:17px;letter-spacing:.03em;text-transform:uppercase;margin:0 0 8px">{{ s.title }}</h3>
+          <p style="color:#9aa5ba;font-size:14px;line-height:1.5;margin:0;flex:1">{{ s.desc }}</p>
+          <a href="https://wa.me/971563867796" target="_blank" rel="noopener" style="margin-top:16px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:#8fb4ff;text-decoration:none;align-self:flex-start;min-height:30px;display:inline-flex;align-items:center" style-hover="color:#fff">Request Quotation ›</a>
+        </div>
+      </article>
+    </sc-for>
+  </div>
+</section>
+
+<section style="max-width:1560px;width:94%;margin:0 auto;padding:0 0 clamp(48px,7vw,88px)">
+  <h2 style="font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:clamp(19px,2.4vw,26px);margin:0 0 24px">Paint Process</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px">
+    <sc-for list="{{ processSteps }}" as="p" hint-placeholder-count="8">
+      <div style="border-top:2px solid rgba(120,160,255,.25);padding-top:14px">
+        <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12px;letter-spacing:.1em;color:#3f7bff">{{ p.num }}</span>
+        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14.5px;letter-spacing:.02em;margin:6px 0 0;color:#dde4f3">{{ p.label }}</p>
+      </div>
+    </sc-for>
+  </div>
+  <p style="color:#7a8299;font-size:12.5px;margin:22px 0 0">Final scope, materials, duration and price are confirmed after vehicle inspection. Additional work requires customer approval.</p>
+</section>
+
+<section style="max-width:1560px;width:94%;margin:0 auto;padding:0 0 clamp(56px,7vw,88px)">
+  <div style="background:linear-gradient(120deg,rgba(63,123,255,.12),rgba(63,123,255,.02));border:1px solid rgba(120,160,255,.18);border-radius:16px;padding:clamp(26px,4vw,40px);display:flex;flex-wrap:wrap;align-items:center;gap:22px 28px">
+    <div style="flex:1;min-width:220px">
+      <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:clamp(18px,2.2vw,25px);margin:0 0 8px">Bring Your Vehicle In for Inspection</h2>
+      <p style="color:#c2ccdd;font-size:14.5px;margin:0">Send damage photos on WhatsApp or book an inspection date.</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px">
+      <a href="https://wa.me/971563867796" target="_blank" rel="noopener" style="background:#e11d27;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:14px;padding:15px 24px;border-radius:6px;text-decoration:none;min-height:48px;display:inline-flex;align-items:center" style-hover="background:#ff3b3b">Request Quotation</a>
+      <a href="Book.dc.html" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35);font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:14px;padding:15px 24px;border-radius:6px;text-decoration:none;min-height:48px;display:inline-flex;align-items:center" style-hover="border-color:#3f7bff">Book Inspection</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer style="border-top:1px solid rgba(120,160,255,.12);background:rgba(4,6,12,.9)">
+  <div style="max-width:1560px;width:94%;margin:0 auto;padding:26px 0;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;color:#7a8299;font-size:12.5px">
+    <span>© {{ year }} Auto Sports Car Care · Operated by AL KHAIR AL RAAZ LLC · Licence 2646563.01</span>
+    <span>Ajman · Sharjah · Dubai</span>
+  </div>
+</footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { width: typeof window !== 'undefined' ? window.innerWidth : 1440, mobileOpen: false };
+  componentDidMount() {
+    this._r = () => this.setState({ width: window.innerWidth });
+    window.addEventListener('resize', this._r);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._r); }
+  renderVals() {
+    const isDesktopNav = this.state.width >= 1080;
+    const raw = [
+      { label: 'Home', href: 'Homepage.dc.html' },
+      { label: 'Services', href: 'Services.dc.html' },
+      { label: 'Auto Paint', href: 'AutoPaint.dc.html' },
+      { label: 'Products', href: 'Products.dc.html' },
+      { label: 'Brands', href: 'Brands.dc.html' },
+      { label: 'Gallery', href: 'Gallery.dc.html' },
+      { label: 'About', href: 'About.dc.html' },
+      { label: 'Contact', href: 'Contact.dc.html' }
+    ];
+    const navItems = raw.map(n => ({
+      ...n,
+      current: n.label === 'Auto Paint' ? 'page' : undefined,
+      color: n.label === 'Auto Paint' ? '#fff' : '#dde4f3',
+      border: n.label === 'Auto Paint' ? '#e11d27' : 'transparent'
+    }));
+    return {
+      isDesktopNav, isMobileNav: !isDesktopNav,
+      mobileOpen: this.state.mobileOpen && !isDesktopNav,
+      toggleMobile: () => this.setState(s => ({ mobileOpen: !s.mobileOpen })),
+      closeMobile: () => this.setState({ mobileOpen: false }),
+      navItems,
+      paintServices: [
+        { icon: '◈', title: 'Full-Body Painting', desc: 'Same colour, colour change, exterior only, door jambs and body shell models.' },
+        { icon: '▤', title: 'Panel Painting', desc: 'Bonnet, roof, doors, fenders, quarter panels, boot and multiple panels.' },
+        { icon: '◉', title: 'Spot Paint Repair', desc: 'Localised, edge, bumper spot and blended repair for limited damaged areas.' },
+        { icon: '✦', title: 'Scratch Repair', desc: 'Polishing, wet sanding, touch-up, spot paint or full panel depending on depth.' },
+        { icon: '◐', title: 'Colour Matching', desc: 'Paint-code inspection, formula review and spray-out testing before application.' },
+        { icon: '▦', title: 'Primer &amp; Filler', desc: 'Surface preparation, body filler, putty, primer and sealer stages.' },
+        { icon: '◇', title: 'Clearcoat &amp; Finishing', desc: 'Clearcoat application, flatting, compounding and final polish.' },
+        { icon: '⚙', title: 'Rust &amp; Body Repair', desc: 'Rust treatment, panel straightening and structural preparation before paint.' }
+      ],
+      processSteps: ['Vehicle Inspection','Damage Assessment','Scope Confirmation','Quotation','Customer Approval','Preparation','Painting','Quality Check &amp; Handover'].map((label, i) => ({ num: String(i + 1).padStart(2, '0'), label })),
+      year: new Date().getFullYear()
+    };
+  }
+}
+
+</script>
+</body>
+</html>

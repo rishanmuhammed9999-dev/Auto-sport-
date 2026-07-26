@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Contact — Auto Sports Car Care</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#f3f1ec}a{color:#2454d9}a:hover{color:#173a9e}</style>
+</helmet>
+<div style="background:#f3f1ec;color:#1c1e24;font-family:'Inter',system-ui,sans-serif;line-height:1.6;min-height:100vh">
+<dc-import name="SiteHeaderNew" current="Contact" hint-size="100%,76px"></dc-import>
+
+<section style="background:#14161c;padding:clamp(48px,6vw,72px) 0">
+  <div style="max-width:1560px;width:94%;margin:0 auto">
+    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.14em;color:#7fa0ff;text-transform:uppercase;margin:0 0 10px">Contact</p>
+    <h1 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(28px,3.6vw,40px);color:#f3f1ec;margin:0 0 12px">Get in Touch</h1>
+    <p style="color:#a7abb6;font-size:15px;max-width:60ch;margin:0">Serving customers across Ajman, Sharjah and Dubai.</p>
+  </div>
+</section>
+
+<section style="max-width:1560px;width:94%;margin:0 auto;padding:clamp(40px,5vw,56px) 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px">
+  <a href="https://wa.me/971563867796" target="_blank" rel="noopener" style="background:#fff;border-radius:12px;padding:20px;text-decoration:none;color:#14161c"><p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;margin:0 0 4px">WhatsApp</p><p style="color:#5a5f6e;font-size:13.5px;margin:0">+971 56 386 7796</p></a>
+  <a href="tel:+971563160420" style="background:#fff;border-radius:12px;padding:20px;text-decoration:none;color:#14161c"><p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;margin:0 0 4px">Call</p><p style="color:#5a5f6e;font-size:13.5px;margin:0">+971 56 316 0420</p></a>
+  <a href="mailto:autosportcar.care@gmail.com" style="background:#fff;border-radius:12px;padding:20px;text-decoration:none;color:#14161c"><p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;margin:0 0 4px">Email</p><p style="color:#5a5f6e;font-size:13.5px;margin:0;word-break:break-all">autosportcar.care@gmail.com</p></a>
+  <a href="https://instagram.com/autosportscarcare" target="_blank" rel="noopener" style="background:#fff;border-radius:12px;padding:20px;text-decoration:none;color:#14161c"><p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;margin:0 0 4px">Instagram</p><p style="color:#5a5f6e;font-size:13.5px;margin:0">@autosportscarcare</p></a>
+</section>
+
+<section style="max-width:1560px;width:94%;margin:0 auto;padding:0 0 clamp(56px,7vw,88px)">
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px">
+    <sc-for list="{{ formTabs }}" as="t" hint-placeholder-count="6">
+      <button onClick="{{ t.select }}" aria-pressed="{{ t.active }}" style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;padding:10px 16px;border-radius:8px;border:1.5px solid {{ t.borderColor }};background:{{ t.bg }};color:{{ t.color }};min-height:42px">{{ t.label }}</button>
+    </sc-for>
+  </div>
+
+  <div style="background:#fff;border-radius:14px;padding:clamp(24px,3vw,32px);max-width:640px">
+    <sc-if value="{{ success }}" hint-placeholder-val="{{ false }}">
+      <div style="text-align:center;padding:20px 0;display:flex;flex-direction:column;align-items:center;gap:12px">
+        <span style="width:44px;height:44px;border-radius:50%;background:rgba(31,157,92,.12);color:#1f9d5c;display:flex;align-items:center;justify-content:center;font-size:20px">✓</span>
+        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;margin:0;color:#14161c">Message Received</p>
+        <p style="color:#5a5f6e;font-size:14px;margin:0;max-width:38ch">Your {{ activeLabel }} has been recorded. Our team will contact you to confirm next steps.</p>
+      </div>
+    </sc-if>
+    <sc-if value="{{ notSuccess }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
+        <p style="color:#b3261e;font-size:13px;margin:0;background:#fdecea;border:1px solid #f3b8b3;border-radius:8px;padding:10px 12px">{{ error }}</p>
+      </sc-if>
+      <label style="display:flex;flex-direction:column;gap:5px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#5a5f6e">Name *
+        <input type="text" value="{{ name }}" onChange="{{ setName }}" style="font-family:'Inter',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;background:#f3f1ec;border:1px solid #d6d2c6;border-radius:8px;color:#1c1e24;font-size:14.5px;padding:11px 13px;min-height:44px" style-focus="border-color:#2454d9;outline:2px solid #2454d9;outline-offset:2px">
+      </label>
+      <label style="display:flex;flex-direction:column;gap:5px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#5a5f6e">Phone *
+        <input type="tel" value="{{ phone }}" onChange="{{ setPhone }}" style="font-family:'Inter',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;background:#f3f1ec;border:1px solid #d6d2c6;border-radius:8px;color:#1c1e24;font-size:14.5px;padding:11px 13px;min-height:44px" style-focus="border-color:#2454d9;outline:2px solid #2454d9;outline-offset:2px">
+      </label>
+      <label style="display:flex;flex-direction:column;gap:5px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#5a5f6e">Message
+        <textarea value="{{ message }}" onChange="{{ setMessage }}" rows="4" style="font-family:'Inter',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;background:#f3f1ec;border:1px solid #d6d2c6;border-radius:8px;color:#1c1e24;font-size:14.5px;padding:11px 13px;resize:vertical" style-focus="border-color:#2454d9;outline:2px solid #2454d9;outline-offset:2px"></textarea>
+      </label>
+      <label style="display:flex;align-items:flex-start;gap:9px;font-size:13px;color:#5a5f6e">
+        <input type="checkbox" checked="{{ consent }}" onChange="{{ setConsent }}" style="margin-top:3px;width:16px;height:16px">
+        I agree to be contacted about this enquiry.
+      </label>
+      <button onClick="{{ submit }}" disabled="{{ loading }}" style="align-self:flex-start;background:#d81f2a;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:14px;padding:13px 22px;border-radius:8px;border:0;min-height:46px" style-hover="background:#ef2d38">{{ submitLabel }}</button>
+    </div>
+    </sc-if>
+  </div>
+</section>
+
+<dc-import name="SiteFooterNew" hint-size="100%,320px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { activeTab: 'Service', name: '', phone: '', message: '', consent: false, loading: false, success: false, error: '' };
+  renderVals() {
+    const tabLabels = ['Service', 'Product', 'Wholesale', 'Fleet', 'Support', 'Complaint'];
+    const formTabs = tabLabels.map(label => {
+      const active = label === this.state.activeTab;
+      return { label, active, color: active ? '#fff' : '#14161c', bg: active ? '#14161c' : '#fff', borderColor: active ? '#14161c' : '#d6d2c6', select: () => this.setState({ activeTab: label, success: false, error: '' }) };
+    });
+    return {
+      formTabs, activeLabel: this.state.activeTab.toLowerCase() + ' enquiry',
+      name: this.state.name, setName: (e) => this.setState({ name: e.target.value }),
+      phone: this.state.phone, setPhone: (e) => this.setState({ phone: e.target.value }),
+      message: this.state.message, setMessage: (e) => this.setState({ message: e.target.value }),
+      consent: this.state.consent, setConsent: (e) => this.setState({ consent: e.target.checked }),
+      loading: this.state.loading, success: this.state.success, notSuccess: !this.state.success, error: this.state.error,
+      submitLabel: this.state.loading ? 'Sending…' : 'Send',
+      submit: () => {
+        if (!this.state.name.trim() || !this.state.phone.trim()) { this.setState({ error: 'Please enter your name and phone number.' }); return; }
+        if (!this.state.consent) { this.setState({ error: 'Please confirm consent to be contacted.' }); return; }
+        this.setState({ error: '', loading: true });
+        setTimeout(() => this.setState({ loading: false, success: true }), 500);
+      }
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<title>Auto Sports Car Care — Automotive Services, Products &amp; Technical Support</title>
+<meta name="description" content="Request vehicle services, explore automotive products and submit material requirements through one connected platform.">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f3f1ec}
+::selection{background:rgba(37,84,217,.2)}
+a{color:#2454d9}
+a:hover{color:#173a9e}
+</style>
+</helmet>
+
+<div style="background:#f3f1ec;color:#1c1e24;font-family:'Inter',system-ui,sans-serif;line-height:1.6;min-height:100vh">
+<a href="#main" style="position:absolute;left:-9999px;top:0;background:#2454d9;color:#fff;padding:12px 18px;font-weight:700;z-index:200" style-focus="left:12px;top:12px">Skip to main content</a>
+
+<header style="position:sticky;top:0;z-index:80;background:#14161c;border-bottom:1px solid #262a34">
+  <div style="max-width:1560px;width:94%;margin:0 auto;display:flex;align-items:center;gap:28px;min-height:76px">
+    <a href="#top" aria-label="Auto Sports Car Care — home" style="display:flex;align-items:center;flex-shrink:0">
+      <img src="assets/logo.png" alt="Auto Sports Car Care" style="height:32px;width:auto;display:block">
+    </a>
+    <sc-if value="{{ isDesktopNav }}" hint-placeholder-val="{{ true }}">
+      <nav aria-label="Main" style="display:flex;align-items:center;gap:22px;flex:1">
+        <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
+          <a href="{{ item.href }}" style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;letter-spacing:.03em;color:#cfd3dc;text-decoration:none;white-space:nowrap" style-hover="color:#fff">{{ item.label }}</a>
+        </sc-for>
+      </nav>
+      <div style="display:flex;align-items:center;gap:14px">
+        <button aria-label="Search" style="width:38px;height:38px;border-radius:8px;border:1px solid #333846;background:transparent;color:#cfd3dc;display:flex;align-items:center;justify-content:center;font-size:15px" style-hover="border-color:#2454d9;color:#fff">⌕</button>
+        <a href="Book.dc.html" style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13.5px;color:#cfd3dc;text-decoration:none;white-space:nowrap" style-hover="color:#fff">Customer Login</a>
+        <a href="#requirement" style="background:transparent;color:#dde4f3;border:1px solid #3a4256;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;font-size:13.5px;padding:11px 16px;border-radius:8px;text-decoration:none;white-space:nowrap" style-hover="border-color:#2454d9;color:#fff">Product Enquiry</a>
+        <a href="Book.dc.html" style="background:#d81f2a;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;font-size:13.5px;padding:11px 18px;border-radius:8px;text-decoration:none;white-space:nowrap" style-hover="background:#ef2d38">Request Service</a>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isMobileNav }}" hint-placeholder-val="{{ false }}">
+      <button aria-label="Open menu" aria-expanded="{{ mobileOpen }}" onClick="{{ toggleMobile }}" style="margin-left:auto;background:transparent;border:1px solid #333846;border-radius:8px;width:44px;height:44px;color:#fff;font-size:20px">☰</button>
+    </sc-if>
+  </div>
+  <sc-if value="{{ mobileOpen }}" hint-placeholder-val="{{ false }}">
+    <nav aria-label="Mobile" style="display:flex;flex-direction:column;padding:6px 5% 20px;border-top:1px solid #262a34">
+      <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
+        <a href="{{ item.href }}" onClick="{{ closeMobile }}" style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:16px;color:#dde4f3;text-decoration:none;padding:14px 2px;border-bottom:1px solid #262a34;min-height:48px;display:flex;align-items:center">{{ item.label }}</a>
+      </sc-for>
+      <div style="display:flex;gap:10px;margin-top:14px">
+        <a href="#requirement" style="flex:1;text-align:center;background:transparent;color:#dde4f3;border:1px solid #3a4256;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;padding:13px;border-radius:8px;text-decoration:none;min-height:48px;display:flex;align-items:center;justify-content:center">Product Enquiry</a>
+        <a href="Book.dc.html" style="flex:1;text-align:center;background:#d81f2a;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;padding:13px;border-radius:8px;text-decoration:none;min-height:48px;display:flex;align-items:center;justify-content:center">Request Service</a>
+      </div>
+    </nav>
+  </sc-if>
+</header>
+
+<span id="top"></span>
+<main id="main">
+
+<section style="position:relative;background:#14161c;overflow:hidden">
+  <div style="position:absolute;inset:0;opacity:.55">
+    <img src="assets/hero.webp" alt="" style="width:100%;height:100%;object-fit:cover;object-position:65% 40%">
+    <div style="position:absolute;inset:0;background:linear-gradient(100deg,#14161c 8%,rgba(20,22,28,.7) 42%,rgba(20,22,28,.15) 100%)"></div>
+  </div>
+  <div style="position:relative;max-width:1560px;width:94%;margin:0 auto;padding:clamp(64px,9vw,120px) 0 clamp(56px,7vw,88px);display:grid;grid-template-columns:minmax(280px,620px) 1fr;gap:40px;align-items:end">
+    <div>
+      <div style="background:#f3f1ec;border-radius:14px;padding:clamp(28px,4vw,44px);box-shadow:0 30px 60px rgba(0,0,0,.35)">
+        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.16em;color:#2454d9;text-transform:uppercase;margin:0 0 12px">Auto Sports Car Care</p>
+        <h1 style="font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.005em;font-size:clamp(28px,3.6vw,42px);line-height:1.14;margin:0 0 16px;color:#14161c">Automotive Services, Products and Technical Support</h1>
+        <p style="color:#4b5060;font-size:15.5px;line-height:1.65;margin:0 0 24px;max-width:52ch">Request vehicle services, explore automotive products and submit material requirements through one connected platform. Inspection, scope confirmation and customer approval are completed before service work begins.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px">
+          <a href="Book.dc.html" style="background:#d81f2a;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;font-size:15px;padding:15px 22px;border-radius:8px;text-decoration:none;min-height:50px;display:inline-flex;align-items:center" style-hover="background:#ef2d38">Request Vehicle Inspection</a>
+          <a href="Products-New.dc.html" style="background:transparent;color:#14161c;border:1.5px solid #d6d2c6;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;font-size:15px;padding:15px 22px;border-radius:8px;text-decoration:none;min-height:50px;display:inline-flex;align-items:center" style-hover="border-color:#2454d9;color:#2454d9">Browse Automotive Products</a>
+        </div>
+        <div style="display:flex;gap:18px;margin-top:20px;flex-wrap:wrap">
+          <a href="#requirement" style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13px;color:#2454d9;text-decoration:none">Business Enquiries →</a>
+          <a href="Book.dc.html" style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13px;color:#2454d9;text-decoration:none">Track Existing Request →</a>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+      <sc-for list="{{ heroPanel }}" as="hp" hint-placeholder-count="4">
+        <a href="{{ hp.href }}" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:16px;color:#f3f1ec;text-decoration:none;display:flex;flex-direction:column;gap:6px;backdrop-filter:blur(6px)" style-hover="background:rgba(255,255,255,.14)">
+          <span style="color:#7fa0ff;font-size:18px" aria-hidden="true">{{ hp.icon }}</span>
+          <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13.5px;letter-spacing:.02em">{{ hp.label }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="requirement" style="max-width:1560px;width:94%;margin:0 auto;padding:clamp(56px,7vw,88px) 0">
+  <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.14em;color:#2454d9;text-transform:uppercase;margin:0 0 10px">Choose Your Requirement</p>
+  <h2 style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:clamp(24px,3vw,32px);margin:0 0 28px;color:#14161c">What are you looking for today?</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+    <sc-for list="{{ requirementTiles }}" as="t" hint-placeholder-count="4">
+      <a href="{{ t.href }}" style="background:#14161c;color:#f3f1ec;border-radius:14px;padding:28px 24px;text-decoration:none;display:flex;flex-direction:column;gap:14px;min-height:180px;position:relative;overflow:hidden" style-hover="background:#1d2029">
+        <span style="color:#7fa0ff;font-size:26px" aria-hidden="true">{{ t.icon }}</span>
+        <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:18px;line-height:1.25">{{ t.label }}</span>
+        <span style="margin-top:auto;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12.5px;color:#7fa0ff;letter-spacing:.04em">Start Enquiry →</span>
+      </a>
+    </sc-for>
+  </div>
+</section>
+
+<section style="background:#eae6dc;padding:clamp(56px,7vw,88px) 0">
+  <div style="max-width:1560px;width:94%;margin:0 auto">
+    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.14em;color:#2454d9;text-transform:uppercase;margin:0 0 10px">Service Finder</p>
+    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:clamp(24px,3vw,32px);margin:0 0 8px;color:#14161c">What does your vehicle need?</h2>
+    <p style="color:#5a5f6e;font-size:14.5px;margin:0 0 22px;max-width:60ch">Select a condition and we'll suggest relevant service categories.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px">
+      <sc-for list="{{ conditions }}" as="c" hint-placeholder-count="10">
+        <button onClick="{{ c.select }}" aria-pressed="{{ c.active }}" style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13.5px;padding:10px 16px;border-radius:99px;border:1.5px solid {{ c.borderColor }};background:{{ c.bg }};color:{{ c.color }};min-height:42px">{{ c.label }}</button>
+      </sc-for>
+    </div>
+    <sc-if value="{{ hasSelection }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#fff;border-radius:12px;padding:22px 24px;display:flex;flex-wrap:wrap;gap:14px;align-items:center">
+        <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;color:#14161c">Suggested: {{ suggestedText }}</span>
+        <a href="Services.dc.html" style="margin-left:auto;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;color:#2454d9;text-decoration:none">View Services →</a>
+      </div>
+    </sc-if>
+    <p style="color:#8a8f9c;font-size:12.5px;margin:16px 0 0">Suggested options are preliminary. Final work requirements are confirmed after inspection.</p>
+  </div>
+</section>
+
+<section style="max-width:1560px;width:94%;margin:0 auto;padding:clamp(56px,7vw,88px) 0">
+  <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.14em;color:#2454d9;text-transform:uppercase;margin:0 0 10px">Main Service Departments</p>
+  <h2 style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:clamp(24px,3vw,32px);margin:0 0 32px;color:#14161c">Departments</h2>
+  <div style="display:flex;flex-direction:column;gap:48px">
+    <sc-for list="{{ departments }}" as="d" hint-placeholder-count="4">
+      <div style="display:grid;grid-template-columns:{{ d.gridCols }};gap:32px;align-items:center">
+        <sc-if value="{{ d.imageFirst }}" hint-placeholder-val="{{ true }}">
+          <div style="border-radius:14px;overflow:hidden;aspect-ratio:4/3"><img src="{{ d.image }}" alt="{{ d.imageAlt }}" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        </sc-if>
+        <div>
+          <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(19px,2.2vw,24px);margin:0 0 10px;color:#14161c">{{ d.title }}</h3>
+          <p style="color:#5a5f6e;font-size:14.5px;line-height:1.6;margin:0 0 14px;max-width:44ch">{{ d.desc }}</p>
+          <ul style="list-style:none;margin:0 0 18px;padding:0;display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ d.services }}" as="s" hint-placeholder-count="4">
+              <li style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12.5px;color:#4b5060;background:#eae6dc;padding:6px 12px;border-radius:99px">{{ s }}</li>
+            </sc-for>
+          </ul>
+          <a href="Services-New.dc.html" style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13.5px;color:#2454d9;text-decoration:none">Explore {{ d.title }} →</a>
+        </div>
+        <sc-if value="{{ d.imageLast }}" hint-placeholder-val="{{ false }}">
+          <div style="border-radius:14px;overflow:hidden;aspect-ratio:4/3"><img src="{{ d.image }}" alt="{{ d.imageAlt }}" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        </sc-if>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section style="background:#14161c;padding:clamp(56px,7vw,88px) 0">
+  <div style="max-width:1560px;width:94%;margin:0 auto">
+    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.14em;color:#7fa0ff;text-transform:uppercase;margin:0 0 10px">Product Departments</p>
+    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:clamp(24px,3vw,32px);margin:0 0 28px;color:#f3f1ec">Products &amp; Materials</h2>
+    <div style="display:flex;flex-direction:column;gap:1px;background:#262a34;border-radius:14px;overflow:hidden">
+      <sc-for list="{{ productDepts }}" as="pd" hint-placeholder-count="5">
+        <a href="Products-New.dc.html" style="background:#1a1c24;padding:22px 26px;display:flex;align-items:center;gap:18px;text-decoration:none;color:#f3f1ec" style-hover="background:#20232c">
+          <span style="color:#7fa0ff;font-size:22px;width:32px;flex-shrink:0" aria-hidden="true">{{ pd.icon }}</span>
+          <div style="flex:1">
+            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;margin:0 0 3px">{{ pd.title }}</p>
+            <p style="color:#8a8f9c;font-size:13px;margin:0">{{ pd.desc }}</p>
+          </div>
+          <span style="color:#7fa0ff;font-size:15px" aria-hidden="true">→</span>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1560px;width:94%;margin:0 auto;padding:clamp(56px,7vw,88px) 0">
+  <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.14em;color:#2454d9;text-transform:uppercase;margin:0 0 10px">Working Process</p>
+  <h2 style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:clamp(24px,3vw,32px);margin:0 0 32px;color:#14161c">From Enquiry to Aftercare</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0;position:relative">
+    <sc-for list="{{ processSteps }}" as="ps" hint-placeholder-count="10">
+      <div style="padding:0 14px 14px 0;position:relative">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="width:30px;height:30px;border-radius:50%;background:#14161c;color:#f3f1ec;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0">{{ ps.num }}</span>
+          <span style="flex:1;height:1px;background:#d6d2c6"></span>
+        </div>
+        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13.5px;margin:0;color:#14161c">{{ ps.label }}</p>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section style="background:#eae6dc;padding:clamp(56px,7vw,88px) 0">
+  <div style="max-width:1560px;width:94%;margin:0 auto">
+    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.14em;color:#2454d9;text-transform:uppercase;margin:0 0 10px">Technology &amp; Digital Tools</p>
+    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:clamp(24px,3vw,32px);margin:0 0 28px;color:#14161c">Practical Business Functions</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px">
+      <sc-for list="{{ techModules }}" as="tm" hint-placeholder-count="8">
+        <div style="background:#fff;border-radius:12px;padding:20px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px">
+            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;margin:0;color:#14161c">{{ tm.label }}</p>
+            <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:10px;letter-spacing:.05em;text-transform:uppercase;padding:4px 9px;border-radius:99px;background:{{ tm.statusBg }};color:{{ tm.statusColor }};white-space:nowrap">{{ tm.status }}</span>
+          </div>
+          <p style="color:#5a5f6e;font-size:13px;margin:0;line-height:1.5">{{ tm.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1560px;width:94%;margin:0 auto;padding:clamp(56px,7vw,88px) 0;display:grid;grid-template-columns:minmax(280px,1fr) minmax(280px,1fr);gap:40px;align-items:center">
+  <div>
+    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.14em;color:#2454d9;text-transform:uppercase;margin:0 0 10px">Business Customers</p>
+    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:clamp(24px,3vw,32px);margin:0 0 14px;color:#14161c">Support for Automotive Businesses</h2>
+    <p style="color:#5a5f6e;font-size:14.5px;line-height:1.65;margin:0 0 16px;max-width:50ch">Detailing centres, paint and body shops, car-wash operations, workshops and fleet operators can submit product and service requirements through the same platform.</p>
+    <ul style="list-style:none;margin:0 0 20px;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+      <sc-for list="{{ businessTypes }}" as="bt" hint-placeholder-count="6">
+        <li style="font-size:13.5px;color:#4b5060;display:flex;align-items:center;gap:8px"><span style="color:#2454d9" aria-hidden="true">•</span>{{ bt }}</li>
+      </sc-for>
+    </ul>
+    <p style="color:#8a8f9c;font-size:12.5px;margin:0 0 18px">Stock, supply status and commercial relationships are confirmed on enquiry.</p>
+    <a href="#requirement" style="background:#14161c;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;font-size:14px;padding:14px 20px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center" style-hover="background:#20232c">Submit Business Enquiry</a>
+  </div>
+  <image-slot id="business-photo" shape="rounded" radius="14" placeholder="Business/workshop photo" style="width:100%;aspect-ratio:4/3"></image-slot>
+</section>
+
+<section style="background:#14161c;padding:clamp(56px,7vw,88px) 0">
+  <div style="max-width:1560px;width:94%;margin:0 auto">
+    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.14em;color:#7fa0ff;text-transform:uppercase;margin:0 0 10px">Projects</p>
+    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:clamp(24px,3vw,32px);margin:0 0 24px;color:#f3f1ec">Completed Work</h2>
+    <div style="border:1px dashed #333846;border-radius:14px;padding:56px 24px;text-align:center">
+      <p style="color:#8a8f9c;font-size:14.5px;margin:0 0 16px;max-width:52ch;margin-left:auto;margin-right:auto">Project photographs will be published after work completion and media approval.</p>
+      <a href="Book.dc.html" style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13.5px;color:#7fa0ff;text-decoration:none">Request Vehicle Inspection →</a>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1560px;width:94%;margin:0 auto;padding:clamp(56px,7vw,88px) 0">
+  <div style="background:#eae6dc;border-radius:16px;padding:clamp(32px,5vw,48px);display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between">
+    <div style="max-width:52ch">
+      <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(20px,2.6vw,28px);margin:0 0 8px;color:#14161c">Ready to Start?</h2>
+      <p style="color:#5a5f6e;font-size:14.5px;margin:0">Request a service, submit a product requirement, or reach our support team directly.</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px">
+      <a href="Book.dc.html" style="background:#d81f2a;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;font-size:14px;padding:14px 20px;border-radius:8px;text-decoration:none;min-height:48px;display:inline-flex;align-items:center" style-hover="background:#ef2d38">Request Service</a>
+      <a href="Products-New.dc.html" style="background:transparent;color:#14161c;border:1.5px solid #14161c;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;font-size:14px;padding:14px 20px;border-radius:8px;text-decoration:none;min-height:48px;display:inline-flex;align-items:center">Submit Product Requirement</a>
+      <a href="https://wa.me/971563867796" target="_blank" rel="noopener" style="background:transparent;color:#14161c;border:1.5px solid #14161c;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;font-size:14px;padding:14px 20px;border-radius:8px;text-decoration:none;min-height:48px;display:inline-flex;align-items:center">WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer style="background:#14161c;color:#cfd3dc">
+  <div style="max-width:1560px;width:94%;margin:0 auto;display:grid;grid-template-columns:1.4fr repeat(5,1fr);gap:32px;padding:clamp(40px,5vw,56px) 0 32px">
+    <div>
+      <img src="assets/logo.png" alt="Auto Sports Car Care" style="height:32px;margin-bottom:12px">
+      <p style="color:#8a8f9c;font-size:13px;line-height:1.55;max-width:30ch;margin:0">Automotive services, products and technical support, operated by AL KHAIR AL RAAZ LLC.</p>
+    </div>
+    <div>
+      <h4 style="font-family:'Rajdhani',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;color:#f3f1ec">Services</h4>
+      <ul style="list-style:none;margin:0;padding:0;display:grid;gap:9px"><li><a href="Services.dc.html" style="color:#8a8f9c;font-size:13.5px;text-decoration:none" style-hover="color:#fff">Vehicle Care</a></li><li><a href="Services.dc.html" style="color:#8a8f9c;font-size:13.5px;text-decoration:none" style-hover="color:#fff">Protection</a></li><li><a href="Services.dc.html" style="color:#8a8f9c;font-size:13.5px;text-decoration:none" style-hover="color:#fff">Paint &amp; Body</a></li></ul>
+    </div>
+    <div>
+      <h4 style="font-family:'Rajdhani',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;color:#f3f1ec">Products</h4>
+      <ul style="list-style:none;margin:0;padding:0;display:grid;gap:9px"><li><a href="Products-New.dc.html" style="color:#8a8f9c;font-size:13.5px;text-decoration:none" style-hover="color:#fff">Brand Directory</a></li><li><a href="Brands.dc.html" style="color:#8a8f9c;font-size:13.5px;text-decoration:none" style-hover="color:#fff">Automotive Paint</a></li></ul>
+    </div>
+    <div>
+      <h4 style="font-family:'Rajdhani',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;color:#f3f1ec">Customer Support</h4>
+      <ul style="list-style:none;margin:0;padding:0;display:grid;gap:9px"><li><a href="Contact.dc.html" style="color:#8a8f9c;font-size:13.5px;text-decoration:none" style-hover="color:#fff">Contact</a></li><li><a href="https://wa.me/971563867796" target="_blank" rel="noopener" style="color:#8a8f9c;font-size:13.5px;text-decoration:none" style-hover="color:#fff">WhatsApp</a></li></ul>
+    </div>
+    <div>
+      <h4 style="font-family:'Rajdhani',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;color:#f3f1ec">Business</h4>
+      <ul style="list-style:none;margin:0;padding:0;display:grid;gap:9px"><li><a href="#requirement" style="color:#8a8f9c;font-size:13.5px;text-decoration:none" style-hover="color:#fff">Wholesale Enquiry</a></li><li><a href="#requirement" style="color:#8a8f9c;font-size:13.5px;text-decoration:none" style-hover="color:#fff">Fleet Enquiry</a></li></ul>
+    </div>
+    <div>
+      <h4 style="font-family:'Rajdhani',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;color:#f3f1ec">Legal</h4>
+      <ul style="list-style:none;margin:0;padding:0;display:grid;gap:9px"><li><span style="color:#5a6274;font-size:13.5px" title="Coming soon">Privacy (soon)</span></li><li><span style="color:#5a6274;font-size:13.5px" title="Coming soon">Terms (soon)</span></li></ul>
+    </div>
+  </div>
+  <div style="max-width:1560px;width:94%;margin:0 auto;border-top:1px solid #262a34;padding:16px 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;color:#6b7080;font-size:12px">
+    <span>Auto Sports Car Care · Operated by AL KHAIR AL RAAZ LLC · Licence 2646563.01</span>
+    <span>© {{ year }}</span>
+  </div>
+</footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { width: typeof window !== 'undefined' ? window.innerWidth : 1440, mobileOpen: false, selectedConditions: [] };
+
+  componentDidMount() {
+    this._onResize = () => this.setState({ width: window.innerWidth });
+    window.addEventListener('resize', this._onResize);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._onResize); }
+
+  renderVals() {
+    const isDesktopNav = this.state.width >= 1080;
+    const navItems = [
+      { label: 'Home', href: '#top' }, { label: 'Services', href: 'Services-New.dc.html' },
+      { label: 'Products', href: 'Products-New.dc.html' }, { label: 'Solutions', href: '#requirement' },
+      { label: 'Projects', href: '#top' }, { label: 'About', href: 'About-New.dc.html' }, { label: 'Contact', href: 'Contact-New.dc.html' }
+    ];
+    const heroPanel = [
+      { icon: '✎', label: 'Service Enquiry', href: 'Book.dc.html' },
+      { icon: '▤', label: 'Product Enquiry', href: 'Products-New.dc.html' },
+      { icon: '◎', label: 'Vehicle Inspection', href: 'Book.dc.html' },
+      { icon: '☎', label: 'Customer Support', href: 'Contact.dc.html' }
+    ];
+    const requirementTiles = [
+      { icon: '✦', label: 'I Need a Vehicle Service', href: 'Services-New.dc.html' },
+      { icon: '▤', label: 'I Need Automotive Products', href: 'Products-New.dc.html' },
+      { icon: '◆', label: 'I Need Paint and Body Support', href: 'Services-New.dc.html' },
+      { icon: '◎', label: 'I Am a Business Customer', href: 'Contact-New.dc.html' }
+    ];
+    const conditionLabels = ['Scratches','Dull Paint','Swirl Marks','Stone Chips','Interior Stains','Odour','Old Tint','Damaged Film','Rust','Body Damage'];
+    const conditions = conditionLabels.map(label => {
+      const active = this.state.selectedConditions.includes(label);
+      return {
+        label, active,
+        color: active ? '#fff' : '#14161c',
+        bg: active ? '#2454d9' : '#fff',
+        borderColor: active ? '#2454d9' : '#d6d2c6',
+        select: () => this.setState(s => ({
+          selectedConditions: s.selectedConditions.includes(label) ? s.selectedConditions.filter(c => c !== label) : [...s.selectedConditions, label]
+        }))
+      };
+    });
+    const hasSelection = this.state.selectedConditions.length > 0;
+    const suggestedText = this.state.selectedConditions.join(', ');
+
+    const departments = [
+      { title: 'Detailing and Surface Care', desc: 'Exterior and interior detailing, paint enhancement and glass care.', services: ['Inspection','Detailing','Paint Correction','Glass Care'], image: 'assets/about.webp', imageAlt: 'Detailing work in progress', imageFirst: true, imageLast: false, gridCols: '1fr 1fr' },
+      { title: 'Paint Protection and Window Film', desc: 'Paint protection film, window tint and heat-control film.', services: ['PPF','Window Tint','Colour PPF'], image: 'assets/hero.webp', imageAlt: 'Vehicle with protective film applied', imageFirst: false, imageLast: true, gridCols: '1fr 1fr' },
+      { title: 'Automotive Painting and Repair', desc: 'Colour matching, panel painting, scratch and stone-chip repair.', services: ['Colour Matching','Panel Painting','Body Repair'], image: 'assets/about.webp', imageAlt: 'Automotive paint and body work', imageFirst: true, imageLast: false, gridCols: '1fr 1fr' },
+      { title: 'Restoration and Customisation', desc: 'Vehicle restoration, wrapping and wheel refinishing.', services: ['Restoration','Wrapping','Wheel Refinishing'], image: 'assets/hero.webp', imageAlt: 'Vehicle customisation work', imageFirst: false, imageLast: true, gridCols: '1fr 1fr' }
+    ];
+
+    const productDepts = [
+      { icon: '◆', title: 'Paint and Body Materials', desc: 'Automotive paint, primers, clearcoats and body-repair materials.' },
+      { icon: '✦', title: 'Polishing and Detailing', desc: 'Compounds, pads, detailing chemicals and accessories.' },
+      { icon: '◇', title: 'Films and Surface Protection', desc: 'PPF, window tint and wrapping materials.' },
+      { icon: '⚙', title: 'Workshop Tools and Equipment', desc: 'Spray equipment, hand tools and workshop supplies.' },
+      { icon: '▦', title: 'Wood, Furniture and Industrial Coatings', desc: 'Coatings for non-automotive applications.' }
+    ];
+
+    const processLabels = ['Enquiry','Information Review','Vehicle/Product Confirmation','Inspection if Required','Scope and Quotation','Customer Approval','Work/Supply Preparation','Quality and Document Review','Collection or Delivery','Aftercare and Support'];
+    const processSteps = processLabels.map((label, i) => ({ num: i + 1, label }));
+
+    const techModules = [
+      { label: 'Vehicle Profile', desc: 'Store vehicle details, paint code and service history.', status: 'AVAILABLE', statusBg: 'rgba(61,220,132,.15)', statusColor: '#1f9d5c' },
+      { label: 'Digital Inspection', desc: 'Panel-based condition assessment with photos.', status: 'STAFF ASSISTED', statusBg: 'rgba(37,84,217,.12)', statusColor: '#2454d9' },
+      { label: 'Paint-Code Support', desc: 'Paint code lookup and verification record.', status: 'STAFF ASSISTED', statusBg: 'rgba(37,84,217,.12)', statusColor: '#2454d9' },
+      { label: 'Vehicle Visualiser', desc: 'Preview colour, film and finish options.', status: 'PREVIEW', statusBg: 'rgba(255,194,71,.18)', statusColor: '#a06a00' },
+      { label: 'Quotation Approval', desc: 'Review and approve quotations online.', status: 'UNDER DEVELOPMENT', statusBg: 'rgba(138,143,156,.15)', statusColor: '#5a5f6e' },
+      { label: 'Work Status Tracking', desc: 'Track job progress from start to delivery.', status: 'UNDER DEVELOPMENT', statusBg: 'rgba(138,143,156,.15)', statusColor: '#5a5f6e' },
+      { label: 'Product Requirement List', desc: 'Build and submit a product requirement list.', status: 'AVAILABLE', statusBg: 'rgba(61,220,132,.15)', statusColor: '#1f9d5c' },
+      { label: 'Digital Aftercare', desc: 'Aftercare instructions and reminders.', status: 'REQUIRES CONFIGURATION', statusBg: 'rgba(138,143,156,.15)', statusColor: '#5a5f6e' }
+    ];
+
+    const businessTypes = ['Detailing Centres','Paint & Body Shops','Car-Wash Operations','Automotive Workshops','Fleet Operators','Wholesale Customers'];
+
+    return {
+      isDesktopNav, isMobileNav: !isDesktopNav,
+      mobileOpen: this.state.mobileOpen && !isDesktopNav,
+      toggleMobile: () => this.setState(s => ({ mobileOpen: !s.mobileOpen })),
+      closeMobile: () => this.setState({ mobileOpen: false }),
+      navItems, heroPanel, requirementTiles,
+      conditions, hasSelection, suggestedText,
+      departments, productDepts, processSteps, techModules, businessTypes,
+      year: new Date().getFullYear()
+    };
+  }
+}
+
+</script>
+</body>
+</html>

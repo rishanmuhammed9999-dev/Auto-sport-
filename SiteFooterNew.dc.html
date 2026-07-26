@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<footer style="background:#14161c;color:#cfd3dc;font-family:'Inter',system-ui,sans-serif">
+  <div style="max-width:1560px;width:94%;margin:0 auto;display:grid;grid-template-columns:1.4fr repeat(5,1fr);gap:32px;padding:clamp(40px,5vw,56px) 0 32px">
+    <div>
+      <img src="assets/logo.png" alt="Auto Sports Car Care" style="height:32px;margin-bottom:12px">
+      <p style="color:#8a8f9c;font-size:13px;line-height:1.55;max-width:30ch;margin:0">Automotive services, products and technical support, operated by AL KHAIR AL RAAZ LLC.</p>
+    </div>
+    <div>
+      <h4 style="font-family:'Rajdhani',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;color:#f3f1ec">Services</h4>
+      <ul style="list-style:none;margin:0;padding:0;display:grid;gap:9px"><li><a href="Services-New.dc.html" style="color:#8a8f9c;font-size:13.5px;text-decoration:none" style-hover="color:#fff">Vehicle Care</a></li><li><a href="Services-New.dc.html" style="color:#8a8f9c;font-size:13.5px;text-decoration:none" style-hover="color:#fff">Protection</a></li><li><a href="Services-New.dc.html" style="color:#8a8f9c;font-size:13.5px;text-decoration:none" style-hover="color:#fff">Paint &amp; Body</a></li></ul>
+    </div>
+    <div>
+      <h4 style="font-family:'Rajdhani',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;color:#f3f1ec">Products</h4>
+      <ul style="list-style:none;margin:0;padding:0;display:grid;gap:9px"><li><a href="Products-New.dc.html" style="color:#8a8f9c;font-size:13.5px;text-decoration:none" style-hover="color:#fff">Product Catalogue</a></li><li><a href="Brands.dc.html" style="color:#8a8f9c;font-size:13.5px;text-decoration:none" style-hover="color:#fff">Brand Directory</a></li></ul>
+    </div>
+    <div>
+      <h4 style="font-family:'Rajdhani',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;color:#f3f1ec">Customer Support</h4>
+      <ul style="list-style:none;margin:0;padding:0;display:grid;gap:9px"><li><a href="Support.dc.html" style="color:#8a8f9c;font-size:13.5px;text-decoration:none" style-hover="color:#fff">Help &amp; Customer Care</a></li><li><a href="Contact-New.dc.html" style="color:#8a8f9c;font-size:13.5px;text-decoration:none" style-hover="color:#fff">Contact</a></li><li><a href="https://wa.me/971563867796" target="_blank" rel="noopener" style="color:#8a8f9c;font-size:13.5px;text-decoration:none" style-hover="color:#fff">WhatsApp</a></li></ul>
+    </div>
+    <div>
+      <h4 style="font-family:'Rajdhani',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;color:#f3f1ec">Business</h4>
+      <ul style="list-style:none;margin:0;padding:0;display:grid;gap:9px"><li><a href="Contact-New.dc.html" style="color:#8a8f9c;font-size:13.5px;text-decoration:none" style-hover="color:#fff">Wholesale Enquiry</a></li><li><a href="Contact-New.dc.html" style="color:#8a8f9c;font-size:13.5px;text-decoration:none" style-hover="color:#fff">Fleet Enquiry</a></li></ul>
+    </div>
+    <div>
+      <h4 style="font-family:'Rajdhani',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;color:#f3f1ec">Legal</h4>
+      <ul style="list-style:none;margin:0;padding:0;display:grid;gap:9px"><li><span style="color:#5a6274;font-size:13.5px" title="Coming soon">Privacy (soon)</span></li><li><span style="color:#5a6274;font-size:13.5px" title="Coming soon">Terms (soon)</span></li></ul>
+    </div>
+  </div>
+  <div style="max-width:1560px;width:94%;margin:0 auto;border-top:1px solid #262a34;padding:16px 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;color:#6b7080;font-size:12px">
+    <span>Auto Sports Car Care · Operated by AL KHAIR AL RAAZ LLC · Licence 2646563.01</span>
+    <span>© {{ year }}</span>
+  </div>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() { return { year: new Date().getFullYear() }; }
+}
+
+</script>
+</body>
+</html>

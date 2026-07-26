@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Brand Directory — Auto Sports Car Care</title>
+<meta name="description" content="Brand directory for Auto Sports Car Care's product catalogue. Pilot stage: 10 brands.">
+<style>*{box-sizing:border-box}body{margin:0}@keyframes ascc-spin{to{transform:rotate(360deg)}}</style>
+</helmet>
+<div style="background:#05070d;color:#f2f4f9;font-family:'Inter',system-ui,sans-serif;line-height:1.6;min-height:100vh">
+<a href="#main" style="position:absolute;left:-9999px;top:0;background:#3f7bff;color:#05070d;padding:12px 18px;font-weight:700;z-index:200" style-focus="left:12px;top:12px">Skip to main content</a>
+<dc-import name="SiteHeader" current="Products" hint-size="100%,74px"></dc-import>
+
+<main id="main">
+<section style="max-width:1720px;width:94%;margin:0 auto;padding:clamp(48px,7vw,72px) 0 24px">
+  <p style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;letter-spacing:.28em;color:#8fb4ff;text-transform:uppercase;margin:0 0 14px">Brand Directory — Pilot Stage</p>
+  <h1 style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:clamp(28px,4vw,44px);margin:0 0 12px">Brands</h1>
+  <p style="color:#9aa5ba;font-size:15px;max-width:70ch;margin:0">First 10 pilot brands from the approved master product database (119 confirmed brands total; the remaining 109 follow in later batches). Official logo files are pending upload — brand name placeholders are shown until verified logo files are provided.</p>
+</section>
+
+<section style="max-width:1720px;width:94%;margin:0 auto;padding:0 0 24px;display:flex;gap:16px;flex-wrap:wrap;align-items:center">
+  <input type="search" value="{{ searchText }}" onChange="{{ onSearchChange }}" placeholder="Search brands…" aria-label="Search brands" style="flex:1;min-width:220px;background:rgba(255,255,255,.04);border:1px solid rgba(120,160,255,.2);border-radius:8px;color:#f2f4f9;font-family:'Inter',sans-serif;font-size:15px;padding:13px 16px;min-height:48px" style-focus="border-color:#3f7bff;outline:2px solid #3f7bff;outline-offset:2px">
+</section>
+
+<section style="max-width:1720px;width:94%;margin:0 auto;padding:0 0 clamp(56px,7vw,88px);min-height:300px">
+  <sc-if value="{{ hasResults }}" hint-placeholder-val="{{ true }}">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px">
+      <sc-for list="{{ filteredBrands }}" as="b" hint-placeholder-count="10">
+        <a href="{{ b.href }}" style="background:rgba(255,255,255,.035);border:1px solid rgba(120,160,255,.14);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:10px;text-decoration:none;color:inherit;transition:.18s" style-hover="transform:translateY(-4px);border-color:rgba(120,160,255,.4);box-shadow:0 16px 40px rgba(0,0,0,.35)">
+          <div style="height:56px;display:flex;align-items:center;border-radius:8px;background:rgba(255,255,255,.04);padding:0 14px">
+            <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:19px;letter-spacing:.02em;text-transform:uppercase;color:#dde4f3">{{ b.brandName }}</span>
+          </div>
+          <span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#ffc247">Logo file required</span>
+          <p style="color:#9aa5ba;font-size:14px;margin:0">{{ b.productCount }} products · {{ b.categoryCount }} categories</p>
+        </a>
+      </sc-for>
+    </div>
+  </sc-if>
+  <sc-if value="{{ hasNoResults }}" hint-placeholder-val="{{ false }}">
+    <div style="border:1px dashed rgba(120,160,255,.25);border-radius:14px;padding:56px 24px;text-align:center">
+      <p style="color:#7a8299;font-size:15px;margin:0">No brands match "{{ searchText }}".</p>
+    </div>
+  </sc-if>
+</section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,320px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { searchText: '', brands: [], loaded: false };
+
+  async componentDidMount() {
+    const res = await fetch('master-product-database/pilot-brands-data.json');
+    const data = await res.json();
+    this.setState({ brands: Object.values(data), loaded: true });
+  }
+
+  renderVals() {
+    const searchText = this.state.searchText;
+    const filtered = this.state.brands
+      .filter(b => !searchText || b.brandName.toLowerCase().includes(searchText.toLowerCase()))
+      .sort((a,b) => a.brandName.localeCompare(b.brandName))
+      .map(b => {
+        const dedicated = { kapci: 'Kapci-Brand.dc.html', maxshine: 'MaxShine-Brand.dc.html', sonax: 'SONAX-Brand.dc.html', rupes: 'RUPES-Brand.dc.html', standox: 'Standox-Brand.dc.html', meguiars: 'Meguiars-Brand.dc.html', mirka: 'Mirka-Brand.dc.html' };
+        return { ...b, href: dedicated[b.slug] || ('Brand.dc.html?brand=' + b.slug) };
+      });
+    return {
+      searchText,
+      onSearchChange: (e) => this.setState({ searchText: e.target.value }),
+      filteredBrands: filtered,
+      hasResults: filtered.length > 0,
+      hasNoResults: this.state.loaded && filtered.length === 0
+    };
+  }
+}
+
+</script>
+</body>
+</html>

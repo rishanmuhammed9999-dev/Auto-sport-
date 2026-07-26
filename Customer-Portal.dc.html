@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Customer Portal — Auto Sports Car Care</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#f3f1ec}a{color:#2454d9}a:hover{color:#173a9e}</style>
+</helmet>
+<div style="background:#f3f1ec;color:#1c1e24;font-family:'Inter',system-ui,sans-serif;line-height:1.6;min-height:100vh;display:flex">
+
+<sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+  <aside style="width:250px;flex-shrink:0;background:#14161c;min-height:100vh;padding:22px 0;position:sticky;top:0;height:100vh;overflow-y:auto">
+    <div style="padding:0 22px 22px;border-bottom:1px solid #262a34;margin-bottom:16px">
+      <img src="assets/logo.png" alt="Auto Sports Car Care" style="height:28px;display:block">
+      <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#6b7080;margin:8px 0 0">Customer Portal</p>
+    </div>
+    <nav aria-label="Portal">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="7">
+        <button onClick="{{ n.select }}" aria-current="{{ n.current }}" style="width:100%;text-align:left;display:flex;align-items:center;gap:12px;padding:12px 22px;background:{{ n.bg }};border:0;border-left:3px solid {{ n.accent }};color:{{ n.color }};font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14.5px;min-height:46px" style-hover="background:#1d2029;color:#fff">
+          <span style="font-size:15px;width:18px" aria-hidden="true">{{ n.icon }}</span>{{ n.label }}
+        </button>
+      </sc-for>
+    </nav>
+  </aside>
+</sc-if>
+
+<div style="flex:1;min-width:0;display:flex;flex-direction:column">
+  <header style="background:#fff;border-bottom:1px solid #e2ded2;padding:0 clamp(16px,3vw,32px);display:flex;align-items:center;gap:16px;min-height:68px;position:sticky;top:0;z-index:20">
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <img src="assets/logo.png" alt="Auto Sports Car Care" style="height:26px">
+    </sc-if>
+    <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0">
+      <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8a8f9c;white-space:nowrap">Vehicle</span>
+      <select value="{{ activeVehicle }}" onChange="{{ setVehicle }}" aria-label="Select vehicle" style="background:#f3f1ec;border:1px solid #d6d2c6;border-radius:8px;color:#1c1e24;font-family:'Inter',sans-serif;font-size:13.5px;padding:8px 12px;min-height:40px;max-width:260px">
+        <sc-for list="{{ vehicles }}" as="v" hint-placeholder-count="2">
+          <option value="{{ v.id }}">{{ v.label }}</option>
+        </sc-for>
+      </select>
+    </div>
+    <button aria-label="Notifications" style="width:40px;height:40px;border-radius:8px;border:1px solid #d6d2c6;background:#fff;color:#5a5f6e;font-size:15px;position:relative" style-hover="border-color:#2454d9;color:#2454d9">◔</button>
+    <div style="width:36px;height:36px;border-radius:50%;background:#14161c;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;flex-shrink:0">AS</div>
+  </header>
+
+  <main style="flex:1;padding:clamp(20px,3vw,32px)">
+    <h1 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(22px,2.8vw,30px);margin:0 0 4px;color:#14161c">{{ activeLabel }}</h1>
+    <p style="color:#8a8f9c;font-size:13.5px;margin:0 0 24px">{{ activeSubtitle }}</p>
+
+    <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:28px">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+          <div style="background:#fff;border-radius:12px;padding:20px">
+            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:#8a8f9c;margin:0 0 8px">{{ s.label }}</p>
+            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:30px;margin:0;color:{{ s.color }};line-height:1">{{ s.value }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background:#fff;border-radius:12px;padding:22px">
+        <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;margin:0 0 16px;color:#14161c">Recent Activity</h2>
+        <sc-if value="{{ hasActivity }}" hint-placeholder-val="{{ false }}">
+          <sc-for list="{{ activity }}" as="a" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;gap:14px;padding:12px 0;border-top:1px solid #eeebe3">
+              <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:10px;letter-spacing:.05em;text-transform:uppercase;padding:4px 9px;border-radius:99px;background:{{ a.statusBg }};color:{{ a.statusColor }};white-space:nowrap">{{ a.status }}</span>
+              <span style="font-size:13.5px;color:#14161c;flex:1">{{ a.label }}</span>
+              <span style="font-size:12.5px;color:#8a8f9c">{{ a.date }}</span>
+            </div>
+          </sc-for>
+        </sc-if>
+        <sc-if value="{{ noActivity }}" hint-placeholder-val="{{ true }}">
+          <div style="border:1px dashed #d6d2c6;border-radius:10px;padding:40px 20px;text-align:center">
+            <p style="color:#8a8f9c;font-size:14px;margin:0 0 12px">No activity yet. Submit a service request to get started.</p>
+            <a href="Book.dc.html" style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;color:#2454d9;text-decoration:none">Request Service →</a>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isNotDashboard }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#fff;border-radius:12px;padding:clamp(28px,4vw,48px);text-align:center;border:1px dashed #d6d2c6">
+        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#a06a00;background:rgba(255,194,71,.18);display:inline-block;padding:5px 12px;border-radius:99px;margin:0 0 14px">Requires Backend</p>
+        <p style="color:#5a5f6e;font-size:14.5px;margin:0 0 6px;max-width:48ch;margin-left:auto;margin-right:auto">{{ activeLabel }} is designed and ready. Live records appear once the database and authentication are connected.</p>
+        <p style="color:#8a8f9c;font-size:13px;margin:0">{{ activeSubtitle }}</p>
+      </div>
+    </sc-if>
+  </main>
+
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+    <nav aria-label="Portal" style="position:sticky;bottom:0;background:#14161c;display:flex;border-top:1px solid #262a34;z-index:30">
+      <sc-for list="{{ mobileNav }}" as="n" hint-placeholder-count="5">
+        <button onClick="{{ n.select }}" aria-current="{{ n.current }}" style="flex:1;background:transparent;border:0;padding:10px 4px;color:{{ n.color }};display:flex;flex-direction:column;align-items:center;gap:3px;min-height:58px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:10.5px">
+          <span style="font-size:16px" aria-hidden="true">{{ n.icon }}</span>{{ n.short }}
+        </button>
+      </sc-for>
+    </nav>
+  </sc-if>
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1400,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { width: typeof window !== 'undefined' ? window.innerWidth : 1440, active: 'Dashboard', vehicle: 'v1' };
+  componentDidMount() {
+    this._r = () => this.setState({ width: window.innerWidth });
+    window.addEventListener('resize', this._r);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._r); }
+  renderVals() {
+    const isDesktop = this.state.width >= 900;
+    const sections = [
+      { label: 'Dashboard', short: 'Home', icon: '▤', subtitle: 'Overview of your requests, approvals and vehicles.' },
+      { label: 'My Vehicles', short: 'Vehicles', icon: '◈', subtitle: 'Vehicle profiles, paint codes and service history.' },
+      { label: 'Requests', short: 'Requests', icon: '✎', subtitle: 'Service requests, product requirements and inspections.' },
+      { label: 'Approvals', short: 'Approve', icon: '✓', subtitle: 'Quotation, work-scope and additional-work approvals.' },
+      { label: 'Documents', short: 'Docs', icon: '▦', subtitle: 'Quotations, invoices, inspection reports and warranties.' },
+      { label: 'Support', short: 'Support', icon: '☎', subtitle: 'Open a support request or track an existing one.' },
+      { label: 'Profile', short: 'Profile', icon: '◎', subtitle: 'Account details and contact preferences.' }
+    ];
+    const mk = (s) => ({
+      ...s,
+      current: s.label === this.state.active ? 'page' : undefined,
+      bg: s.label === this.state.active ? '#1d2029' : 'transparent',
+      accent: s.label === this.state.active ? '#2454d9' : 'transparent',
+      color: s.label === this.state.active ? '#fff' : '#a7abb6',
+      select: () => this.setState({ active: s.label })
+    });
+    const activeSection = sections.find(s => s.label === this.state.active) || sections[0];
+    return {
+      isDesktop, isMobile: !isDesktop,
+      navItems: sections.map(mk),
+      mobileNav: sections.slice(0, 5).map(mk),
+      vehicles: [{ id: 'v1', label: 'Add your first vehicle' }],
+      activeVehicle: this.state.vehicle,
+      setVehicle: (e) => this.setState({ vehicle: e.target.value }),
+      activeLabel: activeSection.label,
+      activeSubtitle: activeSection.subtitle,
+      isDashboard: this.state.active === 'Dashboard',
+      isNotDashboard: this.state.active !== 'Dashboard',
+      stats: [
+        { label: 'Active Requests', value: '0', color: '#14161c' },
+        { label: 'Pending Approvals', value: '0', color: '#a06a00' },
+        { label: 'Vehicles', value: '0', color: '#14161c' },
+        { label: 'Documents', value: '0', color: '#14161c' }
+      ],
+      activity: [], hasActivity: false, noActivity: true
+    };
+  }
+}
+
+</script>
+</body>
+</html>

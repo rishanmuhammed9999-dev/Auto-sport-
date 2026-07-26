@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Brand — Auto Sports Car Care</title>
+<style>*{box-sizing:border-box}body{margin:0}@keyframes ascc-spin{to{transform:rotate(360deg)}}</style>
+</helmet>
+<div style="background:#05070d;color:#f2f4f9;font-family:'Inter',system-ui,sans-serif;line-height:1.6;min-height:100vh">
+<a href="#main" style="position:absolute;left:-9999px;top:0;background:#3f7bff;color:#05070d;padding:12px 18px;font-weight:700;z-index:200" style-focus="left:12px;top:12px">Skip to main content</a>
+<dc-import name="SiteHeader" current="Products" hint-size="100%,74px"></dc-import>
+
+<main id="main">
+<sc-if value="{{ isLoading }}" hint-placeholder-val="{{ true }}">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 0;gap:16px">
+    <div style="width:36px;height:36px;border-radius:50%;border:3px solid rgba(120,160,255,.2);border-top-color:#3f7bff;animation:ascc-spin 0.8s linear infinite"></div>
+    <p style="color:#9aa5ba;font-size:14px;margin:0">Loading brand…</p>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isNotFound }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:900px;width:90%;margin:0 auto;padding:100px 0;text-align:center">
+    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;color:#ff8a8a;font-size:22px;margin:0 0 12px">Brand Not Found</p>
+    <p style="color:#9aa5ba;font-size:15px;margin:0 0 24px">This brand isn't in the pilot stage yet. <a href="Brands.dc.html" style="color:#8fb4ff">Return to Brand Directory</a>.</p>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isReady }}" hint-placeholder-val="{{ false }}">
+<section style="max-width:1720px;width:94%;margin:0 auto;padding:clamp(40px,6vw,64px) 0 20px">
+  <a href="Brands.dc.html" style="color:#8fb4ff;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none">‹ Brand Directory</a>
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:16px">
+    <div style="height:60px;min-width:160px;display:flex;align-items:center;border-radius:8px;background:rgba(255,255,255,.045);padding:0 22px;border:1px solid rgba(120,160,255,.14)">
+      <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:24px;letter-spacing:.02em;text-transform:uppercase;color:#dde4f3">{{ brand.brandName }}</span>
+    </div>
+    <span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding:6px 11px;border-radius:99px;border:1px solid rgba(61,220,132,.4);background:rgba(9,32,20,.5);color:#3ddc84">{{ brand.logoVerificationStatus }}</span>
+    <span style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding:6px 11px;border-radius:99px;border:1px solid rgba(255,194,71,.4);background:rgba(38,28,6,.5);color:#ffc247">Logo {{ brand.logoFileStatus }}</span>
+  </div>
+  <p style="color:#9aa5ba;font-size:14.5px;margin:14px 0 0">{{ brand.productCount }} products from the approved workbook · {{ brand.categoryCount }} categories. Prices are not shown — availability confirmed on enquiry.</p>
+</section>
+
+<section style="max-width:1720px;width:94%;margin:0 auto;padding:0 0 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+  <input type="search" value="{{ searchText }}" onChange="{{ onSearchChange }}" placeholder="Search by name or code…" aria-label="Search within brand" style="flex:1;min-width:220px;background:rgba(255,255,255,.04);border:1px solid rgba(120,160,255,.2);border-radius:8px;color:#f2f4f9;font-family:'Inter',sans-serif;font-size:14.5px;padding:12px 15px;min-height:46px" style-focus="border-color:#3f7bff;outline:2px solid #3f7bff;outline-offset:2px">
+  <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="4">
+    <button onClick="{{ cat.select }}" aria-pressed="{{ cat.active }}" style="font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:12.5px;padding:10px 15px;border-radius:8px;border:1px solid {{ cat.borderColor }};background:{{ cat.bg }};color:{{ cat.color }};min-height:44px" style-focus="outline:2px solid #3f7bff;outline-offset:2px">{{ cat.label }}</button>
+  </sc-for>
+  <button onClick="{{ onClearFilters }}" style="font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:12.5px;padding:10px 15px;border-radius:8px;border:1px dashed #3a4256;background:transparent;color:#7a8299;min-height:44px">Clear Filters</button>
+</section>
+
+<section style="max-width:1720px;width:94%;margin:0 auto;padding:0 0 clamp(56px,7vw,88px)">
+  <sc-if value="{{ hasResults }}" hint-placeholder-val="{{ true }}">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px">
+      <sc-for list="{{ filteredProducts }}" as="p" hint-placeholder-count="8">
+        <div style="background:rgba(255,255,255,.035);border:1px solid rgba(120,160,255,.14);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:.18s" style-hover="transform:translateY(-4px);border-color:rgba(120,160,255,.4);box-shadow:0 16px 40px rgba(0,0,0,.35)">
+          <div style="position:relative;aspect-ratio:5/4;background:linear-gradient(160deg,#10152a,#0a0d18);display:flex;align-items:center;justify-content:center">
+            <span style="position:absolute;top:9px;left:9px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:rgba(6,10,19,.7);color:{{ p.imageBadgeColor }};border:1px solid {{ p.imageBadgeBorder }}">{{ p.imageStatusShort }}</span>
+            <span style="color:#3f7bff;opacity:.5;font-size:34px" aria-hidden="true">{{ p.categoryIcon }}</span>
+          </div>
+          <div style="padding:16px;display:flex;flex-direction:column;flex:1;gap:5px">
+            <p style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:#8fb4ff;margin:0">{{ p.cleanCategory }}</p>
+            <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15.5px;letter-spacing:.01em;margin:0;line-height:1.3;min-height:2.6em">{{ p.name }}</h3>
+            <p style="color:#7a8299;font-size:12px;margin:0">{{ p.metaLine }}</p>
+            <div style="display:flex;gap:6px;margin-top:10px">
+              <button onClick="{{ p.open }}" style="flex:1;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:#dde4f3;background:transparent;border:1px solid rgba(120,160,255,.25);border-radius:7px;padding:9px 6px;min-height:38px" style-hover="border-color:#3f7bff;color:#fff">Details</button>
+              <button onClick="{{ p.openRetail }}" style="flex:1;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:#e11d27;border:0;border-radius:7px;padding:9px 6px;min-height:38px" style-hover="background:#ff3b3b">Retail</button>
+              <button onClick="{{ p.openWholesale }}" style="flex:1;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:#8fb4ff;background:transparent;border:1px solid rgba(120,160,255,.3);border-radius:7px;padding:9px 6px;min-height:38px" style-hover="border-color:#3f7bff;color:#fff">Wholesale</button>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+  <sc-if value="{{ hasNoResults }}" hint-placeholder-val="{{ false }}">
+    <div style="border:1px dashed rgba(120,160,255,.25);border-radius:14px;padding:56px 24px;text-align:center">
+      <p style="color:#7a8299;font-size:15px;margin:0">No products match your search or filter.</p>
+    </div>
+  </sc-if>
+</section>
+</sc-if>
+</main>
+
+<sc-if value="{{ activeProduct }}" hint-placeholder-val="{{ null }}">
+  <div role="dialog" aria-modal="true" aria-labelledby="pdTitle" style="position:fixed;inset:0;z-index:120;background:rgba(4,6,12,.82);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px">
+    <div style="width:min(760px,100%);max-height:88vh;overflow:auto;background:#0a0d18;border:1px solid rgba(120,160,255,.18);border-radius:16px">
+      <div style="display:flex;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid rgba(120,160,255,.12)">
+        <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#8fb4ff">{{ brand.brandName }}</span>
+        <h3 id="pdTitle" style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.01em;font-size:16px;margin:0;flex:1">{{ activeProduct.name }}</h3>
+        <button onClick="{{ closeProduct }}" aria-label="Close details" style="width:36px;height:36px;border-radius:8px;border:1px solid rgba(120,160,255,.2);background:transparent;color:#fff;font-size:16px">✕</button>
+      </div>
+      <div style="padding:22px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+          <div style="width:90px;height:90px;flex-shrink:0;background:linear-gradient(160deg,#10152a,#0a0d18);border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(120,160,255,.12)">
+            <span style="color:#3f7bff;opacity:.5;font-size:32px">{{ activeProduct.categoryIcon }}</span>
+          </div>
+          <div>
+            <p style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#ffc247;margin:0 0 4px">{{ activeProduct.imageStatus }}</p>
+            <p style="color:#9aa5ba;font-size:13px;margin:0">{{ activeProduct.cleanCategory }}</p>
+          </div>
+        </div>
+        <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px 18px">
+          <div><dt style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7a8299;margin:0 0 3px">Product Code</dt><dd style="margin:0;color:#e9edf5;font-size:14px">{{ activeProduct.codeLabel }}</dd></div>
+          <div><dt style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7a8299;margin:0 0 3px">Size / Pack</dt><dd style="margin:0;color:#e9edf5;font-size:14px">{{ activeProduct.sizeLabel }}</dd></div>
+          <div><dt style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7a8299;margin:0 0 3px">Workbook Category</dt><dd style="margin:0;color:#e9edf5;font-size:13px">{{ activeProduct.category }}</dd></div>
+        </dl>
+        <div>
+          <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7a8299;margin:0 0 4px">Original Workbook Entry</p>
+          <p style="color:#c2ccdd;font-size:13.5px;line-height:1.55;margin:0">{{ activeProduct.originalEntry }}</p>
+        </div>
+
+        <div style="border-top:1px solid rgba(120,160,255,.1);padding-top:14px">
+          <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#dde4f3;margin:0 0 10px">Technical Information</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 20px">
+            <div><p style="margin:0 0 2px;font-size:11.5px;color:#7a8299;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;text-transform:uppercase">Main Use — {{ activeProduct.tech.mainUse }}</p><p style="margin:0;color:#c2ccdd;font-size:13px">{{ activeProduct.tech.mainUseText }}</p></div>
+            <div><p style="margin:0 0 2px;font-size:11.5px;color:#7a8299;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;text-transform:uppercase">Mixing Ratio — {{ activeProduct.tech.mixingRatio }}</p><p style="margin:0;color:#c2ccdd;font-size:13px">{{ activeProduct.tech.mixingRatioText }}</p></div>
+            <div><p style="margin:0 0 2px;font-size:11.5px;color:#7a8299;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;text-transform:uppercase">Hardener — {{ activeProduct.tech.hardener }}</p><p style="margin:0;color:#c2ccdd;font-size:13px">{{ activeProduct.tech.hardenerText }}</p></div>
+            <div><p style="margin:0 0 2px;font-size:11.5px;color:#7a8299;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;text-transform:uppercase">Coats — {{ activeProduct.tech.coats }}</p><p style="margin:0;color:#c2ccdd;font-size:13px">{{ activeProduct.tech.coatsText }}</p></div>
+            <div><p style="margin:0 0 2px;font-size:11.5px;color:#7a8299;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;text-transform:uppercase">Drying Time — {{ activeProduct.tech.dryingTime }}</p><p style="margin:0;color:#c2ccdd;font-size:13px">{{ activeProduct.tech.dryingTimeText }}</p></div>
+            <div><p style="margin:0 0 2px;font-size:11.5px;color:#7a8299;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;text-transform:uppercase">Pot Life — {{ activeProduct.tech.potLife }}</p><p style="margin:0;color:#c2ccdd;font-size:13px">{{ activeProduct.tech.potLifeText }}</p></div>
+            <div><p style="margin:0 0 2px;font-size:11.5px;color:#7a8299;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;text-transform:uppercase">Safety / PPE — {{ activeProduct.tech.ppe }}</p><p style="margin:0;color:#c2ccdd;font-size:13px">{{ activeProduct.tech.ppeText }}</p></div>
+            <div><p style="margin:0 0 2px;font-size:11.5px;color:#7a8299;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;text-transform:uppercase">Storage — {{ activeProduct.tech.storage }}</p><p style="margin:0;color:#c2ccdd;font-size:13px">{{ activeProduct.tech.storageText }}</p></div>
+          </div>
+          <sc-if value="{{ activeProduct.tech.hasSource }}" hint-placeholder-val="{{ false }}">
+            <p style="margin:12px 0 0;font-size:11.5px;color:#5a6274">Source: <a href="{{ activeProduct.tech.source }}" target="_blank" rel="noopener" style="color:#8fb4ff">{{ activeProduct.tech.source }}</a></p>
+          </sc-if>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:10px;padding-top:6px;border-top:1px solid rgba(120,160,255,.1)">
+          <button onClick="{{ activeProduct.openRetail }}" style="display:inline-flex;align-items:center;gap:8px;background:#e11d27;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:13.5px;padding:12px 16px;border-radius:8px;border:0;min-height:42px">Retail Enquiry</button>
+          <button onClick="{{ activeProduct.openWholesale }}" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35);font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:13.5px;padding:12px 16px;border-radius:8px;min-height:42px">Wholesale Enquiry</button>
+          <button onClick="{{ activeProduct.openQuote }}" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#8fb4ff;border:1px solid rgba(120,160,255,.3);font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:13.5px;padding:12px 16px;border-radius:8px;min-height:42px">Request Quotation</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ enquiry }}" hint-placeholder-val="{{ null }}">
+  <div role="dialog" aria-modal="true" aria-labelledby="eqTitle" style="position:fixed;inset:0;z-index:130;background:rgba(4,6,12,.85);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px">
+    <div style="width:min(560px,100%);max-height:90vh;overflow:auto;background:#0a0d18;border:1px solid rgba(120,160,255,.18);border-radius:16px">
+      <div style="display:flex;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid rgba(120,160,255,.12)">
+        <h3 id="eqTitle" style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;font-size:16px;margin:0;flex:1">{{ enquiry.title }}</h3>
+        <button onClick="{{ closeEnquiry }}" aria-label="Close enquiry form" style="width:36px;height:36px;border-radius:8px;border:1px solid rgba(120,160,255,.2);background:transparent;color:#fff;font-size:16px">✕</button>
+      </div>
+
+      <sc-if value="{{ enquiry.success }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:32px 22px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px">
+          <span style="width:48px;height:48px;border-radius:50%;background:rgba(61,220,132,.15);display:flex;align-items:center;justify-content:center;color:#3ddc84;font-size:22px">✓</span>
+          <p style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;font-size:16px;margin:0">Enquiry Ready</p>
+          <p style="color:#9aa5ba;font-size:14px;margin:0;max-width:38ch">Your details are prepared. Continue on WhatsApp to send your enquiry to our team.</p>
+          <a href="{{ enquiry.waLink }}" target="_blank" rel="noopener" style="margin-top:6px;display:inline-flex;align-items:center;gap:8px;background:#e11d27;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:14px;padding:13px 20px;border-radius:8px;text-decoration:none;min-height:44px">Continue on WhatsApp</a>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ enquiry.notSuccess }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:20px 22px;display:flex;flex-direction:column;gap:12px">
+        <p style="color:#9aa5ba;font-size:13px;margin:0">{{ enquiry.brand }} — {{ enquiry.productName }} ({{ enquiry.sizeLabel }})</p>
+
+        <sc-if value="{{ enquiry.error }}" hint-placeholder-val="{{ false }}">
+          <p style="color:#ff8a8a;font-size:13px;margin:0;background:rgba(60,10,12,.3);border:1px solid rgba(255,90,90,.3);border-radius:8px;padding:10px 12px">{{ enquiry.error }}</p>
+        </sc-if>
+
+        <label style="display:flex;flex-direction:column;gap:5px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#9aa5ba">Full Name *
+          <input type="text" value="{{ enquiry.name }}" onChange="{{ enquiry.setName }}" style="font-family:'Inter',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;background:rgba(255,255,255,.04);border:1px solid rgba(120,160,255,.2);border-radius:8px;color:#f2f4f9;font-size:14.5px;padding:11px 13px;min-height:44px" style-focus="border-color:#3f7bff;outline:2px solid #3f7bff;outline-offset:2px">
+        </label>
+        <label style="display:flex;flex-direction:column;gap:5px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#9aa5ba">Phone / WhatsApp *
+          <input type="tel" value="{{ enquiry.phone }}" onChange="{{ enquiry.setPhone }}" style="font-family:'Inter',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;background:rgba(255,255,255,.04);border:1px solid rgba(120,160,255,.2);border-radius:8px;color:#f2f4f9;font-size:14.5px;padding:11px 13px;min-height:44px" style-focus="border-color:#3f7bff;outline:2px solid #3f7bff;outline-offset:2px">
+        </label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <label style="display:flex;flex-direction:column;gap:5px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#9aa5ba">Quantity
+            <input type="text" value="{{ enquiry.quantity }}" onChange="{{ enquiry.setQuantity }}" placeholder="e.g. 2 units" style="font-family:'Inter',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;background:rgba(255,255,255,.04);border:1px solid rgba(120,160,255,.2);border-radius:8px;color:#f2f4f9;font-size:14.5px;padding:11px 13px;min-height:44px" style-focus="border-color:#3f7bff;outline:2px solid #3f7bff;outline-offset:2px">
+          </label>
+          <label style="display:flex;flex-direction:column;gap:5px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#9aa5ba">Business Type
+            <input type="text" value="{{ enquiry.businessType }}" onChange="{{ enquiry.setBusinessType }}" placeholder="e.g. Workshop, Individual" style="font-family:'Inter',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;background:rgba(255,255,255,.04);border:1px solid rgba(120,160,255,.2);border-radius:8px;color:#f2f4f9;font-size:14.5px;padding:11px 13px;min-height:44px" style-focus="border-color:#3f7bff;outline:2px solid #3f7bff;outline-offset:2px">
+          </label>
+        </div>
+        <label style="display:flex;flex-direction:column;gap:5px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#9aa5ba">Message
+          <textarea value="{{ enquiry.message }}" onChange="{{ enquiry.setMessage }}" rows="3" style="font-family:'Inter',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;background:rgba(255,255,255,.04);border:1px solid rgba(120,160,255,.2);border-radius:8px;color:#f2f4f9;font-size:14.5px;padding:11px 13px;resize:vertical" style-focus="border-color:#3f7bff;outline:2px solid #3f7bff;outline-offset:2px"></textarea>
+        </label>
+        <label style="display:flex;align-items:flex-start;gap:9px;font-size:13px;color:#c2ccdd">
+          <input type="checkbox" checked="{{ enquiry.consent }}" onChange="{{ enquiry.setConsent }}" style="margin-top:3px;width:16px;height:16px">
+          I agree to be contacted about this enquiry. Prices and availability are confirmed by our team, not shown here.
+        </label>
+        <button onClick="{{ enquiry.submit }}" disabled="{{ enquiry.loading }}" style="margin-top:4px;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#e11d27;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:14.5px;padding:13px 18px;border-radius:8px;border:0;min-height:46px" style-hover="background:#ff3b3b">
+          <sc-if value="{{ enquiry.loading }}" hint-placeholder-val="{{ false }}"><span style="width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;animation:ascc-spin 0.7s linear infinite;display:inline-block"></span></sc-if>
+          {{ enquiry.submitLabel }}
+        </button>
+      </div>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+
+<dc-import name="SiteFooter" hint-size="100%,320px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    loaded: false, brand: null, searchText: '', activeCategory: 'All', activeProductId: null,
+    enquiryType: null, enquiryProductId: null,
+    eqName: '', eqPhone: '', eqQuantity: '', eqBusinessType: '', eqMessage: '', eqConsent: false,
+    eqLoading: false, eqSuccess: false, eqError: ''
+  };
+
+  async componentDidMount() {
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('brand') || '';
+    const res = await fetch('master-product-database/pilot-brands-data.json');
+    const data = await res.json();
+    this.setState({ brand: data[slug] || null, loaded: true });
+  }
+
+  buildTech(p) {
+    const t = p.technicalData;
+    const na = { status: 'INFORMATION REQUIRED', text: 'Not yet verified from an official source.' };
+    if (!t) {
+      return {
+        mainUse: na.status, mainUseText: na.text, mixingRatio: na.status, mixingRatioText: na.text,
+        hardener: na.status, hardenerText: na.text, coats: na.status, coatsText: na.text,
+        dryingTime: na.status, dryingTimeText: na.text, potLife: na.status, potLifeText: na.text,
+        ppe: na.status, ppeText: 'Refer to official technical data sheet.',
+        storage: na.status, storageText: 'Refer to official technical data sheet.',
+        hasSource: false, source: ''
+      };
+    }
+    return {
+      mainUse: t.mainUse, mainUseText: t.mainUseText || 'Refer to official technical data sheet.',
+      mixingRatio: t.mixingRatio, mixingRatioText: t.mixingRatioText || 'Refer to official technical data sheet.',
+      hardener: t.hardener, hardenerText: t.hardenerText || 'Refer to official technical data sheet.',
+      coats: t.coats, coatsText: t.coatsText || 'Refer to official technical data sheet.',
+      dryingTime: t.dryingTime, dryingTimeText: t.dryingTimeText || 'Refer to official technical data sheet.',
+      potLife: t.potLife, potLifeText: t.potLifeText || 'Refer to official technical data sheet.',
+      ppe: t.ppe, ppeText: t.ppeText || 'Refer to official technical data sheet.',
+      storage: t.storage, storageText: t.storageText || 'Refer to official technical data sheet.',
+      hasSource: t.source && t.source.startsWith('http'), source: t.source || ''
+    };
+  }
+
+  renderVals() {
+    const isLoading = !this.state.loaded;
+    const isNotFound = this.state.loaded && !this.state.brand;
+    const isReady = this.state.loaded && !!this.state.brand;
+    const brand = this.state.brand || { brandName: '', products: [], productCount: 0, categoryCount: 0, logoVerificationStatus: '', logoFileStatus: '' };
+
+    const searchText = this.state.searchText;
+    const activeCategory = this.state.activeCategory;
+    const categoryList = ['All', ...new Set(brand.products.map(p => p.cleanCategory || p.category))];
+
+    const filtered = brand.products.filter(p => {
+      const cat = p.cleanCategory || p.category;
+      const matchCat = activeCategory === 'All' || cat === activeCategory;
+      const matchSearch = !searchText || p.name.toLowerCase().includes(searchText.toLowerCase()) || (p.code || '').toLowerCase().includes(searchText.toLowerCase());
+      return matchCat && matchSearch;
+    }).sort((a,b) => (b.isShowcase?1:0) - (a.isShowcase?1:0));
+
+    const openEnquiry = (type, productId) => () => this.setState({
+      enquiryType: type, enquiryProductId: productId, eqName: '', eqPhone: '', eqQuantity: '', eqBusinessType: '', eqMessage: '', eqConsent: false, eqLoading: false, eqSuccess: false, eqError: ''
+    });
+
+    const decorate = (p) => ({
+      ...p,
+      cleanCategory: p.cleanCategory || p.category,
+      categoryIcon: p.categoryIcon || '◇',
+      codeLabel: p.code || 'Not listed',
+      sizeLabel: p.size || 'Not recorded',
+      metaLine: p.code ? (p.code + ' · ' + (p.size || 'size n/a')) : (p.size || 'Size not recorded'),
+      imageStatusShort: p.imageStatus === 'IMAGE REQUIRES CONFIRMATION' ? 'Confirming' : 'Image required',
+      imageBadgeColor: p.imageStatus === 'IMAGE REQUIRES CONFIRMATION' ? '#8fb4ff' : '#ffc247',
+      imageBadgeBorder: p.imageStatus === 'IMAGE REQUIRES CONFIRMATION' ? 'rgba(120,160,255,.4)' : 'rgba(255,194,71,.4)',
+      tech: this.buildTech(p),
+      open: () => this.setState({ activeProductId: p.id }),
+      openRetail: openEnquiry('Retail Enquiry', p.id),
+      openWholesale: openEnquiry('Wholesale Enquiry', p.id),
+      openQuote: openEnquiry('Request Quotation', p.id)
+    });
+
+    const filteredProducts = filtered.map(decorate);
+
+    const categories = categoryList.map(label => {
+      const active = label === activeCategory;
+      return {
+        label, active,
+        color: active ? '#fff' : '#dde4f3',
+        bg: active ? 'rgba(63,123,255,.22)' : 'transparent',
+        borderColor: active ? '#3f7bff' : 'rgba(120,160,255,.25)',
+        select: () => this.setState({ activeCategory: label })
+      };
+    });
+
+    const activeProductRaw = brand.products.find(p => p.id === this.state.activeProductId);
+    const activeProduct = activeProductRaw ? decorate(activeProductRaw) : null;
+
+    let enquiry = null;
+    if (this.state.enquiryType) {
+      const prod = brand.products.find(p => p.id === this.state.enquiryProductId);
+      const waBase = 'https://wa.me/971563867796?text=';
+      const msgParts = [
+        `${this.state.enquiryType} — ${brand.brandName} — ${prod ? prod.name : ''}`,
+        prod && prod.code ? `Code: ${prod.code}` : null,
+        prod && prod.size ? `Size: ${prod.size}` : null,
+        this.state.eqQuantity ? `Quantity: ${this.state.eqQuantity}` : null,
+        this.state.eqBusinessType ? `Business type: ${this.state.eqBusinessType}` : null,
+        `Name: ${this.state.eqName}`,
+        `Phone: ${this.state.eqPhone}`,
+        this.state.eqMessage ? `Message: ${this.state.eqMessage}` : null
+      ].filter(Boolean).join('\n');
+      const waLink = waBase + encodeURIComponent(msgParts);
+
+      enquiry = {
+        title: this.state.enquiryType,
+        brand: brand.brandName,
+        productName: prod ? prod.name : '',
+        sizeLabel: prod ? (prod.size || 'size n/a') : '',
+        name: this.state.eqName, setName: (e) => this.setState({ eqName: e.target.value }),
+        phone: this.state.eqPhone, setPhone: (e) => this.setState({ eqPhone: e.target.value }),
+        quantity: this.state.eqQuantity, setQuantity: (e) => this.setState({ eqQuantity: e.target.value }),
+        businessType: this.state.eqBusinessType, setBusinessType: (e) => this.setState({ eqBusinessType: e.target.value }),
+        message: this.state.eqMessage, setMessage: (e) => this.setState({ eqMessage: e.target.value }),
+        consent: this.state.eqConsent, setConsent: (e) => this.setState({ eqConsent: e.target.checked }),
+        loading: this.state.eqLoading,
+        success: this.state.eqSuccess,
+        notSuccess: !this.state.eqSuccess,
+        error: this.state.eqError,
+        submitLabel: this.state.eqLoading ? 'Preparing…' : 'Prepare Enquiry',
+        waLink,
+        submit: () => {
+          if (!this.state.eqName.trim() || !this.state.eqPhone.trim()) {
+            this.setState({ eqError: 'Please enter your name and phone/WhatsApp number.' }); return;
+          }
+          if (!this.state.eqConsent) {
+            this.setState({ eqError: 'Please confirm consent to be contacted.' }); return;
+          }
+          this.setState({ eqError: '', eqLoading: true });
+          setTimeout(() => this.setState({ eqLoading: false, eqSuccess: true }), 600);
+        }
+      };
+    }
+
+    return {
+      isLoading, isNotFound, isReady, brand,
+      searchText,
+      onSearchChange: (e) => this.setState({ searchText: e.target.value }),
+      categories,
+      onClearFilters: () => this.setState({ searchText: '', activeCategory: 'All' }),
+      filteredProducts,
+      hasResults: filteredProducts.length > 0,
+      hasNoResults: isReady && filteredProducts.length === 0,
+      activeProduct,
+      closeProduct: () => this.setState({ activeProductId: null }),
+      enquiry,
+      closeEnquiry: () => this.setState({ enquiryType: null, enquiryProductId: null })
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Admin — Auto Sports Car Care</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#f3f1ec}a{color:#2454d9}a:hover{color:#173a9e}</style>
+</helmet>
+<div style="background:#f3f1ec;color:#1c1e24;font-family:'Inter',system-ui,sans-serif;line-height:1.6;min-height:100vh;display:flex">
+
+<sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+  <aside style="width:{{ sidebarWidth }};flex-shrink:0;background:#14161c;min-height:100vh;padding:18px 0;position:sticky;top:0;height:100vh;overflow-y:auto;transition:width .16s">
+    <div style="padding:0 18px 18px;border-bottom:1px solid #262a34;margin-bottom:12px;display:flex;align-items:center;gap:10px">
+      <img src="assets/logo.png" alt="Auto Sports Car Care" style="height:24px;flex-shrink:0">
+      <sc-if value="{{ sidebarOpen }}" hint-placeholder-val="{{ true }}">
+        <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b7080;white-space:nowrap">Admin</span>
+      </sc-if>
+    </div>
+    <nav aria-label="Admin">
+      <sc-for list="{{ navGroups }}" as="g" hint-placeholder-count="4">
+        <sc-if value="{{ sidebarOpen }}" hint-placeholder-val="{{ true }}">
+          <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#565c6b;margin:14px 18px 6px">{{ g.title }}</p>
+        </sc-if>
+        <sc-for list="{{ g.items }}" as="n" hint-placeholder-count="4">
+          <button onClick="{{ n.select }}" aria-current="{{ n.current }}" title="{{ n.label }}" style="width:100%;text-align:left;display:flex;align-items:center;gap:11px;padding:9px 18px;background:{{ n.bg }};border:0;border-left:3px solid {{ n.accent }};color:{{ n.color }};font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13.5px;min-height:40px;white-space:nowrap;overflow:hidden" style-hover="background:#1d2029;color:#fff">
+            <span style="font-size:14px;width:16px;flex-shrink:0" aria-hidden="true">{{ n.icon }}</span>
+            <sc-if value="{{ sidebarOpen }}" hint-placeholder-val="{{ true }}"><span>{{ n.label }}</span></sc-if>
+          </button>
+        </sc-for>
+      </sc-for>
+    </nav>
+  </aside>
+</sc-if>
+
+<div style="flex:1;min-width:0;display:flex;flex-direction:column">
+  <header style="background:#fff;border-bottom:1px solid #e2ded2;padding:0 clamp(16px,2.5vw,28px);display:flex;align-items:center;gap:14px;min-height:64px;position:sticky;top:0;z-index:20">
+    <button onClick="{{ toggleSidebar }}" aria-label="Toggle sidebar" style="width:38px;height:38px;border-radius:8px;border:1px solid #d6d2c6;background:#fff;color:#5a5f6e;font-size:15px;flex-shrink:0" style-hover="border-color:#2454d9;color:#2454d9">☰</button>
+    <input type="search" placeholder="Search customers, vehicles, jobs…" aria-label="Global search" style="flex:1;min-width:0;max-width:420px;background:#f3f1ec;border:1px solid #d6d2c6;border-radius:8px;color:#1c1e24;font-family:'Inter',sans-serif;font-size:13.5px;padding:9px 13px;min-height:40px" style-focus="border-color:#2454d9;outline:2px solid #2454d9;outline-offset:2px">
+    <span style="margin-left:auto"></span>
+    <button aria-label="Notifications" style="width:38px;height:38px;border-radius:8px;border:1px solid #d6d2c6;background:#fff;color:#5a5f6e;font-size:15px" style-hover="border-color:#2454d9;color:#2454d9">◔</button>
+    <div style="display:flex;align-items:center;gap:9px">
+      <div style="width:34px;height:34px;border-radius:50%;background:#14161c;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12px">AD</div>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <div style="line-height:1.2"><p style="font-size:13px;margin:0;color:#14161c;font-weight:500">Administrator</p><p style="font-size:11px;margin:0;color:#8a8f9c">Full access</p></div>
+      </sc-if>
+    </div>
+  </header>
+
+  <main style="flex:1;padding:clamp(18px,2.5vw,28px)">
+    <h1 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(20px,2.4vw,26px);margin:0 0 4px;color:#14161c">{{ activeLabel }}</h1>
+    <p style="color:#8a8f9c;font-size:13px;margin:0 0 22px">{{ activeSubtitle }}</p>
+
+    <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:24px">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="6">
+          <div style="background:#fff;border-radius:10px;padding:16px 18px;border-left:3px solid {{ s.accent }}">
+            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:#8a8f9c;margin:0 0 6px">{{ s.label }}</p>
+            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:26px;margin:0;color:#14161c;line-height:1">{{ s.value }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background:#fff;border-radius:12px;overflow:hidden">
+        <div style="padding:16px 20px;border-bottom:1px solid #eeebe3;display:flex;align-items:center;gap:12px">
+          <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;margin:0;color:#14161c">Work Queue</h2>
+          <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:99px;background:rgba(255,194,71,.18);color:#a06a00">Requires Backend</span>
+        </div>
+        <div style="display:flex;background:#faf9f6;border-bottom:1px solid #eeebe3;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#8a8f9c">
+          <span style="flex:1;padding:10px 20px">Reference</span><span style="flex:1.4;padding:10px 12px">Customer</span><span style="flex:1.4;padding:10px 12px">Vehicle</span><span style="flex:1;padding:10px 12px">Stage</span><span style="flex:.8;padding:10px 20px">Status</span>
+        </div>
+        <div style="padding:48px 20px;text-align:center">
+          <p style="color:#8a8f9c;font-size:14px;margin:0">No live records. Job cards appear here once the database is connected.</p>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isCatalogue }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#fff;border-radius:12px;padding:22px">
+        <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;margin:0 0 14px;color:#14161c">Imported Catalogue</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+          <sc-for list="{{ catalogueBrands }}" as="b" hint-placeholder-count="7">
+            <a href="{{ b.href }}" style="border:1px solid #e2ded2;border-radius:10px;padding:14px 16px;text-decoration:none;color:#14161c;display:flex;flex-direction:column;gap:3px" style-hover="border-color:#2454d9">
+              <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px">{{ b.name }}</span>
+              <span style="font-size:12px;color:#8a8f9c">{{ b.count }} products · {{ b.images }} with photos</span>
+            </a>
+          </sc-for>
+        </div>
+        <p style="color:#8a8f9c;font-size:12.5px;margin:16px 0 0">2,025 records imported from the approved master workbook · 119 confirmed brands · 300 pending brand confirmation.</p>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isOther }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#fff;border-radius:12px;padding:clamp(28px,4vw,48px);text-align:center;border:1px dashed #d6d2c6">
+        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#a06a00;background:rgba(255,194,71,.18);display:inline-block;padding:5px 12px;border-radius:99px;margin:0 0 14px">Requires Backend</p>
+        <p style="color:#5a5f6e;font-size:14.5px;margin:0 0 6px;max-width:52ch;margin-left:auto;margin-right:auto">{{ activeLabel }} is designed and ready. Live records, permissions and audit history appear once the database and authentication are connected.</p>
+        <p style="color:#8a8f9c;font-size:13px;margin:0">{{ activeSubtitle }}</p>
+      </div>
+    </sc-if>
+  </main>
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1500,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { width: typeof window !== 'undefined' ? window.innerWidth : 1440, active: 'Dashboard', sidebarOpen: true };
+  componentDidMount() {
+    this._r = () => this.setState({ width: window.innerWidth });
+    window.addEventListener('resize', this._r);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._r); }
+  renderVals() {
+    const isDesktop = this.state.width >= 900;
+    const groups = [
+      { title: 'Overview', items: [
+        { label: 'Dashboard', icon: '▤', subtitle: 'Live operational overview across all departments.' },
+        { label: 'Leads', icon: '✦', subtitle: 'Incoming enquiries awaiting first response.' }
+      ]},
+      { title: 'Operations', items: [
+        { label: 'Customers', icon: '◎', subtitle: 'Customer records, contacts and account history.' },
+        { label: 'Vehicles', icon: '◈', subtitle: 'Vehicle profiles, paint codes and service history.' },
+        { label: 'Service Requests', icon: '✎', subtitle: 'Incoming service requests awaiting review.' },
+        { label: 'Inspections', icon: '⚙', subtitle: 'Panel-based inspection capture and reports.' },
+        { label: 'Quotations', icon: '▦', subtitle: 'Quotation preparation, revisions and approvals.' },
+        { label: 'Job Cards', icon: '◆', subtitle: 'Active job cards, tasks and progress tracking.' }
+      ]},
+      { title: 'Catalogue', items: [
+        { label: 'Product Catalogue', icon: '▥', subtitle: 'Imported product records, images and status.' },
+        { label: 'Brands', icon: '◇', subtitle: 'Brand directory and logo verification status.' },
+        { label: 'Suppliers', icon: '⚑', subtitle: 'Supplier records and purchase history.' },
+        { label: 'Inventory', icon: '▧', subtitle: 'Stock levels and inventory movements.' }
+      ]},
+      { title: 'System', items: [
+        { label: 'Users & Roles', icon: '☰', subtitle: 'Staff accounts, roles and permissions.' },
+        { label: 'Activity Log', icon: '◔', subtitle: 'Audit trail of all system actions.' },
+        { label: 'Settings', icon: '⚙', subtitle: 'Application configuration and preferences.' }
+      ]}
+    ];
+    const all = groups.flatMap(g => g.items);
+    const mk = (s) => ({
+      ...s,
+      current: s.label === this.state.active ? 'page' : undefined,
+      bg: s.label === this.state.active ? '#1d2029' : 'transparent',
+      accent: s.label === this.state.active ? '#2454d9' : 'transparent',
+      color: s.label === this.state.active ? '#fff' : '#a7abb6',
+      select: () => this.setState({ active: s.label })
+    });
+    const activeSection = all.find(s => s.label === this.state.active) || all[0];
+    const isDashboard = this.state.active === 'Dashboard';
+    const isCatalogue = this.state.active === 'Product Catalogue';
+    return {
+      isDesktop,
+      sidebarOpen: this.state.sidebarOpen,
+      sidebarWidth: this.state.sidebarOpen ? '232px' : '64px',
+      toggleSidebar: () => this.setState(s => ({ sidebarOpen: !s.sidebarOpen })),
+      navGroups: groups.map(g => ({ title: g.title, items: g.items.map(mk) })),
+      activeLabel: activeSection.label,
+      activeSubtitle: activeSection.subtitle,
+      isDashboard, isCatalogue, isOther: !isDashboard && !isCatalogue,
+      stats: [
+        { label: 'New Enquiries', value: '0', accent: '#2454d9' },
+        { label: 'Awaiting Review', value: '0', accent: '#a06a00' },
+        { label: 'Inspections Due', value: '0', accent: '#a06a00' },
+        { label: 'Active Jobs', value: '0', accent: '#14161c' },
+        { label: 'Quotations Pending', value: '0', accent: '#a06a00' },
+        { label: 'Support Requests', value: '0', accent: '#d81f2a' }
+      ],
+      catalogueBrands: [
+        { name: 'Kapci', count: 190, images: 190, href: 'Kapci-Brand.dc.html' },
+        { name: 'MaxShine', count: 136, images: 28, href: 'MaxShine-Brand.dc.html' },
+        { name: 'SONAX', count: 99, images: 0, href: 'Brand.dc.html?brand=sonax' },
+        { name: 'RUPES', count: 89, images: 0, href: 'Brand.dc.html?brand=rupes' },
+        { name: 'Standox', count: 88, images: 0, href: 'Brand.dc.html?brand=standox' },
+        { name: 'Meguiar\u2019s', count: 54, images: 0, href: 'Brand.dc.html?brand=meguiars' },
+        { name: 'Mirka', count: 48, images: 0, href: 'Brand.dc.html?brand=mirka' }
+      ]
+    };
+  }
+}
+
+</script>
+</body>
+</html>

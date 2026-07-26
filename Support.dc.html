@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="assets/services/services-data.js"></script>
+<title>Help &amp; Customer Care — Auto Sports Car Care</title>
+<meta name="description" content="Assistance with products, vehicle services, bookings, quotations, orders, deliveries, aftercare and existing requests.">
+<style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f3f1ec}a{color:#2454d9}a:hover{color:#173a9e}</style>
+</helmet>
+<div style="background:#f3f1ec;color:#1c1e24;font-family:'Inter',system-ui,sans-serif;line-height:1.6;min-height:100vh">
+<dc-import name="SiteHeaderNew" current="Support" hint-size="100%,76px"></dc-import>
+
+<section style="background:#14161c;padding:clamp(44px,5.5vw,68px) 0">
+  <div style="max-width:1560px;width:94%;margin:0 auto">
+    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.14em;color:#7fa0ff;text-transform:uppercase;margin:0 0 10px">Support</p>
+    <h1 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(28px,3.6vw,42px);color:#f3f1ec;margin:0 0 14px">Help and Customer Care</h1>
+    <p style="color:#a7abb6;font-size:15.5px;max-width:72ch;margin:0 0 26px;line-height:1.65">Get assistance with products, vehicle services, bookings, quotations, orders, deliveries, aftercare and existing requests.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px">
+      <button onClick="{{ openAssistant }}" style="background:#d81f2a;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;font-size:14.5px;padding:14px 20px;border-radius:8px;border:0;min-height:48px;display:inline-flex;align-items:center;gap:9px" style-hover="background:#ef2d38"><span aria-hidden="true">◈</span>Ask AI Assistant</button>
+      <a href="https://wa.me/971563867796" target="_blank" rel="noopener" style="background:transparent;color:#f3f1ec;border:1.5px solid #3a4256;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;font-size:14.5px;padding:14px 20px;border-radius:8px;text-decoration:none;min-height:48px;display:inline-flex;align-items:center" style-hover="border-color:#2454d9">Start WhatsApp Chat</a>
+      <a href="#request" style="background:transparent;color:#f3f1ec;border:1.5px solid #3a4256;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;font-size:14.5px;padding:14px 20px;border-radius:8px;text-decoration:none;min-height:48px;display:inline-flex;align-items:center" style-hover="border-color:#2454d9">Submit Support Request</a>
+      <a href="#track" style="background:transparent;color:#f3f1ec;border:1.5px solid #3a4256;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;font-size:14.5px;padding:14px 20px;border-radius:8px;text-decoration:none;min-height:48px;display:inline-flex;align-items:center" style-hover="border-color:#2454d9">Track Existing Request</a>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1560px;width:94%;margin:0 auto;padding:clamp(32px,4vw,44px) 0 0">
+  <input type="search" value="{{ helpQuery }}" onChange="{{ onHelpQuery }}" placeholder="Search the Help Centre — products, services, bookings, delivery, aftercare…" aria-label="Search Help Centre" style="width:100%;background:#fff;border:1px solid #d6d2c6;border-radius:10px;color:#1c1e24;font-family:'Inter',sans-serif;font-size:15px;padding:14px 17px;min-height:50px;display:block" style-focus="border-color:#2454d9;outline:2px solid #2454d9;outline-offset:2px">
+  <sc-if value="{{ hasHelpResults }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#fff;border-radius:12px;margin-top:12px;padding:8px;display:flex;flex-direction:column;gap:2px">
+      <sc-for list="{{ helpResults }}" as="hr" hint-placeholder-count="4">
+        <button onClick="{{ hr.open }}" style="text-align:left;background:transparent;border:0;padding:14px 16px;border-radius:8px;cursor:pointer;display:flex;flex-direction:column;gap:3px;min-height:48px" style-hover="background:#f3f1ec">
+          <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14.5px;color:#14161c">{{ hr.title }}</span>
+          <span style="color:#8a8f9c;font-size:12.5px">{{ hr.category }} · {{ hr.shortAnswer }}</span>
+        </button>
+      </sc-for>
+    </div>
+  </sc-if>
+  <sc-if value="{{ helpNoResults }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#fff;border-radius:12px;margin-top:12px;padding:22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center">
+      <p style="color:#5a5f6e;font-size:14px;margin:0;flex:1;min-width:200px">No help article matches that search. The assistant can collect your requirement and send it for staff review.</p>
+      <button onClick="{{ openAssistant }}" style="background:#14161c;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13.5px;padding:12px 18px;border-radius:8px;border:0;min-height:44px">Ask AI Assistant</button>
+    </div>
+  </sc-if>
+</section>
+
+<section style="max-width:1560px;width:94%;margin:0 auto;padding:clamp(28px,3.5vw,40px) 0">
+  <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.14em;color:#2454d9;text-transform:uppercase;margin:0 0 14px">What do you need help with?</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px">
+    <sc-for list="{{ supportTopics }}" as="t" hint-placeholder-count="8">
+      <button onClick="{{ t.start }}" style="background:#fff;border:1px solid #e2ded2;border-radius:12px;padding:20px;text-align:left;display:flex;flex-direction:column;gap:8px;min-height:130px;cursor:pointer;transition:.16s" style-hover="border-color:#2454d9;box-shadow:0 10px 26px rgba(0,0,0,.07);transform:translateY(-2px)">
+        <span style="color:#2454d9;font-size:24px" aria-hidden="true">{{ t.icon }}</span>
+        <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15.5px;color:#14161c;line-height:1.25">{{ t.label }}</span>
+        <span style="color:#8a8f9c;font-size:12.5px;line-height:1.45">{{ t.desc }}</span>
+      </button>
+    </sc-for>
+  </div>
+</section>
+
+<section style="background:#eae6dc;padding:clamp(44px,5.5vw,68px) 0">
+  <div style="max-width:1560px;width:94%;margin:0 auto;display:grid;grid-template-columns:minmax(280px,1fr) minmax(280px,1.1fr);gap:clamp(24px,4vw,48px);align-items:start">
+    <div>
+      <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.14em;color:#2454d9;text-transform:uppercase;margin:0 0 10px">Customer Helpline</p>
+      <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(22px,2.8vw,30px);margin:0 0 8px;color:#14161c">Speak to Customer Care</h2>
+      <p style="color:#5a5f6e;font-size:14.5px;margin:0 0 22px;max-width:52ch">Reach the team directly by WhatsApp, phone or email. Support hours are being confirmed and will be published once finalised.</p>
+      <div style="display:grid;gap:10px">
+        <a href="https://wa.me/971563867796" target="_blank" rel="noopener" style="background:#fff;border-radius:12px;padding:18px 20px;text-decoration:none;color:#14161c;display:flex;align-items:center;gap:14px" style-hover="box-shadow:0 8px 22px rgba(0,0,0,.08)">
+          <span style="color:#1f9d5c;font-size:20px;width:26px" aria-hidden="true">✆</span>
+          <div style="flex:1"><p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;margin:0 0 2px">WhatsApp</p><p style="color:#5a5f6e;font-size:13.5px;margin:0">+971 56 386 7796</p></div>
+          <span style="color:#2454d9" aria-hidden="true">→</span>
+        </a>
+        <a href="tel:+971563160420" style="background:#fff;border-radius:12px;padding:18px 20px;text-decoration:none;color:#14161c;display:flex;align-items:center;gap:14px" style-hover="box-shadow:0 8px 22px rgba(0,0,0,.08)">
+          <span style="color:#2454d9;font-size:20px;width:26px" aria-hidden="true">☎</span>
+          <div style="flex:1"><p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;margin:0 0 2px">Phone</p><p style="color:#5a5f6e;font-size:13.5px;margin:0">+971 56 316 0420</p></div>
+          <span style="color:#2454d9" aria-hidden="true">→</span>
+        </a>
+        <a href="mailto:autosportcar.care@gmail.com" style="background:#fff;border-radius:12px;padding:18px 20px;text-decoration:none;color:#14161c;display:flex;align-items:center;gap:14px" style-hover="box-shadow:0 8px 22px rgba(0,0,0,.08)">
+          <span style="color:#2454d9;font-size:20px;width:26px" aria-hidden="true">✉</span>
+          <div style="flex:1"><p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;margin:0 0 2px">Email</p><p style="color:#5a5f6e;font-size:13.5px;margin:0;word-break:break-all">autosportcar.care@gmail.com</p></div>
+          <span style="color:#2454d9" aria-hidden="true">→</span>
+        </a>
+        <a href="https://maps.app.goo.gl/dBx6tim3eCizya2N6" target="_blank" rel="noopener" style="background:#fff;border-radius:12px;padding:18px 20px;text-decoration:none;color:#14161c;display:flex;align-items:center;gap:14px" style-hover="box-shadow:0 8px 22px rgba(0,0,0,.08)">
+          <span style="color:#d81f2a;font-size:20px;width:26px" aria-hidden="true">⌖</span>
+          <div style="flex:1"><p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;margin:0 0 2px">Location</p><p style="color:#5a5f6e;font-size:13.5px;margin:0">Serving Ajman, Sharjah and Dubai</p></div>
+          <span style="color:#2454d9" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div id="request" style="background:#fff;border-radius:14px;padding:clamp(22px,3vw,32px)">
+      <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(19px,2.3vw,24px);margin:0 0 6px;color:#14161c">Submit a Support Request</h2>
+      <p style="color:#8a8f9c;font-size:13px;margin:0 0 20px">Your details are used only to handle this request. A reference number is issued on submission.</p>
+
+      <sc-if value="{{ ticketCreated }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;padding:24px 0;display:flex;flex-direction:column;align-items:center;gap:12px">
+          <span style="width:48px;height:48px;border-radius:50%;background:rgba(31,157,92,.12);color:#1f9d5c;display:flex;align-items:center;justify-content:center;font-size:22px" aria-hidden="true">✓</span>
+          <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:17px;margin:0;color:#14161c">Request Recorded</p>
+          <p style="color:#5a5f6e;font-size:14px;margin:0;max-width:42ch">Your request has been recorded under reference <strong>{{ newTicketRef }}</strong>. A customer-care team member will review the information and contact you through your selected method.</p>
+          <button onClick="{{ resetTicket }}" style="background:#14161c;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13.5px;padding:12px 20px;border-radius:8px;border:0;min-height:44px;margin-top:6px">Submit Another Request</button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ ticketFormOpen }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <sc-if value="{{ ticketError }}" hint-placeholder-val="{{ false }}">
+          <p style="color:#b3261e;font-size:13px;margin:0;background:#fdecea;border:1px solid #f3b8b3;border-radius:8px;padding:11px 13px">{{ ticketError }}</p>
+        </sc-if>
+
+        <label style="display:flex;flex-direction:column;gap:5px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:#5a5f6e">Category *
+          <select value="{{ tCategory }}" onChange="{{ setTCategory }}" style="font-family:'Inter',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;background:#f3f1ec;border:1px solid #d6d2c6;border-radius:8px;color:#1c1e24;font-size:14.5px;padding:11px 13px;min-height:44px" style-focus="border-color:#2454d9;outline:2px solid #2454d9;outline-offset:2px">
+            <sc-for list="{{ categoryOptions }}" as="co" hint-placeholder-count="10">
+              <option value="{{ co }}">{{ co }}</option>
+            </sc-for>
+          </select>
+        </label>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px">
+          <label style="display:flex;flex-direction:column;gap:5px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:#5a5f6e">Name *
+            <input type="text" value="{{ tName }}" onChange="{{ setTName }}" style="font-family:'Inter',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;background:#f3f1ec;border:1px solid #d6d2c6;border-radius:8px;color:#1c1e24;font-size:14.5px;padding:11px 13px;min-height:44px" style-focus="border-color:#2454d9;outline:2px solid #2454d9;outline-offset:2px">
+          </label>
+          <label style="display:flex;flex-direction:column;gap:5px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:#5a5f6e">Phone / WhatsApp *
+            <input type="tel" value="{{ tPhone }}" onChange="{{ setTPhone }}" style="font-family:'Inter',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;background:#f3f1ec;border:1px solid #d6d2c6;border-radius:8px;color:#1c1e24;font-size:14.5px;padding:11px 13px;min-height:44px" style-focus="border-color:#2454d9;outline:2px solid #2454d9;outline-offset:2px">
+          </label>
+        </div>
+
+        <label style="display:flex;flex-direction:column;gap:5px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:#5a5f6e">Reference (order, booking or quotation, if any)
+          <input type="text" value="{{ tRef }}" onChange="{{ setTRef }}" style="font-family:'Inter',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;background:#f3f1ec;border:1px solid #d6d2c6;border-radius:8px;color:#1c1e24;font-size:14.5px;padding:11px 13px;min-height:44px" style-focus="border-color:#2454d9;outline:2px solid #2454d9;outline-offset:2px">
+        </label>
+
+        <label style="display:flex;flex-direction:column;gap:5px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:#5a5f6e">How can we help? *
+          <textarea value="{{ tMessage }}" onChange="{{ setTMessage }}" rows="4" style="font-family:'Inter',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;background:#f3f1ec;border:1px solid #d6d2c6;border-radius:8px;color:#1c1e24;font-size:14.5px;padding:11px 13px;resize:vertical" style-focus="border-color:#2454d9;outline:2px solid #2454d9;outline-offset:2px"></textarea>
+        </label>
+
+        <label style="display:flex;flex-direction:column;gap:5px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:#5a5f6e">Preferred contact method
+          <select value="{{ tContact }}" onChange="{{ setTContact }}" style="font-family:'Inter',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;background:#f3f1ec;border:1px solid #d6d2c6;border-radius:8px;color:#1c1e24;font-size:14.5px;padding:11px 13px;min-height:44px" style-focus="border-color:#2454d9;outline:2px solid #2454d9;outline-offset:2px">
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="Phone call">Phone call</option>
+            <option value="Email">Email</option>
+          </select>
+        </label>
+
+        <label style="display:flex;align-items:flex-start;gap:9px;font-size:13px;color:#5a5f6e">
+          <input type="checkbox" checked="{{ tConsent }}" onChange="{{ setTConsent }}" style="margin-top:3px;width:16px;height:16px">
+          I agree to be contacted about this request and to my details being used to handle it.
+        </label>
+
+        <button onClick="{{ submitTicket }}" style="align-self:flex-start;background:#d81f2a;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:14px;padding:13px 22px;border-radius:8px;border:0;min-height:46px" style-hover="background:#ef2d38">{{ ticketSubmitLabel }}</button>
+      </div>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+<section id="track" style="max-width:1560px;width:94%;margin:0 auto;padding:clamp(44px,5.5vw,68px) 0">
+  <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.14em;color:#2454d9;text-transform:uppercase;margin:0 0 10px">Track a Request</p>
+  <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(22px,2.8vw,30px);margin:0 0 20px;color:#14161c">Your Requests</h2>
+  <sc-if value="{{ hasTickets }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-for list="{{ myTickets }}" as="mt" hint-placeholder-count="2">
+        <div style="background:#fff;border-radius:12px;padding:20px;display:flex;flex-wrap:wrap;gap:16px;align-items:center">
+          <div style="min-width:130px">
+            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14.5px;margin:0 0 2px;color:#14161c">{{ mt.ref }}</p>
+            <p style="color:#8a8f9c;font-size:12px;margin:0">{{ mt.date }}</p>
+          </div>
+          <div style="flex:1;min-width:180px">
+            <p style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13.5px;margin:0 0 2px;color:#14161c">{{ mt.category }}</p>
+            <p style="color:#5a5f6e;font-size:13px;margin:0">{{ mt.summary }}</p>
+          </div>
+          <span style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:5px 11px;border-radius:99px;background:{{ mt.statusBg }};color:{{ mt.statusColor }}">{{ mt.status }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+  <sc-if value="{{ noTickets }}" hint-placeholder-val="{{ true }}">
+    <div style="border:1px dashed #d6d2c6;border-radius:14px;padding:48px 24px;text-align:center;background:#fff">
+      <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;margin:0 0 8px;color:#14161c">No requests yet</p>
+      <p style="color:#8a8f9c;font-size:14px;margin:0 0 18px;max-width:46ch;margin-left:auto;margin-right:auto">Requests you submit through the assistant or the support form appear here with their reference and current status.</p>
+      <button onClick="{{ openAssistant }}" style="background:#14161c;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13.5px;padding:12px 20px;border-radius:8px;border:0;min-height:44px">Start a Request</button>
+    </div>
+  </sc-if>
+</section>
+
+<section style="background:#14161c;padding:clamp(44px,5.5vw,68px) 0">
+  <div style="max-width:1000px;width:94%;margin:0 auto">
+    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.14em;color:#7fa0ff;text-transform:uppercase;margin:0 0 10px">Help Centre</p>
+    <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(22px,2.8vw,30px);margin:0 0 24px;color:#f3f1ec">Common Questions</h2>
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="8">
+        <div style="background:#1a1c24;border-radius:10px;overflow:hidden">
+          <button onClick="{{ f.toggle }}" aria-expanded="{{ f.open }}" style="width:100%;text-align:left;background:transparent;border:0;padding:17px 20px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14.5px;color:#f3f1ec;display:flex;align-items:center;gap:12px;min-height:50px">
+            <span style="flex:1">{{ f.q }}</span>
+            <span style="color:#7fa0ff;font-size:16px;flex-shrink:0" aria-hidden="true">{{ f.marker }}</span>
+          </button>
+          <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:0 20px 19px">
+              <p style="color:#a7abb6;font-size:13.5px;line-height:1.6;margin:0 0 10px">{{ f.a }}</p>
+              <p style="color:#6b7080;font-size:11.5px;margin:0">{{ f.meta }}</p>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<sc-if value="{{ assistantClosed }}" hint-placeholder-val="{{ true }}">
+  <button onClick="{{ openAssistant }}" aria-label="Open support assistant" style="position:fixed;bottom:22px;right:22px;z-index:90;background:#d81f2a;color:#fff;border:0;border-radius:99px;padding:15px 22px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14.5px;letter-spacing:.03em;box-shadow:0 12px 30px rgba(0,0,0,.3);display:flex;align-items:center;gap:9px;min-height:52px" style-hover="background:#ef2d38">
+    <span aria-hidden="true">◈</span>Support Assistant
+  </button>
+</sc-if>
+
+<sc-if value="{{ assistantOpen }}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-modal="true" aria-label="Support assistant" style="position:fixed;inset:0;z-index:120;background:rgba(10,12,16,.6);display:flex;align-items:flex-end;justify-content:flex-end;padding:0" style-hover="">
+  <div style="width:min(460px,100%);height:min(88vh,760px);margin:0;background:#14161c;border-radius:16px 16px 0 0;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 -10px 50px rgba(0,0,0,.5)">
+
+    <div style="padding:16px 18px;border-bottom:1px solid #262a34;display:flex;align-items:center;gap:12px;flex-shrink:0">
+      <img src="assets/logo.png" alt="" style="height:24px;flex-shrink:0">
+      <div style="flex:1;min-width:0">
+        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;margin:0;color:#f3f1ec;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">AUTO SPORTS Support Assistant</p>
+        <p style="color:#8a8f9c;font-size:11px;margin:0;display:flex;align-items:center;gap:5px"><span style="width:6px;height:6px;border-radius:50%;background:{{ statusDot }};display:inline-block"></span>{{ agentStatus }}</p>
+      </div>
+      <select value="{{ language }}" onChange="{{ setLanguage }}" aria-label="Language" style="background:#1e212b;border:1px solid #333846;border-radius:7px;color:#cfd3dc;font-family:'Inter',sans-serif;font-size:12px;padding:7px 8px;flex-shrink:0">
+        <option value="English">EN</option>
+        <option value="Arabic">AR</option>
+        <option value="Malayalam">ML</option>
+      </select>
+      <button onClick="{{ closeAssistant }}" aria-label="Close assistant" style="width:34px;height:34px;border-radius:8px;border:1px solid #333846;background:transparent;color:#cfd3dc;font-size:15px;flex-shrink:0">✕</button>
+    </div>
+
+    <div style="flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px">
+      <sc-for list="{{ messages }}" as="m" hint-placeholder-count="2">
+        <div style="display:flex;justify-content:{{ m.align }}">
+          <div style="max-width:84%;background:{{ m.bg }};color:{{ m.color }};border-radius:{{ m.radius }};padding:12px 14px;font-size:13.5px;line-height:1.55;white-space:pre-line">
+            <sc-if value="{{ m.showSender }}" hint-placeholder-val="{{ false }}">
+              <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:{{ m.senderColor }};margin:0 0 5px">{{ m.sender }}</p>
+            </sc-if>
+            {{ m.text }}
+          </div>
+        </div>
+      </sc-for>
+
+      <sc-if value="{{ hasChips }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
+          <sc-for list="{{ chips }}" as="c" hint-placeholder-count="6">
+            <button onClick="{{ c.pick }}" style="background:transparent;border:1px solid #3a4256;border-radius:99px;color:#cfd3dc;font-family:'Inter',sans-serif;font-size:12.5px;padding:9px 14px;min-height:38px;cursor:pointer" style-hover="border-color:#2454d9;color:#fff;background:rgba(37,84,217,.12)">{{ c.label }}</button>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showReference }}" hint-placeholder-val="{{ false }}">
+        <div style="background:rgba(31,157,92,.1);border:1px solid rgba(31,157,92,.3);border-radius:10px;padding:14px">
+          <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:#3ddc84;margin:0 0 6px">Request Reference</p>
+          <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:19px;color:#f3f1ec;margin:0 0 6px">{{ referenceNo }}</p>
+          <p style="color:#a7abb6;font-size:12px;margin:0">Status: Ready for staff review · Keep this reference for follow-up.</p>
+        </div>
+      </sc-if>
+    </div>
+
+    <div style="border-top:1px solid #262a34;padding:12px 14px;flex-shrink:0">
+      <sc-if value="{{ showHandoverNotice }}" hint-placeholder-val="{{ false }}">
+        <p style="color:#ffc247;font-size:11.5px;margin:0 0 10px;display:flex;align-items:flex-start;gap:7px"><span aria-hidden="true">⚑</span>Transferred to customer care. A team member will continue this conversation.</p>
+      </sc-if>
+      <div style="display:flex;gap:8px;align-items:flex-end">
+        <label aria-label="Attach a photo or document" style="width:42px;height:42px;border-radius:8px;border:1px solid #333846;background:transparent;color:#cfd3dc;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;cursor:pointer" style-hover="border-color:#2454d9;color:#fff">
+          <span aria-hidden="true">＋</span>
+          <input type="file" accept="image/*,.pdf" multiple="{{ true }}" onChange="{{ onAttach }}" style="display:none">
+        </label>
+        <textarea value="{{ draft }}" onChange="{{ setDraft }}" onKeyDown="{{ onKeyDown }}" rows="1" placeholder="Type your requirement…" aria-label="Message" style="flex:1;background:#1e212b;border:1px solid #333846;border-radius:8px;color:#f3f1ec;font-family:'Inter',sans-serif;font-size:13.5px;padding:12px 13px;resize:none;min-height:42px;max-height:110px" style-focus="border-color:#2454d9;outline:none"></textarea>
+        <button onClick="{{ send }}" aria-label="Send message" style="width:42px;height:42px;border-radius:8px;border:0;background:#d81f2a;color:#fff;font-size:16px;flex-shrink:0" style-hover="background:#ef2d38">➤</button>
+      </div>
+      <div style="display:flex;gap:12px;align-items:center;margin-top:9px;flex-wrap:wrap">
+        <button onClick="{{ requestHuman }}" style="background:transparent;border:0;color:#7fa0ff;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12px;letter-spacing:.04em;padding:4px 0;cursor:pointer">Speak to a Human</button>
+        <a href="https://wa.me/971563867796" target="_blank" rel="noopener" style="color:#7fa0ff;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12px;letter-spacing:.04em;text-decoration:none">WhatsApp</a>
+        <button onClick="{{ restartChat }}" style="background:transparent;border:0;color:#6b7080;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12px;padding:4px 0;cursor:pointer;margin-left:auto">Restart</button>
+      </div>
+      <p style="color:#5a6274;font-size:10.5px;margin:9px 0 0;line-height:1.45">Automated assistant. It collects information for staff review and cannot confirm prices, stock, warranties or final approvals. A team member can take over at any time.</p>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<dc-import name="SiteFooterNew" hint-size="100%,320px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1100}}">
+class Component extends DCLogic {
+  state = {
+    helpQuery: '', openFaq: null, assistantOpen: false,
+    language: 'English', draft: '',
+    flow: null, step: 0, collected: {}, messages: [], chips: [],
+    reference: null, handover: false,
+    tickets: [],
+    tCategory: 'General enquiry', tName: '', tPhone: '', tRef: '', tMessage: '',
+    tContact: 'WhatsApp', tConsent: false, tError: '', tSubmitting: false, tCreated: false, tNewRef: ''
+  };
+
+  STORE = 'ascc_support_v1';
+
+  componentDidMount() {
+    try {
+      const raw = window.localStorage.getItem(this.STORE);
+      if (raw) {
+        const d = JSON.parse(raw);
+        this.setState({ tickets: d.tickets || [] });
+      }
+    } catch (e) {}
+    this.pushBot(this.opening(), this.startChips());
+  }
+
+  persist(tickets) {
+    try { window.localStorage.setItem(this.STORE, JSON.stringify({ tickets })); } catch (e) {}
+  }
+
+  opening() {
+    return 'Hello. Welcome to AUTO SPORTS CAR CARE.\n\nI can help collect information for product enquiries, service requests, bookings, quotations, deliveries and customer support. Select an option or type your requirement below.\n\nI am an automated assistant — a human team member can take over at any point.';
+  }
+
+  startChips() {
+    return ['I need a product','I need a vehicle service','I need a quotation','I want to book a service','Track my request','Delivery information','I have a complaint','Aftercare support','Speak to customer care'];
+  }
+
+  pushBot(text, chips, extra) {
+    this.setState(s => ({
+      messages: [...s.messages, { role: 'bot', text }],
+      chips: chips || [],
+      ...(extra || {})
+    }));
+  }
+
+  pushUser(text) {
+    this.setState(s => ({ messages: [...s.messages, { role: 'user', text }], chips: [] }));
+  }
+
+  pushAgent(text) {
+    this.setState(s => ({ messages: [...s.messages, { role: 'agent', text }], chips: [] }));
+  }
+
+  makeRef(prefix) {
+    const n = Math.floor(100000 + Math.random() * 900000);
+    return `${prefix}-${new Date().getFullYear()}-${n}`;
+  }
+
+  // ---- Flow definitions: sequential questions per enquiry type ----
+  flows() {
+    return {
+      product: { label: 'Product enquiry', prefix: 'PRD', dept: 'Product Sales',
+        questions: [
+          { key: 'product', q: 'Please share the product name, brand, or a clear photo of the item.' },
+          { key: 'code', q: 'Do you have the product code or size? If not, reply "not known".' },
+          { key: 'quantity', q: 'What quantity do you require?' },
+          { key: 'application', q: 'What is the intended application — vehicle, wood, furniture or industrial use?' },
+          { key: 'location', q: 'Please provide your delivery location (emirate and area).' },
+          { key: 'name', q: 'Your name, please.' },
+          { key: 'phone', q: 'And a contact number or WhatsApp number.' }
+        ],
+        closing: 'Thank you. Your product enquiry has been recorded and sent for staff review. Product availability, price and delivery details will be confirmed by an authorised team member.' },
+
+      service: { label: 'Vehicle service enquiry', prefix: 'SRV', dept: 'Service Adviser',
+        questions: [
+          { key: 'concern', q: 'What issue are you experiencing with the vehicle?', chips: ['Dull paint','Swirl marks','Deep scratches','Stone chips','Dents','Dirty interior','Interior odour','Need paint protection','Need colour change','Need heat-control film','Headlight condition','Wheel or caliper work','Rust concern','Restoration','Not sure'] },
+          { key: 'area', q: 'Which area is affected?', chips: ['Full vehicle','Front section','One panel','Multiple panels','Interior','Glass','Wheels','Headlights','Underbody'] },
+          { key: 'vehicle', q: 'Please give the vehicle make, model and year.' },
+          { key: 'existing', q: 'Any existing PPF, wrap, tint, coating or previous repairs on the affected area? Reply "none" if not.' },
+          { key: 'date', q: 'Do you have a preferred date? A requested date is not confirmed until we accept it.' },
+          { key: 'name', q: 'Your name, please.' },
+          { key: 'phone', q: 'And a contact number or WhatsApp number.' }
+        ],
+        closing: 'Thank you. Your service enquiry has been recorded for staff review. Work scope, materials, duration and price are confirmed after inspection, and any additional work found requires your approval first.' },
+
+      quotation: { label: 'Quotation request', prefix: 'QTN', dept: 'Quotation Desk',
+        questions: [
+          { key: 'type', q: 'Is the quotation for a product, a service, product with installation, or a fleet/business requirement?', chips: ['Product','Service','Product with installation','Fleet requirement','Business supply','Restoration project'] },
+          { key: 'details', q: 'Please describe what you need quoted, including quantities or affected vehicle areas.' },
+          { key: 'vehicle', q: 'If this involves a vehicle, give the make, model and year. Otherwise reply "not applicable".' },
+          { key: 'location', q: 'Your location or delivery address (emirate and area).' },
+          { key: 'vat', q: 'Do you require a VAT invoice? If yes, please give the company name and TRN.' },
+          { key: 'name', q: 'Your name and company name if applicable.' },
+          { key: 'phone', q: 'A contact number or WhatsApp number.' }
+        ],
+        closing: 'Thank you. Your quotation request has been recorded for staff review. The final quotation is prepared and issued by an authorised team member — I cannot confirm prices or discounts.' },
+
+      booking: { label: 'Booking request', prefix: 'BKG', dept: 'Booking Desk',
+        questions: [
+          { key: 'service', q: 'Which service would you like to book?', chips: ['Inspection','Exterior detailing','Interior detailing','Paint correction','Ceramic coating','Paint protection film','Window tint','Automotive painting','Other'] },
+          { key: 'vehicle', q: 'Vehicle make, model, year and colour.' },
+          { key: 'registration', q: 'Registration number, please. Reply "not now" if you prefer to give it later.' },
+          { key: 'date', q: 'Preferred date and time.' },
+          { key: 'pickup', q: 'Do you need vehicle collection and delivery?', chips: ['No, I will visit','Collection only','Collection and delivery'] },
+          { key: 'name', q: 'Your name, please.' },
+          { key: 'phone', q: 'And a contact number or WhatsApp number.' }
+        ],
+        closing: 'Thank you. Your preferred appointment has been submitted for confirmation. The booking is not final until you receive a confirmation update.' },
+
+      order: { label: 'Order support', prefix: 'ORD', dept: 'General Customer Care',
+        questions: [
+          { key: 'issue', q: 'What do you need help with?', chips: ['Order status','Missing item','Incorrect item','Damaged item','Invoice request','Payment status','Cancellation','Return request'] },
+          { key: 'reference', q: 'Please give your order or invoice reference.' },
+          { key: 'details', q: 'Please describe the issue, and attach photos if an item arrived damaged or incorrect.' },
+          { key: 'name', q: 'Your name, please.' },
+          { key: 'phone', q: 'And the contact number registered with the order.' }
+        ],
+        closing: 'Thank you. Your order support request has been recorded. For your security, order details are only shared after your identity is verified by a team member.' },
+
+      delivery: { label: 'Delivery support', prefix: 'DLV', dept: 'Delivery',
+        questions: [
+          { key: 'issue', q: 'What do you need help with?', chips: ['Check delivery status','Submit delivery location','Add delivery instructions','Report a delay','Report a failed delivery','Reschedule delivery'] },
+          { key: 'reference', q: 'Please give your order or delivery reference.' },
+          { key: 'location', q: 'Confirm the delivery address or area.' },
+          { key: 'name', q: 'Your name, please.' },
+          { key: 'phone', q: 'And a contact number for the delivery.' }
+        ],
+        closing: 'Thank you. Your delivery request has been recorded and routed to the delivery team. Delivery timing is confirmed by the team — I cannot commit to a time.' },
+
+      complaint: { label: 'Complaint', prefix: 'CMP', dept: 'Complaints',
+        questions: [
+          { key: 'related', q: 'Is this about a service, a product, an order or a delivery?', chips: ['Service','Product','Order','Delivery','Other'] },
+          { key: 'reference', q: 'Please give the related reference number if you have one.' },
+          { key: 'description', q: 'Please describe what happened, including the date. Attach photos or video if you have them.' },
+          { key: 'outcome', q: 'What outcome are you requesting?' },
+          { key: 'name', q: 'Your name, please.' },
+          { key: 'phone', q: 'And your preferred contact number.' }
+        ],
+        closing: null },
+
+      warranty: { label: 'Warranty request', prefix: 'WTY', dept: 'Warranty and Aftercare',
+        questions: [
+          { key: 'item', q: 'Which product or service is the warranty enquiry about?' },
+          { key: 'reference', q: 'Please give the invoice or service reference and the installation or service date.' },
+          { key: 'vehicle', q: 'Vehicle make, model and year, if applicable.' },
+          { key: 'problem', q: 'Please describe the problem and attach photos or video.' },
+          { key: 'maintenance', q: 'Briefly, how has the vehicle or product been maintained since then?' },
+          { key: 'name', q: 'Your name, please.' },
+          { key: 'phone', q: 'And a contact number.' }
+        ],
+        closing: 'Thank you. A warranty review request has been created. Submitting a warranty request does not confirm approval — only authorised staff can approve or reject a claim after reviewing the evidence.' },
+
+      aftercare: { label: 'Aftercare support', prefix: 'AFT', dept: 'Warranty and Aftercare',
+        questions: [
+          { key: 'service', q: 'Which completed service or purchased product do you need aftercare guidance for?', chips: ['Paint protection film','Window tint','Ceramic coating','Fresh paint','Detailing','Vehicle wrap','Wheel finish','A product I purchased'] },
+          { key: 'reference', q: 'Please give the invoice or service reference and the completion date, so we give guidance for the exact product used.' },
+          { key: 'question', q: 'What would you like to know? For example washing, curing or maintenance.' },
+          { key: 'name', q: 'Your name, please.' },
+          { key: 'phone', q: 'And a contact number.' }
+        ],
+        closing: 'Thank you. Aftercare guidance is issued from the record of the exact product used on your vehicle, so a team member will confirm the correct instructions against your service record.' }
+    };
+  }
+
+  routeIntent(text) {
+    const t = text.toLowerCase();
+    if (/complain|unhappy|bad service|damaged my|not satisfied/.test(t)) return 'complaint';
+    if (/warrant|claim|guarantee/.test(t)) return 'warranty';
+    if (/aftercare|how (do i )?(wash|clean|maintain)|curing/.test(t)) return 'aftercare';
+    if (/delivery|deliver|driver|dispatch/.test(t)) return 'delivery';
+    if (/order|invoice|payment|refund|return/.test(t)) return 'order';
+    if (/quotation|quote|price|cost|how much/.test(t)) return 'quotation';
+    if (/book|appointment|schedule|slot/.test(t)) return 'booking';
+    if (/track|status|reference|my request/.test(t)) return 'track';
+    if (/product|paint|compound|polish|filler|primer|clear ?coat|thinner|hardener|film|tint|buy|supply|stock/.test(t)) return 'product';
+    if (/service|detail|scratch|dent|swirl|ppf|coat|wrap|restor|repair|rust|headlight|wheel|caliper/.test(t)) return 'service';
+    if (/human|agent|staff|person|customer care|someone/.test(t)) return 'human';
+    return null;
+  }
+
+  startFlow(key) {
+    const flow = this.flows()[key];
+    if (!flow) return;
+    const q = flow.questions[0];
+    this.setState({ flow: key, step: 0, collected: {}, reference: null });
+    setTimeout(() => this.pushBot(q.q, q.chips || []), 120);
+  }
+
+  advance(answer) {
+    const key = this.state.flow;
+    const flow = this.flows()[key];
+    if (!flow) return;
+    const idx = this.state.step;
+    const cur = flow.questions[idx];
+    const collected = { ...this.state.collected, [cur.key]: answer };
+    const next = flow.questions[idx + 1];
+
+    if (next) {
+      this.setState({ collected, step: idx + 1 });
+      setTimeout(() => this.pushBot(next.q, next.chips || []), 140);
+      return;
+    }
+
+    // Flow complete — create ticket
+    const ref = this.makeRef(flow.prefix);
+    const ticket = {
+      ref, date: new Date().toISOString().slice(0, 10),
+      category: flow.label, dept: flow.dept,
+      summary: this.summarise(collected, flow),
+      status: 'Ready for staff review',
+      language: this.state.language,
+      channel: 'Website assistant',
+      collected
+    };
+    const tickets = [ticket, ...this.state.tickets];
+    this.persist(tickets);
+
+    const closing = flow.closing ||
+      `Thank you for sharing the details. Your concern has been recorded under reference ${ref}. A customer-care team member will review the information and contact you through your preferred method.`;
+
+    this.setState({ collected, tickets, reference: ref, flow: null, step: 0 });
+    setTimeout(() => {
+      this.pushBot(closing, ['Speak to customer care','Start a new enquiry','Track my request']);
+    }, 150);
+  }
+
+  summarise(c, flow) {
+    const parts = [];
+    if (c.product) parts.push(c.product);
+    if (c.service) parts.push(c.service);
+    if (c.concern) parts.push(c.concern);
+    if (c.type) parts.push(c.type);
+    if (c.issue) parts.push(c.issue);
+    if (c.item) parts.push(c.item);
+    if (c.related) parts.push(c.related);
+    if (c.quantity) parts.push('Qty ' + c.quantity);
+    if (c.vehicle && c.vehicle.toLowerCase() !== 'not applicable') parts.push(c.vehicle);
+    return parts.length ? parts.join(' · ') : flow.label;
+  }
+
+  handleInput(text) {
+    const clean = text.trim();
+    if (!clean) return;
+    this.pushUser(clean);
+
+    if (this.state.handover) {
+      setTimeout(() => this.pushAgent('Message received. A customer-care team member is reviewing this conversation and will reply here.'), 200);
+      return;
+    }
+
+    if (this.state.flow) { this.advance(clean); return; }
+
+    const intent = this.routeIntent(clean);
+
+    if (intent === 'human') { setTimeout(() => this.doHandover(), 150); return; }
+    if (intent === 'track') {
+      setTimeout(() => {
+        if (this.state.tickets.length === 0) {
+          this.pushBot('I do not have a request saved on this device yet. If you already have a reference number, share it and I will pass it to customer care for lookup.', ['Speak to customer care','Start a new enquiry']);
+        } else {
+          const list = this.state.tickets.map(t => `${t.ref} — ${t.category} — ${t.status}`).join('\n');
+          this.pushBot('Here are the requests saved on this device:\n\n' + list + '\n\nA team member can give the latest update on any of these.', ['Speak to customer care','Start a new enquiry']);
+        }
+      }, 150);
+      return;
+    }
+    if (intent) { this.startFlow(intent); return; }
+
+    // Try approved service knowledge
+    const svc = this.findService(clean);
+    if (svc) {
+      setTimeout(() => {
+        this.pushBot(`${svc.name}\n\n${svc.purpose}\n\n${svc.inspection === 'Inspection Required' ? 'This service requires inspection before scope and price are confirmed.' : 'This service can be requested directly, subject to availability.'}\n\nWould you like to submit an enquiry for it?`,
+          ['Yes, submit a service enquiry','Request a quotation','Book an appointment','Speak to customer care']);
+      }, 160);
+      return;
+    }
+
+    setTimeout(() => {
+      this.pushBot('I do not have enough confirmed information to answer that accurately. I can collect your requirement and send it to the support team for review, or transfer you to customer care now.',
+        ['Product enquiry','Vehicle service enquiry','Request a quotation','Speak to customer care']);
+    }, 160);
+  }
+
+  findService(text) {
+    const services = (typeof window !== 'undefined' && window.ASCC_SERVICES) ? window.ASCC_SERVICES : [];
+    const t = text.toLowerCase();
+    return services.find(s =>
+      t.includes(s.name.toLowerCase()) ||
+      s.name.toLowerCase().split(/\s+/).filter(w => w.length > 4).some(w => t.includes(w))
+    );
+  }
+
+  doHandover() {
+    const flow = this.state.flow ? this.flows()[this.state.flow] : null;
+    const dept = flow ? flow.dept : 'General Customer Care';
+    const ref = this.state.reference || this.makeRef('SUP');
+    if (!this.state.reference) {
+      const ticket = {
+        ref, date: new Date().toISOString().slice(0, 10),
+        category: flow ? flow.label : 'General enquiry', dept,
+        summary: this.state.collected && Object.keys(this.state.collected).length
+          ? Object.values(this.state.collected).slice(0, 3).join(' · ')
+          : 'Customer requested a human agent',
+        status: 'Human response required',
+        language: this.state.language, channel: 'Website assistant',
+        collected: this.state.collected
+      };
+      const tickets = [ticket, ...this.state.tickets];
+      this.persist(tickets);
+      this.setState({ tickets, reference: ref });
+    }
+    this.setState({ handover: true, flow: null, chips: [] });
+    this.pushBot(`Your request requires review by a customer-care team member. I have transferred the conversation with the information already provided, so you do not need to repeat everything.\n\nDepartment: ${dept}\nReference: ${ref}`);
+    setTimeout(() => {
+      this.pushAgent('Customer care has joined this conversation. Our team is currently reviewing your details and will reply here. You can also reach us on WhatsApp at +971 56 386 7796.');
+    }, 900);
+  }
+
+  pickChip(label) {
+    if (this.state.flow) { this.pushUser(label); this.advance(label); return; }
+    const map = {
+      'I need a product': 'product', 'Product enquiry': 'product',
+      'I need a vehicle service': 'service', 'Vehicle service enquiry': 'service', 'Yes, submit a service enquiry': 'service',
+      'I need a quotation': 'quotation', 'Request a quotation': 'quotation',
+      'I want to book a service': 'booking', 'Book an appointment': 'booking',
+      'Delivery information': 'delivery',
+      'I have a complaint': 'complaint',
+      'Aftercare support': 'aftercare'
+    };
+    this.pushUser(label);
+    if (label === 'Speak to customer care' || label === 'Speak to a Human') { setTimeout(() => this.doHandover(), 150); return; }
+    if (label === 'Track my request') { setTimeout(() => this.handleTrack(), 150); return; }
+    if (label === 'Start a new enquiry') {
+      this.setState({ reference: null });
+      setTimeout(() => this.pushBot('What would you like help with?', this.startChips()), 150);
+      return;
+    }
+    const flow = map[label];
+    if (flow) { this.startFlow(flow); return; }
+    setTimeout(() => this.pushBot('I can collect your requirement and send it for staff review. Which area does it relate to?', this.startChips()), 150);
+  }
+
+  handleTrack() {
+    if (this.state.tickets.length === 0) {
+      this.pushBot('No request is saved on this device yet. Share an existing reference number and customer care will look it up.', ['Speak to customer care','Start a new enquiry']);
+    } else {
+      const list = this.state.tickets.map(t => `${t.ref} — ${t.category} — ${t.status}`).join('\n');
+      this.pushBot('Requests saved on this device:\n\n' + list, ['Speak to customer care','Start a new enquiry']);
+    }
+  }
+
+  renderVals() {
+    const helpArticles = [
+      { title: 'Why are product prices not shown on the site?', category: 'Products', shortAnswer: 'Prices are confirmed by quotation.', answer: 'Product availability, specification and commercial terms vary by size, variant and quantity. Prices are confirmed by an authorised team member after reviewing your requirement, so no price is published on the catalogue pages.', updated: '2026-07-26' },
+      { title: 'How do I check whether a product is in stock?', category: 'Product availability', shortAnswer: 'Availability is confirmed on enquiry.', answer: 'Submit a product enquiry with the product name, code and quantity. Availability is confirmed by the team — the assistant does not state stock levels.', updated: '2026-07-26' },
+      { title: 'Do I need an inspection before a service?', category: 'Vehicle services', shortAnswer: 'It depends on the service.', answer: 'Each service page shows whether inspection is required. Where it is, we review your submitted photos first and arrange a physical inspection if needed before scope and quotation.', updated: '2026-07-26' },
+      { title: 'Is my requested appointment date confirmed immediately?', category: 'Bookings', shortAnswer: 'No — it is submitted for confirmation.', answer: 'A requested date is submitted for confirmation. The booking is not final until you receive a confirmation update from the team.', updated: '2026-07-26' },
+      { title: 'What happens if extra work is found during the job?', category: 'Quotations', shortAnswer: 'It requires your approval first.', answer: 'Additional work found during the job is reported to you with the reason. It is only carried out after your approval.', updated: '2026-07-26' },
+      { title: 'How do I request a quotation?', category: 'Quotations', shortAnswer: 'Through the assistant or quotation form.', answer: 'Use the support assistant, the quotation form or WhatsApp. Provide the products or services, quantities, vehicle details where relevant and your location. A reference number is issued on submission.', updated: '2026-07-26' },
+      { title: 'Can you collect and deliver my vehicle?', category: 'Delivery', shortAnswer: 'Available for eligible vehicles, on confirmation.', answer: 'Collection and delivery can be arranged for eligible vehicles across Ajman, Sharjah and Dubai. A request is not an automatic confirmation — availability depends on location, schedule and the service requested.', updated: '2026-07-26' },
+      { title: 'Which payment methods can I use?', category: 'Payments', shortAnswer: 'Confirmed by the team per request.', answer: 'Accepted payment methods are confirmed by the team for your request. Never send full card numbers, CVV codes or banking passwords through chat — we will never ask for them.', updated: '2026-07-26' },
+      { title: 'How do I submit a warranty request?', category: 'Warranty', shortAnswer: 'Submit the reference, dates and evidence.', answer: 'Provide the invoice or service reference, the service or installation date, a description of the problem and supporting photos. Submitting a request does not confirm approval — only authorised staff can approve or reject a claim.', updated: '2026-07-26' },
+      { title: 'When can I wash my vehicle after paint protection film?', category: 'PPF aftercare', shortAnswer: 'After the advised curing period.', answer: 'Wait for the curing period advised for the exact film installed on your vehicle, then avoid high-pressure spray directly at film edges. Aftercare is issued from your service record so it matches the product used.', updated: '2026-07-26' },
+      { title: 'When can I lower my windows after tinting?', category: 'Tint aftercare', shortAnswer: 'After the advised curing period.', answer: 'Do not lower the windows during the curing period advised for the film installed. Small moisture pockets may appear and normally clear as the film cures. Avoid ammonia-based glass cleaners.', updated: '2026-07-26' },
+      { title: 'How do I maintain a ceramic coating?', category: 'Ceramic-coating aftercare', shortAnswer: 'pH-neutral washing and scheduled checks.', answer: 'Follow the initial no-wash curing period for the product used, then wash with pH-neutral products and avoid abrasive methods. Attend any maintenance inspection recommended for that coating.', updated: '2026-07-26' },
+      { title: 'How do I report a problem or make a complaint?', category: 'Complaints', shortAnswer: 'Through the assistant or support form.', answer: 'Submit the related reference, a description of what happened with dates, and any photos or video. A reference number is issued and a customer-care team member reviews the case.', updated: '2026-07-26' },
+      { title: 'How is my personal information used?', category: 'Privacy and security', shortAnswer: 'Only to handle your request.', answer: 'Details you submit are used to handle your enquiry, quotation, booking, delivery, support or warranty request. We never ask for passwords, full card details or CVV codes.', updated: '2026-07-26' },
+      { title: 'How do I contact customer care directly?', category: 'Contacting customer care', shortAnswer: 'WhatsApp, phone or email.', answer: 'WhatsApp +971 56 386 7796, phone +971 56 316 0420, or email autosportcar.care@gmail.com. You can also ask the assistant to transfer you to a team member at any point.', updated: '2026-07-26' }
+    ];
+
+    const hq = this.state.helpQuery.toLowerCase().trim();
+    const helpResults = hq.length < 2 ? [] : helpArticles
+      .filter(a => (a.title + ' ' + a.category + ' ' + a.answer).toLowerCase().includes(hq))
+      .slice(0, 6)
+      .map((a, i) => ({
+        title: a.title, category: a.category, shortAnswer: a.shortAnswer,
+        open: () => this.setState({ openFaq: helpArticles.indexOf(a), helpQuery: '' })
+      }));
+
+    const faqs = helpArticles.map((a, i) => ({
+      q: a.title, a: a.answer,
+      meta: `${a.category} · Last updated ${a.updated} · English`,
+      open: this.state.openFaq === i, marker: this.state.openFaq === i ? '−' : '+',
+      toggle: () => this.setState(s => ({ openFaq: s.openFaq === i ? null : i }))
+    }));
+
+    const supportTopics = [
+      { icon: '▤', label: 'Product Enquiry', desc: 'Find a product, share a photo and request availability.', start: () => this.openAndStart('product') },
+      { icon: '✦', label: 'Vehicle Service', desc: 'Describe the concern and get a preliminary recommendation.', start: () => this.openAndStart('service') },
+      { icon: '◉', label: 'Request Quotation', desc: 'Products, services, installation or fleet requirements.', start: () => this.openAndStart('quotation') },
+      { icon: '▣', label: 'Book a Service', desc: 'Submit a preferred date for confirmation.', start: () => this.openAndStart('booking') },
+      { icon: '⊞', label: 'Order Support', desc: 'Status, missing or incorrect items, invoices.', start: () => this.openAndStart('order') },
+      { icon: '⇄', label: 'Delivery Support', desc: 'Location, schedule, delays or rescheduling.', start: () => this.openAndStart('delivery') },
+      { icon: '◈', label: 'Warranty & Aftercare', desc: 'Claims, care guidance and reinspection.', start: () => this.openAndStart('warranty') },
+      { icon: '⚑', label: 'Report a Problem', desc: 'Raise a complaint with evidence and reference.', start: () => this.openAndStart('complaint') }
+    ];
+
+    const messages = this.state.messages.map(m => {
+      if (m.role === 'user') return { text: m.text, align: 'flex-end', bg: '#2454d9', color: '#fff', radius: '12px 12px 4px 12px', showSender: false, sender: '', senderColor: '' };
+      if (m.role === 'agent') return { text: m.text, align: 'flex-start', bg: 'rgba(31,157,92,.12)', color: '#dfe6e2', radius: '12px 12px 12px 4px', showSender: true, sender: 'Customer Care', senderColor: '#3ddc84' };
+      return { text: m.text, align: 'flex-start', bg: '#1e212b', color: '#cfd3dc', radius: '12px 12px 12px 4px', showSender: true, sender: 'Support Assistant', senderColor: '#7fa0ff' };
+    });
+
+    const chips = this.state.chips.map(label => ({ label, pick: () => this.pickChip(label) }));
+
+    const statusOk = !this.state.handover;
+    const myTickets = this.state.tickets.map(t => ({
+      ref: t.ref, date: t.date, category: t.category, summary: t.summary, status: t.status,
+      statusBg: t.status === 'Human response required' ? 'rgba(255,194,71,.18)' : 'rgba(37,84,217,.1)',
+      statusColor: t.status === 'Human response required' ? '#a06a00' : '#2454d9'
+    }));
+
+    return {
+      helpQuery: this.state.helpQuery,
+      onHelpQuery: (e) => this.setState({ helpQuery: e.target.value }),
+      helpResults, hasHelpResults: helpResults.length > 0,
+      helpNoResults: hq.length >= 2 && helpResults.length === 0,
+      supportTopics, faqs,
+
+      assistantOpen: this.state.assistantOpen, assistantClosed: !this.state.assistantOpen,
+      openAssistant: () => this.setState({ assistantOpen: true }),
+      closeAssistant: () => this.setState({ assistantOpen: false }),
+      language: this.state.language,
+      setLanguage: (e) => {
+        const lang = e.target.value;
+        this.setState({ language: lang });
+        this.pushBot(lang === 'Arabic'
+          ? 'تم تحويل المحادثة إلى العربية. يرجى كتابة طلبك.'
+          : lang === 'Malayalam'
+            ? 'ഭാഷ മലയാളത്തിലേക്ക് മാറ്റി. നിങ്ങളുടെ ആവശ്യം എഴുതുക.'
+            : 'Language set to English. Please type your requirement.', this.startChips());
+      },
+      agentStatus: this.state.handover ? 'Customer care joined' : 'Automated assistant · available',
+      statusDot: this.state.handover ? '#3ddc84' : '#7fa0ff',
+      messages, chips, hasChips: chips.length > 0,
+      showReference: !!this.state.reference, referenceNo: this.state.reference || '',
+      showHandoverNotice: this.state.handover,
+      draft: this.state.draft,
+      setDraft: (e) => this.setState({ draft: e.target.value }),
+      onKeyDown: (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          const v = this.state.draft;
+          this.setState({ draft: '' });
+          this.handleInput(v);
+        }
+      },
+      send: () => { const v = this.state.draft; this.setState({ draft: '' }); this.handleInput(v); },
+      onAttach: (e) => {
+        const files = Array.from(e.target.files || []);
+        if (!files.length) return;
+        const names = files.map(f => f.name).join(', ');
+        this.pushUser(`📎 Attached: ${names}`);
+        setTimeout(() => {
+          if (this.state.flow) {
+            this.pushBot('Thank you, the file has been attached to your request. ' + (this.flows()[this.state.flow].questions[this.state.step] || {}).q || '');
+          } else {
+            this.pushBot('Thank you, the file has been received and will be attached to your request. What does it relate to?', this.startChips());
+          }
+        }, 200);
+      },
+      requestHuman: () => this.doHandover(),
+      restartChat: () => {
+        this.setState({ messages: [], chips: [], flow: null, step: 0, collected: {}, reference: null, handover: false });
+        setTimeout(() => this.pushBot(this.opening(), this.startChips()), 100);
+      },
+
+      myTickets, hasTickets: myTickets.length > 0, noTickets: myTickets.length === 0,
+
+      categoryOptions: ['General enquiry','Product enquiry','Product availability','Product technical information','Service enquiry','Inspection request','Booking support','Quotation support','Order support','Delivery support','Payment support','Return request','Warranty request','Aftercare','Complaint','Business account','Fleet support','Other'],
+      tCategory: this.state.tCategory, setTCategory: (e) => this.setState({ tCategory: e.target.value }),
+      tName: this.state.tName, setTName: (e) => this.setState({ tName: e.target.value }),
+      tPhone: this.state.tPhone, setTPhone: (e) => this.setState({ tPhone: e.target.value }),
+      tRef: this.state.tRef, setTRef: (e) => this.setState({ tRef: e.target.value }),
+      tMessage: this.state.tMessage, setTMessage: (e) => this.setState({ tMessage: e.target.value }),
+      tContact: this.state.tContact, setTContact: (e) => this.setState({ tContact: e.target.value }),
+      tConsent: this.state.tConsent, setTConsent: (e) => this.setState({ tConsent: e.target.checked }),
+      ticketError: this.state.tError,
+      ticketSubmitLabel: this.state.tSubmitting ? 'Submitting…' : 'Submit Request',
+      ticketCreated: this.state.tCreated, ticketFormOpen: !this.state.tCreated,
+      newTicketRef: this.state.tNewRef,
+      resetTicket: () => this.setState({ tCreated: false, tName: '', tPhone: '', tRef: '', tMessage: '', tConsent: false, tError: '' }),
+      submitTicket: () => {
+        if (!this.state.tName.trim() || !this.state.tPhone.trim()) { this.setState({ tError: 'Please enter your name and a contact number.' }); return; }
+        if (!this.state.tMessage.trim()) { this.setState({ tError: 'Please describe how we can help.' }); return; }
+        if (!this.state.tConsent) { this.setState({ tError: 'Please confirm consent to be contacted about this request.' }); return; }
+        this.setState({ tError: '', tSubmitting: true });
+        setTimeout(() => {
+          const ref = this.makeRef('SUP');
+          const ticket = {
+            ref, date: new Date().toISOString().slice(0, 10),
+            category: this.state.tCategory, dept: 'General Customer Care',
+            summary: this.state.tMessage.slice(0, 80),
+            status: 'Ready for staff review',
+            language: this.state.language, channel: 'Support form',
+            collected: { name: this.state.tName, phone: this.state.tPhone, reference: this.state.tRef, contact: this.state.tContact }
+          };
+          const tickets = [ticket, ...this.state.tickets];
+          this.persist(tickets);
+          this.setState({ tickets, tSubmitting: false, tCreated: true, tNewRef: ref });
+        }, 500);
+      }
+    };
+  }
+
+  openAndStart(flow) {
+    this.setState({ assistantOpen: true });
+    setTimeout(() => {
+      this.pushUser(this.flows()[flow].label);
+      this.startFlow(flow);
+    }, 200);
+  }
+}
+
+</script>
+</body>
+</html>

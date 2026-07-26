@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</helmet>
+<header style="position:sticky;top:0;z-index:80;background:#14161c">
+  <div style="max-width:1560px;width:94%;margin:0 auto;display:flex;align-items:center;gap:28px;min-height:76px">
+    <a href="AutoSportsCarCare-NewSite-Homepage.dc.html" aria-label="Auto Sports Car Care — home" style="display:flex;align-items:center;flex-shrink:0">
+      <img src="assets/logo.png" alt="Auto Sports Car Care" style="height:32px;width:auto;display:block">
+    </a>
+    <sc-if value="{{ isDesktopNav }}" hint-placeholder-val="{{ true }}">
+      <nav aria-label="Main" style="display:flex;align-items:center;gap:22px;flex:1">
+        <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
+          <a href="{{ item.href }}" aria-current="{{ item.current }}" style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;letter-spacing:.03em;color:{{ item.color }};text-decoration:none;white-space:nowrap;border-bottom:2px solid {{ item.borderColor }};padding-bottom:2px" style-hover="color:#fff">{{ item.label }}</a>
+        </sc-for>
+      </nav>
+      <div style="display:flex;align-items:center;gap:14px">
+        <button aria-label="Search" style="width:38px;height:38px;border-radius:8px;border:1px solid #333846;background:transparent;color:#cfd3dc;display:flex;align-items:center;justify-content:center;font-size:15px" style-hover="border-color:#2454d9;color:#fff">⌕</button>
+        <a href="Book.dc.html" style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13.5px;color:#cfd3dc;text-decoration:none;white-space:nowrap" style-hover="color:#fff">Customer Login</a>
+        <a href="Brands.dc.html" style="background:transparent;color:#dde4f3;border:1px solid #3a4256;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;font-size:13.5px;padding:11px 16px;border-radius:8px;text-decoration:none;white-space:nowrap" style-hover="border-color:#2454d9;color:#fff">Product Enquiry</a>
+        <a href="Book.dc.html" style="background:#d81f2a;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.04em;font-size:13.5px;padding:11px 18px;border-radius:8px;text-decoration:none;white-space:nowrap" style-hover="background:#ef2d38">Request Service</a>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isMobileNav }}" hint-placeholder-val="{{ false }}">
+      <button aria-label="Open menu" aria-expanded="{{ mobileOpen }}" onClick="{{ toggleMobile }}" style="margin-left:auto;background:transparent;border:1px solid #333846;border-radius:8px;width:44px;height:44px;color:#fff;font-size:20px">☰</button>
+    </sc-if>
+  </div>
+  <sc-if value="{{ mobileOpen }}" hint-placeholder-val="{{ false }}">
+    <nav aria-label="Mobile" style="display:flex;flex-direction:column;padding:6px 5% 20px;border-top:1px solid #262a34">
+      <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
+        <a href="{{ item.href }}" onClick="{{ closeMobile }}" style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:16px;color:#dde4f3;text-decoration:none;padding:14px 2px;min-height:48px;display:flex;align-items:center">{{ item.label }}</a>
+      </sc-for>
+      <div style="display:flex;gap:10px;margin-top:14px">
+        <a href="Brands.dc.html" style="flex:1;text-align:center;background:transparent;color:#dde4f3;border:1px solid #3a4256;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;padding:13px;border-radius:8px;text-decoration:none;min-height:48px;display:flex;align-items:center;justify-content:center">Product Enquiry</a>
+        <a href="Book.dc.html" style="flex:1;text-align:center;background:#d81f2a;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;padding:13px;border-radius:8px;text-decoration:none;min-height:48px;display:flex;align-items:center;justify-content:center">Request Service</a>
+      </div>
+    </nav>
+  </sc-if>
+</header>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;current&quot;:{&quot;editor&quot;:null,&quot;default&quot;:&quot;Home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { width: typeof window !== 'undefined' ? window.innerWidth : 1440, mobileOpen: false };
+  componentDidMount() {
+    this._onResize = () => this.setState({ width: window.innerWidth });
+    window.addEventListener('resize', this._onResize);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._onResize); }
+  renderVals() {
+    const isDesktopNav = this.state.width >= 1080;
+    const current = this.props.current || '';
+    const raw = [
+      { label: 'Home', href: 'AutoSportsCarCare-NewSite-Homepage.dc.html' },
+      { label: 'Services', href: 'Services-New.dc.html' },
+      { label: 'Products', href: 'Products-New.dc.html' },
+      { label: 'Brands', href: 'Brands.dc.html' },
+      { label: 'About', href: 'About-New.dc.html' },
+      { label: 'Support', href: 'Support.dc.html' },
+      { label: 'Contact', href: 'Contact-New.dc.html' }
+    ];
+    const navItems = raw.map(i => ({
+      ...i, current: i.label === current ? 'page' : undefined,
+      color: i.label === current ? '#fff' : '#cfd3dc',
+      borderColor: i.label === current ? '#2454d9' : 'transparent'
+    }));
+    return {
+      isDesktopNav, isMobileNav: !isDesktopNav,
+      mobileOpen: this.state.mobileOpen && !isDesktopNav,
+      toggleMobile: () => this.setState(s => ({ mobileOpen: !s.mobileOpen })),
+      closeMobile: () => this.setState({ mobileOpen: false }),
+      navItems
+    };
+  }
+}
+
+</script>
+</body>
+</html>

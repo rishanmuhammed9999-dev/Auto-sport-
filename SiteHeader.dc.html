@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>@keyframes ascc-fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}</style>
+</helmet>
+<header style="position:sticky;top:0;z-index:70;background:rgba(5,7,13,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(120,160,255,.12);font-family:'Inter',system-ui,sans-serif">
+  <div style="max-width:1720px;width:94%;margin:0 auto;display:flex;align-items:center;gap:22px;min-height:74px;padding:10px 0">
+    <a href="Homepage.dc.html" aria-label="Auto Sports Car Care — home" style="display:flex;align-items:center;flex-shrink:0">
+      <img src="assets/logo.png" alt="Auto Sports Car Care" style="height:34px;width:auto;display:block">
+    </a>
+    <sc-if value="{{ isDesktopNav }}" hint-placeholder-val="{{ true }}">
+      <nav aria-label="Main" style="display:flex;align-items:center;gap:22px;margin-left:auto;flex-wrap:nowrap">
+        <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="7">
+          <a href="{{ item.href }}" aria-current="{{ item.ariaCurrent }}" style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14.5px;letter-spacing:.08em;text-transform:uppercase;color:{{ item.color }};text-decoration:none;padding:6px 0;border-bottom:{{ item.border }};white-space:nowrap" style-hover="color:#fff">{{ item.label }}</a>
+        </sc-for>
+        <a href="Book.dc.html" style="background:#e11d27;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.07em;text-transform:uppercase;font-size:14.5px;padding:12px 20px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:.18s" style-hover="background:#ff3b3b;box-shadow:0 8px 24px rgba(225,29,39,.4)">Book Now</a>
+      </nav>
+    </sc-if>
+    <sc-if value="{{ isMobileNavVisible }}" hint-placeholder-val="{{ false }}">
+      <button aria-label="Open menu" aria-expanded="{{ mobileMenuOpen }}" aria-controls="mnav" onClick="{{ toggleMobileMenu }}" style="margin-left:auto;background:transparent;border:1px solid rgba(120,160,255,.3);border-radius:8px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px">☰</button>
+    </sc-if>
+  </div>
+  <sc-if value="{{ mobileMenuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav id="mnav" aria-label="Mobile" style="display:flex;flex-direction:column;padding:6px 5% 18px;border-top:1px solid rgba(120,160,255,.1);animation:ascc-fade .18s ease">
+      <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="7">
+        <a href="{{ item.href }}" aria-current="{{ item.ariaCurrent }}" onClick="{{ closeMobileMenu }}" style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:17px;letter-spacing:.09em;text-transform:uppercase;color:{{ item.color }};text-decoration:none;padding:15px 2px;border-bottom:1px solid rgba(120,160,255,.1);min-height:48px">{{ item.label }}</a>
+      </sc-for>
+      <a href="Book.dc.html" onClick="{{ closeMobileMenu }}" style="margin-top:14px;background:#e11d27;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.07em;text-transform:uppercase;font-size:16px;padding:14px 22px;border-radius:8px;text-decoration:none;text-align:center;min-height:48px;display:flex;align-items:center;justify-content:center">Book Now</a>
+    </nav>
+  </sc-if>
+</header>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1600,&quot;height&quot;:74},&quot;current&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Home&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;Home&quot;,&quot;About&quot;,&quot;Services&quot;,&quot;Products&quot;,&quot;Technology&quot;,&quot;Gallery&quot;,&quot;Contact&quot;,&quot;Book&quot;]}}">
+class Component extends DCLogic {
+  state = { width: typeof window !== 'undefined' ? window.innerWidth : 1440, mobileMenuOpen: false };
+  componentDidMount() {
+    this._onResize = () => this.setState({ width: window.innerWidth });
+    window.addEventListener('resize', this._onResize);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._onResize); }
+  renderVals() {
+    const current = this.props.current ?? 'Home';
+    const isDesktopNav = this.state.width >= 980;
+    const items = [
+      { label: 'Home', href: 'Homepage.dc.html' },
+      { label: 'About', href: 'About.dc.html' },
+      { label: 'Services', href: 'Services.dc.html' },
+      { label: 'Products', href: 'Products.dc.html' },
+      { label: 'Technology', href: 'Technology.dc.html' },
+      { label: 'Gallery', href: 'Gallery.dc.html' },
+      { label: 'Contact', href: 'Contact.dc.html' }
+    ];
+    const navItems = items.map(it => {
+      const isCurrent = it.label === current;
+      return { ...it, ariaCurrent: isCurrent ? 'page' : undefined, color: isCurrent ? '#8fb4ff' : '#dde4f3', border: isCurrent ? '2px solid #3f7bff' : '2px solid transparent' };
+    });
+    return {
+      isDesktopNav,
+      isMobileNavVisible: !isDesktopNav,
+      mobileMenuOpen: this.state.mobileMenuOpen && !isDesktopNav,
+      toggleMobileMenu: () => this.setState(s => ({ mobileMenuOpen: !s.mobileMenuOpen })),
+      closeMobileMenu: () => this.setState({ mobileMenuOpen: false }),
+      navItems
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Asset Upload Manager — Internal</title>
+<style>*{box-sizing:border-box}body{margin:0}@keyframes ascc-spin{to{transform:rotate(360deg)}}</style>
+</helmet>
+<div style="background:#05070d;color:#f2f4f9;font-family:'Inter',system-ui,sans-serif;line-height:1.6;min-height:100vh">
+<main style="max-width:1500px;width:94%;margin:0 auto;padding:48px 0 88px">
+  <p style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13px;letter-spacing:.28em;color:#8fb4ff;text-transform:uppercase;margin:0 0 12px">Internal Tool — Not Customer-Facing</p>
+  <h1 style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(24px,3.5vw,36px);margin:0 0 10px">Asset Upload Manager</h1>
+  <p style="color:#9aa5ba;font-size:14.5px;max-width:70ch;margin:0 0 28px">Review every missing brand-logo and product-image asset from the pilot batch. Verification status (is the official source confirmed?) is tracked separately from file status (has the actual file been obtained?).</p>
+
+  <div style="display:flex;flex-wrap:wrap;gap:20px;margin-bottom:24px">
+    <div style="background:rgba(255,255,255,.035);border:1px solid rgba(120,160,255,.14);border-radius:12px;padding:16px 20px"><p style="margin:0;color:#7a8299;font-size:11.5px;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Total Assets Pending</p><p style="margin:4px 0 0;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:26px">{{ stats.total }}</p></div>
+    <div style="background:rgba(255,255,255,.035);border:1px solid rgba(120,160,255,.14);border-radius:12px;padding:16px 20px"><p style="margin:0;color:#7a8299;font-size:11.5px;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Logos Pending</p><p style="margin:4px 0 0;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:26px;color:#ffc247">{{ stats.logos }}</p></div>
+    <div style="background:rgba(255,255,255,.035);border:1px solid rgba(120,160,255,.14);border-radius:12px;padding:16px 20px"><p style="margin:0;color:#7a8299;font-size:11.5px;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Product Images Pending</p><p style="margin:4px 0 0;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:26px;color:#ffc247">{{ stats.images }}</p></div>
+    <div style="background:rgba(255,255,255,.035);border:1px solid rgba(120,160,255,.14);border-radius:12px;padding:16px 20px"><p style="margin:0;color:#7a8299;font-size:11.5px;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Sources Verified</p><p style="margin:4px 0 0;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:26px;color:#3ddc84">{{ stats.verified }}</p></div>
+  </div>
+
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px">
+    <sc-for list="{{ brandFilters }}" as="f" hint-placeholder-count="11">
+      <button onClick="{{ f.select }}" aria-pressed="{{ f.active }}" style="font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:12.5px;padding:9px 14px;border-radius:8px;border:1px solid {{ f.borderColor }};background:{{ f.bg }};color:{{ f.color }};min-height:40px">{{ f.label }}</button>
+    </sc-for>
+  </div>
+
+  <div style="overflow-x:auto;border:1px solid rgba(120,160,255,.14);border-radius:12px">
+    <table style="width:100%;border-collapse:collapse;font-size:13px;min-width:920px">
+      <thead>
+        <tr style="background:rgba(255,255,255,.04);text-align:left">
+          <th style="padding:12px 14px;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:11.5px;color:#9aa5ba">Brand</th>
+          <th style="padding:12px 14px;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:11.5px;color:#9aa5ba">Asset</th>
+          <th style="padding:12px 14px;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:11.5px;color:#9aa5ba">Product</th>
+          <th style="padding:12px 14px;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:11.5px;color:#9aa5ba">Verification Status</th>
+          <th style="padding:12px 14px;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:11.5px;color:#9aa5ba">File Status</th>
+          <th style="padding:12px 14px;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:11.5px;color:#9aa5ba">Priority</th>
+        </tr>
+      </thead>
+      <tbody>
+        <sc-for list="{{ visibleRows }}" as="row" hint-placeholder-count="12">
+          <tr style="border-top:1px solid rgba(120,160,255,.08)">
+            <td style="padding:11px 14px;font-family:'Rajdhani',sans-serif;font-weight:700">{{ row.brand }}</td>
+            <td style="padding:11px 14px;color:#dde4f3">{{ row.requiredAsset }}</td>
+            <td style="padding:11px 14px;color:#9aa5ba;max-width:260px">{{ row.productName }}</td>
+            <td style="padding:11px 14px;color:{{ row.verifColor }}">{{ row.verificationStatus }}</td>
+            <td style="padding:11px 14px;color:#ffc247">{{ row.fileStatus }}</td>
+            <td style="padding:11px 14px;color:#9aa5ba">{{ row.priority }}</td>
+          </tr>
+        </sc-for>
+      </tbody>
+    </table>
+  </div>
+  <p style="color:#7a8299;font-size:13px;margin-top:14px">Showing {{ visibleCount }} of {{ stats.total }} rows for the selected brand filter.</p>
+</main>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { rows: [], loaded: false, activeBrand: 'All' };
+
+  async componentDidMount() {
+    const res = await fetch('master-product-database/asset-upload-register.json');
+    const rows = await res.json();
+    this.setState({ rows, loaded: true });
+  }
+
+  renderVals() {
+    const rows = this.state.rows;
+    const total = rows.length;
+    const logos = rows.filter(r => r.requiredAsset === 'Brand Logo').length;
+    const images = rows.filter(r => r.requiredAsset === 'Product Image').length;
+    const verified = rows.filter(r => r.verificationStatus === 'OFFICIAL SOURCE VERIFIED').length;
+
+    const brandNames = [...new Set(rows.map(r => r.brand))];
+    const activeBrand = this.state.activeBrand;
+    const filteredRows = rows.filter(r => activeBrand === 'All' || r.brand === activeBrand);
+
+    const decorate = (r) => ({
+      ...r,
+      verifColor: r.verificationStatus === 'OFFICIAL SOURCE VERIFIED' ? '#3ddc84' : (r.verificationStatus && r.verificationStatus.includes('NOT FOUND') ? '#ff8a8a' : '#ffc247')
+    });
+
+    const brandFilters = ['All', ...brandNames].map(label => {
+      const active = label === activeBrand;
+      return {
+        label, active,
+        color: active ? '#fff' : '#dde4f3',
+        bg: active ? 'rgba(63,123,255,.22)' : 'transparent',
+        borderColor: active ? '#3f7bff' : 'rgba(120,160,255,.25)',
+        select: () => this.setState({ activeBrand: label })
+      };
+    });
+
+    return {
+      stats: { total, logos, images, verified },
+      brandFilters,
+      visibleRows: filteredRows.slice(0, 300).map(decorate),
+      visibleCount: Math.min(filteredRows.length, 300)
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Products — Auto Sports Car Care</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#f3f1ec}a{color:#2454d9}a:hover{color:#173a9e}</style>
+</helmet>
+<div style="background:#f3f1ec;color:#1c1e24;font-family:'Inter',system-ui,sans-serif;line-height:1.6;min-height:100vh">
+<dc-import name="SiteHeaderNew" current="Products" hint-size="100%,76px"></dc-import>
+
+<section style="background:#14161c;padding:clamp(48px,6vw,72px) 0">
+  <div style="max-width:1560px;width:94%;margin:0 auto">
+    <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.14em;color:#7fa0ff;text-transform:uppercase;margin:0 0 10px">Products</p>
+    <h1 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(28px,3.6vw,40px);color:#f3f1ec;margin:0 0 12px">Automotive Products &amp; Materials</h1>
+    <p style="color:#a7abb6;font-size:15px;max-width:60ch;margin:0">Prices are not shown. Availability, specification and commercial terms are confirmed on enquiry.</p>
+  </div>
+</section>
+
+<section style="max-width:1560px;width:94%;margin:0 auto;padding:clamp(40px,5vw,56px) 0">
+  <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(20px,2.4vw,26px);margin:0 0 20px;color:#14161c">Browse by Department</h2>
+  <div style="display:flex;flex-direction:column;gap:1px;background:#e2ded2;border-radius:14px;overflow:hidden;margin-bottom:48px">
+    <sc-for list="{{ productDepts }}" as="pd" hint-placeholder-count="5">
+      <a href="Brands.dc.html" style="background:#fff;padding:22px 26px;display:flex;align-items:center;gap:18px;text-decoration:none;color:#14161c" style-hover="background:#faf9f6">
+        <span style="color:#2454d9;font-size:22px;width:32px;flex-shrink:0" aria-hidden="true">{{ pd.icon }}</span>
+        <div style="flex:1">
+          <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;margin:0 0 3px">{{ pd.title }}</p>
+          <p style="color:#5a5f6e;font-size:13px;margin:0">{{ pd.desc }}</p>
+        </div>
+        <span style="color:#2454d9;font-size:15px" aria-hidden="true">→</span>
+      </a>
+    </sc-for>
+  </div>
+
+  <h2 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:clamp(20px,2.4vw,26px);margin:0 0 20px;color:#14161c">Browse by Brand</h2>
+  <input type="search" value="{{ searchText }}" onChange="{{ onSearchChange }}" placeholder="Search brands…" aria-label="Search brands" style="width:100%;max-width:360px;background:#fff;border:1px solid #d6d2c6;border-radius:8px;color:#1c1e24;font-family:'Inter',sans-serif;font-size:14.5px;padding:12px 15px;min-height:46px;margin-bottom:18px;display:block" style-focus="border-color:#2454d9;outline:2px solid #2454d9;outline-offset:2px">
+  <sc-if value="{{ hasNoResults }}" hint-placeholder-val="{{ false }}">
+    <div style="border:1px dashed #d6d2c6;border-radius:14px;padding:48px 24px;text-align:center">
+      <p style="color:#5a5f6e;font-size:15px;margin:0">No brands match your search.</p>
+    </div>
+  </sc-if>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px">
+    <sc-for list="{{ filteredBrands }}" as="b" hint-placeholder-count="7">
+      <a href="{{ b.href }}" style="background:#fff;border-radius:12px;padding:20px;text-decoration:none;color:#14161c;display:flex;flex-direction:column;gap:8px" style-hover="box-shadow:0 8px 24px rgba(0,0,0,.08)">
+        <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;margin:0">{{ b.name }}</p>
+        <p style="color:#8a8f9c;font-size:12.5px;margin:0">{{ b.meta }}</p>
+        <div style="height:4px;border-radius:99px;background:#eae6dc;overflow:hidden;margin-top:2px">
+          <div style="height:100%;width:{{ b.barWidth }};background:{{ b.barColor }};border-radius:99px"></div>
+        </div>
+        <p style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:{{ b.coverageColor }};margin:0">{{ b.coverageLabel }}</p>
+      </a>
+    </sc-for>
+  </div>
+  <p style="color:#8a8f9c;font-size:12.5px;margin-top:24px">Brand names are listed for product identification and enquiry. Stock, supply status and commercial relationship must be confirmed.</p>
+</section>
+
+<dc-import name="SiteFooterNew" hint-size="100%,320px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { searchText: '' };
+  renderVals() {
+    const productDepts = [
+      { icon: '◆', title: 'Paint and Body Materials', desc: 'Automotive paint, primers, clearcoats and body-repair materials.' },
+      { icon: '✦', title: 'Polishing and Detailing', desc: 'Compounds, pads, detailing chemicals and accessories.' },
+      { icon: '◇', title: 'Films and Surface Protection', desc: 'PPF, window tint and wrapping materials.' },
+      { icon: '⚙', title: 'Workshop Tools and Equipment', desc: 'Spray equipment, hand tools and workshop supplies.' },
+      { icon: '▦', title: 'Wood, Furniture and Industrial Coatings', desc: 'Coatings for non-automotive applications.' }
+    ];
+    const brands = [
+      { name: 'Kapci', productCount: 190, photos: 190, categories: 4, href: 'Kapci-Brand.dc.html' },
+      { name: 'MaxShine', productCount: 136, photos: 43, categories: 5, href: 'MaxShine-Brand.dc.html' },
+      { name: 'SONAX', productCount: 99, photos: 0, categories: 3, href: 'SONAX-Brand.dc.html' },
+      { name: 'RUPES', productCount: 89, photos: 0, categories: 4, href: 'RUPES-Brand.dc.html' },
+      { name: 'Standox', productCount: 88, photos: 0, categories: 2, href: 'Standox-Brand.dc.html' },
+      { name: 'Meguiar\u2019s', productCount: 54, photos: 18, categories: 1, href: 'Meguiars-Brand.dc.html' },
+      { name: 'Mirka', productCount: 48, photos: 0, categories: 4, href: 'Mirka-Brand.dc.html' },
+      { name: 'Auto Paint Department', productCount: 8, photos: 0, categories: 1, href: 'AutoPaint.dc.html' }
+    ].map(b => {
+      const pct = Math.round((b.photos / b.productCount) * 100);
+      return {
+        ...b,
+        meta: b.productCount + ' products · ' + b.categories + ' categor' + (b.categories === 1 ? 'y' : 'ies'),
+        coverageLabel: b.photos === 0 ? 'Photos pending' : b.photos + ' of ' + b.productCount + ' photographed',
+        coverageColor: pct === 100 ? '#147347' : pct > 0 ? '#a06a00' : '#5a5f6e',
+        barWidth: Math.max(pct, 2) + '%',
+        barColor: pct === 100 ? '#1f9d5c' : pct > 0 ? '#d9a441' : '#d6d2c6'
+      };
+    });
+    const filteredBrands = brands.filter(b => !this.state.searchText || b.name.toLowerCase().includes(this.state.searchText.toLowerCase()));
+    return { productDepts, searchText: this.state.searchText, onSearchChange: (e) => this.setState({ searchText: e.target.value }), filteredBrands, hasResults: filteredBrands.length > 0, hasNoResults: filteredBrands.length === 0 };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Design System — Auto Sports Car Care</title>
+<style>*{box-sizing:border-box}body{margin:0}@keyframes ascc-spin{to{transform:rotate(360deg)}}</style>
+</helmet>
+<div style="background:#05070d;color:#f2f4f9;font-family:'Inter',system-ui,sans-serif;line-height:1.6;min-height:100vh">
+<dc-import name="SiteHeader" current="" hint-size="100%,74px"></dc-import>
+<main style="max-width:1400px;width:92%;margin:0 auto;padding:56px 0 100px">
+  <p style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;letter-spacing:.28em;color:#8fb4ff;text-transform:uppercase;margin:0 0 12px">Reference</p>
+  <h1 style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(26px,4vw,40px);margin:0 0 8px">Auto Sports Car Care — Design System</h1>
+  <p style="color:#9aa5ba;font-size:15px;max-width:70ch;margin:0 0 56px">Tokens and components extracted from the approved Homepage v1.0, for reuse across every page of the site.</p>
+
+  <h2 style="font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:.03em;text-transform:uppercase;font-size:22px;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid rgba(120,160,255,.14)">Colour</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:56px">
+    <sc-for list="{{ colours }}" as="c" hint-placeholder-count="8">
+      <div style="border:1px solid rgba(120,160,255,.14);border-radius:12px;overflow:hidden">
+        <div style="height:64px;background:{{ c.hex }}"></div>
+        <div style="padding:12px 14px">
+          <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;margin:0 0 3px">{{ c.name }}</p>
+          <p style="color:#7a8299;font-size:12.5px;margin:0;font-family:monospace">{{ c.hex }}</p>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <h2 style="font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:.03em;text-transform:uppercase;font-size:22px;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid rgba(120,160,255,.14)">Typography</h2>
+  <div style="display:grid;gap:22px;margin-bottom:24px">
+    <div><p style="color:#7a8299;font-size:12px;margin:0 0 6px;font-family:'Rajdhani',sans-serif;letter-spacing:.1em;text-transform:uppercase">H1 · Rajdhani 700 · clamp(30–64px)</p><p style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;font-size:44px;margin:0;line-height:1.05">Protect. Restore.</p></div>
+    <div><p style="color:#7a8299;font-size:12px;margin:0 0 6px;font-family:'Rajdhani',sans-serif;letter-spacing:.1em;text-transform:uppercase">H2 · Rajdhani 600 · clamp(22–38px)</p><p style="font-family:'Rajdhani',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.03em;font-size:30px;margin:0">About Auto Sports Car Care</p></div>
+    <div><p style="color:#7a8299;font-size:12px;margin:0 0 6px;font-family:'Rajdhani',sans-serif;letter-spacing:.1em;text-transform:uppercase">H3 · Rajdhani 700 · 17–19px</p><p style="font-family:'Rajdhani',sans-serif;font-weight:700;text-transform:uppercase;font-size:19px;margin:0">Our Services</p></div>
+    <div><p style="color:#7a8299;font-size:12px;margin:0 0 6px;font-family:'Rajdhani',sans-serif;letter-spacing:.1em;text-transform:uppercase">Body · Inter 400 · 15–18px</p><p style="color:#c2ccdd;font-size:16px;margin:0;max-width:60ch">Vehicle detailing, protection, paint and body, customisation, restoration and maintenance.</p></div>
+    <div><p style="color:#7a8299;font-size:12px;margin:0 0 6px;font-family:'Rajdhani',sans-serif;letter-spacing:.1em;text-transform:uppercase">Eyebrow · Rajdhani 600 · 12–17px · +.32em tracking</p><p style="font-family:'Rajdhani',sans-serif;font-weight:600;font-size:15px;letter-spacing:.32em;color:#8fb4ff;text-transform:uppercase;margin:0">Auto Sports Car Care</p></div>
+  </div>
+  <p style="color:#9aa5ba;font-size:14px;margin:0 0 56px">Headings: Rajdhani (condensed, uppercase, wide tracking). Body: Inter. Never mix.</p>
+
+  <h2 style="font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:.03em;text-transform:uppercase;font-size:22px;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid rgba(120,160,255,.14)">Buttons</h2>
+  <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bottom:12px">
+    <button style="background:#e11d27;color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.07em;text-transform:uppercase;font-size:15px;padding:15px 24px;border-radius:8px;border:0;min-height:48px">Primary Action</button>
+    <button style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35);font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.07em;text-transform:uppercase;font-size:15px;padding:15px 24px;border-radius:8px;min-height:48px">Secondary</button>
+    <button style="background:none;border:0;color:#8fb4ff;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.09em;text-transform:uppercase;font-size:14px">Text Link ›</button>
+    <button disabled="" style="background:#5a2226;color:#c98f92;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.07em;text-transform:uppercase;font-size:15px;padding:15px 24px;border-radius:8px;border:0;opacity:.45;min-height:48px">Disabled</button>
+  </div>
+  <p style="color:#9aa5ba;font-size:14px;margin:0 0 56px">Red (#e11d27) = action/conversion only. Blue (#3f7bff) = links, focus, tech accents. Never combine red and blue as gradient on the same control.</p>
+
+  <h2 style="font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:.03em;text-transform:uppercase;font-size:22px;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid rgba(120,160,255,.14)">Cards</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-bottom:12px">
+    <div style="background:rgba(255,255,255,.035);border:1px solid rgba(120,160,255,.14);border-radius:14px;padding:26px">
+      <span style="color:#3f7bff;margin-bottom:16px;display:inline-block"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.4-7 10-3.8-1.6-7-5-7-10V6z"/></svg></span>
+      <h3 style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:19px;text-transform:uppercase;margin:0 0 8px">Standard Card</h3>
+      <p style="color:#9aa5ba;font-size:15px;margin:0">14px radius · 1px accent-tinted border · 26px padding.</p>
+    </div>
+    <div style="border:1px solid rgba(255,194,71,.45);background:rgba(38,28,6,.6);border-radius:99px;padding:8px 16px;align-self:start;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#ffc247;display:flex;align-items:center">Pending badge</div>
+    <div style="border:1px solid rgba(61,220,132,.45);background:rgba(9,32,20,.6);border-radius:99px;padding:8px 16px;align-self:start;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#3ddc84;display:flex;align-items:center">Working badge</div>
+  </div>
+  <p style="color:#9aa5ba;font-size:14px;margin:0 0 56px">Card hover: translateY(-4px), border brightens, soft shadow. Respect reduced-motion (skip the translate).</p>
+
+  <h2 style="font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:.03em;text-transform:uppercase;font-size:22px;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid rgba(120,160,255,.14)">States</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-bottom:56px">
+    <div style="border:1px solid rgba(120,160,255,.14);border-radius:12px;padding:18px">
+      <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#8fb4ff;margin:0 0 10px">Loading</p>
+      <div style="width:26px;height:26px;border-radius:50%;border:3px solid rgba(120,160,255,.2);border-top-color:#3f7bff;animation:ascc-spin 0.8s linear infinite"></div>
+    </div>
+    <div style="border:1px solid rgba(255,90,90,.3);border-radius:12px;padding:18px;background:rgba(60,10,12,.3)">
+      <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#ff8a8a;margin:0 0 6px">Error</p>
+      <p style="color:#e3b8b8;font-size:13.5px;margin:0">Something needs your attention. Copy stays factual, no blame.</p>
+    </div>
+    <div style="border:1px dashed rgba(120,160,255,.25);border-radius:12px;padding:18px;text-align:center">
+      <p style="color:#7a8299;font-size:13.5px;margin:0">Empty — nothing to show yet. Kept honest, not padded with filler.</p>
+    </div>
+    <div style="border:2px solid #3f7bff;border-radius:12px;padding:18px;outline-offset:2px">
+      <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#8fb4ff;margin:0">Focus ring — 2px, #3f7bff, visible on keyboard nav only</p>
+    </div>
+  </div>
+
+  <h2 style="font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:.03em;text-transform:uppercase;font-size:22px;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid rgba(120,160,255,.14)">Spacing &amp; Containers</h2>
+  <ul style="color:#c2ccdd;font-size:15px;line-height:2;margin:0 0 56px;padding-left:20px">
+    <li>Container: max-width 1720px, width 94% (contact forms narrower at 900px)</li>
+    <li>Section padding: clamp(48px,7vw,88px) vertical</li>
+    <li>Card/grid gap: 18–22px</li>
+    <li>Border radius: 8px controls, 14px cards, 16px feature panels, 99px pills</li>
+    <li>Breakpoints: mobile &lt;600px · tablet 600–980px (nav collapses to hamburger at 980px) · desktop ≥980px, container caps at 1720px</li>
+  </ul>
+
+  <h2 style="font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:.03em;text-transform:uppercase;font-size:22px;margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid rgba(120,160,255,.14)">Icons &amp; Borders</h2>
+  <p style="color:#c2ccdd;font-size:15px;line-height:1.7;margin:0">Line icons only, 1.6px stroke, no fill, sized 18–30px, coloured blue (#3f7bff) or muted (#9aa5ba) — never red. Borders are 1px, low-opacity blue (rgba(120,160,255,.12–.18)), brightening on hover/focus rather than adding weight.</p>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,320px"></dc-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      colours: [
+        { name: 'Base Ground', hex: '#05070d' },
+        { name: 'Surface', hex: '#0a0d18' },
+        { name: 'Text Primary', hex: '#f2f4f9' },
+        { name: 'Text Muted', hex: '#9aa5ba' },
+        { name: 'Tech Blue', hex: '#3f7bff' },
+        { name: 'Blue Tint (link)', hex: '#8fb4ff' },
+        { name: 'Action Red', hex: '#e11d27' },
+        { name: 'Action Red Hover', hex: '#ff3b3b' }
+      ]
+    };
+  }
+}
+
+</script>
+</body>
+</html>
